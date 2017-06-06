@@ -105,6 +105,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        View view = this.getWindow().getDecorView();
+        view.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+
         myProgressBar = (ProgressBar)findViewById(R.id.progressBar);
 
         //myIV = (ImageView)findViewById(R.id.iv);
