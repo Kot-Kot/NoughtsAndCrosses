@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Крестики-нолики</string>
+    <string name="rb1">PC vs PC</string>
+    <string name="rb2">Player vs PC</string>
+    <string name="rb3">Player vs Player</string>
+    <string name="btnClear">Clear screen</string>
+</resources>
