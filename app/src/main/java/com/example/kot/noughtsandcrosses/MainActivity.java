@@ -1,13 +1,7 @@
 package com.example.kot.noughtsandcrosses;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.nfc.Tag;
-import android.os.AsyncTask;
-import android.os.Message;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,24 +14,21 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Arrays;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, RadioButton.OnCheckedChangeListener {
     static final String LOG_TAG = "MY_LOG";
-    static final String Cross = "X";
-    static final String Naught = "O";
+    //static final String Cross = "X";
+    //static final String Naught = "O";
     static final String FirstPos = "Center";
     static final String[] SecondPos = {"TopLeft","TopRight","BottomLeft","BottomRight"};
     static final String[] ThirdPos = {"TopCenter","CenterLeft","CenterRight","BottomCenter"};
 
-    final int STATUS_START = 0;
-    final int STATUS_END = 1;
+    //final int STATUS_START = 0;
+    //final int STATUS_END = 1;
 
 
 
@@ -49,6 +40,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     RadioButton myRB1;
     RadioButton myRB2;
     RadioButton myRB3;
+
+    myClassForDrawing myNoughtPicture = new myClassForDrawing();
+    myClassForDrawing myCrossPicture = new myClassForDrawing();
+    myClassForDrawing myClearPicture = new myClassForDrawing();
 
     Bitmap myBitmapCross;
     Bitmap myBitmapNought;
@@ -215,6 +210,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+
+
+        myBitmapCross = myNoughtPicture.myDrawCross();
+
+
+        myBitmapNought = myCrossPicture.myDrawNought();
+
+
+        myBitmapForClean =  myClearPicture.myDrawClear();
+
+/*
         myBitmapCross = Bitmap.createBitmap(50,50, Bitmap.Config.ARGB_8888);
         myBitmapNought = Bitmap.createBitmap(50,50, Bitmap.Config.ARGB_8888);
         myBitmapForClean = Bitmap.createBitmap(50,50, Bitmap.Config.ARGB_8888);
@@ -238,6 +244,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         myCanvasCross.drawLine(myCanvasCross.getWidth()-7,7,7,myCanvasCross.getHeight()-7,myPaint);
 
         myCanvasForClean.drawColor(Color.WHITE);
+        */
 
         // ivTopCenter.setImageBitmap(myBitmap1);
         // ivTopRight.setImageBitmap(myBitmap1);
@@ -261,6 +268,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
     }
+
+
 
 
     @Override
@@ -294,6 +303,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if(myRB1.isChecked() == true){
             Log.d(LOG_TAG, "---myPcVsPc---");
+            //new Handler(Looper.getMainLooper()).postDelayed(() -> {myPcVsPc(myIV);}, 500);
             myPcVsPc(myIV);
             return;
         }
@@ -605,6 +615,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             myNowClickedButton = "";
             Log.d(LOG_TAG,"----Cross---- ");
             iv.setImageBitmap(myBitmapCross);
+            //iv.setImageBitmap(myCrossPicture.myDrawCross());
             iv.setClickable(false);
             myGameStage++;
 
@@ -624,6 +635,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             myNowClickedButton = "";
             Log.d(LOG_TAG,"----Naught---- ");
             iv.setImageBitmap(myBitmapNought);
+            //iv.setImageBitmap(myNoughtPicture.myDrawNought());
+
             iv.setClickable(false);
             myGameStage++;
 
@@ -643,6 +656,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             myNowClickedButton = "";
             Log.d(LOG_TAG,"----Cross---- ");
             iv.setImageBitmap(myBitmapCross);
+            //iv.setImageBitmap(myCrossPicture.myDrawCross());
+
             iv.setClickable(false);
             myGameStage++;
 
@@ -669,6 +684,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             myNowClickedButton = "";
             Log.d(LOG_TAG,"----Naught---- ");
             iv.setImageBitmap(myBitmapNought);
+            //iv.setImageBitmap(myNoughtPicture.myDrawNought());
             iv.setClickable(false);
             myGameStage++;
 
@@ -696,6 +712,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //myDelay(fiv,fbc);
             //new Thread(myThread).start();
             iv.setImageBitmap(myBitmapCross);
+            //iv.setImageBitmap(myCrossPicture.myDrawCross());
+
             iv.setClickable(false);
             myGameStage++;
 
@@ -720,6 +738,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Log.d(LOG_TAG,"----Naught---- ");
             //myDelay(fiv,fbn);
             iv.setImageBitmap(myBitmapNought);
+            //iv.setImageBitmap(myNoughtPicture.myDrawNought());
             iv.setClickable(false);
             myGameStage++;
 
