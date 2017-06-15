@@ -87,36 +87,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
        // myRB2.setOnCheckedChangeListener(this);
        // myRB3.setOnCheckedChangeListener(this);
 
-        myClearScreen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //myClearScreen();
-                myObjectForDV.myClearScreen(myObjectForLogic, myBitmapForClean,
-                        myIVTopLeft,myIVTopCenter,myIVTopRight,
-                        myIVCenterLeft,myIVCenter,myIVCenterRight,
-                        myIVBottomLeft,myIVBottomCenter,myIVBottomRight);
-                if (myRB1.isChecked()){
-                    //myHoldScreen();
+        myClearScreen.setOnClickListener(v -> {
+            //myClearScreen();
+            myObjectForDV.myClearScreen(myObjectForLogic, myBitmapForClean,
+                    myIVTopLeft,myIVTopCenter,myIVTopRight,
+                    myIVCenterLeft,myIVCenter,myIVCenterRight,
+                    myIVBottomLeft,myIVBottomCenter,myIVBottomRight);
+            if (myRB1.isChecked()){
+                //myHoldScreen();
 
 
-                    //while (myGameStage <= 9){
-                    while (myObjectForDV.myGameStage <= 9){
-                        Log.d(LOG_TAG, "myPositionsForPlayer1 = " + Arrays.toString(myObjectForDV.myPositionsForPlayer1));
-                        Log.d(LOG_TAG, "myPositionsForPlayer2 = " + Arrays.toString(myObjectForDV.myPositionsForPlayer2));
-                        //if (myGameStage%2 == 1){
-                        if (myObjectForDV.myGameStage%2 == 1){
+                //while (myGameStage <= 9){
+                while (myObjectForDV.myGameStage <= 9){
+                    Log.d(LOG_TAG, "myPositionsForPlayer1 = " + Arrays.toString(myObjectForDV.myPositionsForPlayer1));
+                    Log.d(LOG_TAG, "myPositionsForPlayer2 = " + Arrays.toString(myObjectForDV.myPositionsForPlayer2));
+                    //if (myGameStage%2 == 1){
+                    if (myObjectForDV.myGameStage%2 == 1){
 
-                            //ImageView myIV = (ImageView) findViewById(myPCsClickedButton0(myPositionsForPlayer1,myPositionsForPlayer2));
-                            //Integer btnId = getResources().getIdentifier("iv"+ myObjectForLogic.myPCsClickedButton(myPositionsForPlayer1,myPositionsForPlayer2),"id",getPackageName());
-                            ImageView myIV = (ImageView) findViewById(myObjectForLogic.myPCsClickedButton(myObjectForDV.myPositionsForPlayer1,myObjectForDV.myPositionsForPlayer2));
-                            myIV.performClick();
-                        }else{
+                        //ImageView myIV = (ImageView) findViewById(myPCsClickedButton0(myPositionsForPlayer1,myPositionsForPlayer2));
+                        //Integer btnId = getResources().getIdentifier("iv"+ myObjectForLogic.myPCsClickedButton(myPositionsForPlayer1,myPositionsForPlayer2),"id",getPackageName());
+                        ImageView myIV = (ImageView) findViewById(myObjectForLogic.myPCsClickedButton(myObjectForDV.myPositionsForPlayer1,myObjectForDV.myPositionsForPlayer2));
+                        myIV.performClick();
+                    }else{
 
-                            //ImageView myIV = (ImageView) findViewById(myPCsClickedButton0(myPositionsForPlayer2,myPositionsForPlayer1));
-                            //Integer btnId = getResources().getIdentifier("iv"+ myObjectForLogic.myPCsClickedButton(myPositionsForPlayer2,myPositionsForPlayer1),"id",getPackageName());
-                            ImageView myIV = (ImageView) findViewById(myObjectForLogic.myPCsClickedButton(myObjectForDV.myPositionsForPlayer2,myObjectForDV.myPositionsForPlayer1));
-                            myIV.performClick();
-                        }
+                        //ImageView myIV = (ImageView) findViewById(myPCsClickedButton0(myPositionsForPlayer2,myPositionsForPlayer1));
+                        //Integer btnId = getResources().getIdentifier("iv"+ myObjectForLogic.myPCsClickedButton(myPositionsForPlayer2,myPositionsForPlayer1),"id",getPackageName());
+                        ImageView myIV = (ImageView) findViewById(myObjectForLogic.myPCsClickedButton(myObjectForDV.myPositionsForPlayer2,myObjectForDV.myPositionsForPlayer1));
+                        myIV.performClick();
                     }
                 }
             }
@@ -136,48 +133,45 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-        myRG.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                //myClearScreen();
-                myObjectForDV.myClearScreen(myObjectForLogic, myBitmapForClean,
-                        myIVTopLeft,myIVTopCenter,myIVTopRight,
-                        myIVCenterLeft,myIVCenter,myIVCenterRight,
-                        myIVBottomLeft,myIVBottomCenter,myIVBottomRight);
-                switch (checkedId){
-                    case R.id.rb1:
+        myRG.setOnCheckedChangeListener((group, checkedId) -> {
+            //myClearScreen();
+            myObjectForDV.myClearScreen(myObjectForLogic, myBitmapForClean,
+                    myIVTopLeft,myIVTopCenter,myIVTopRight,
+                    myIVCenterLeft,myIVCenter,myIVCenterRight,
+                    myIVBottomLeft,myIVBottomCenter,myIVBottomRight);
+            switch (checkedId){
+                case R.id.rb1:
 
-                        //while (myGameStage <= 9){
-                        while (myObjectForDV.myGameStage <= 9){
+                    //while (myGameStage <= 9){
+                    while (myObjectForDV.myGameStage <= 9){
 
-                            Log.d(LOG_TAG, "myPositionsForPlayer1 = " + Arrays.toString(myObjectForDV.myPositionsForPlayer1));
-                            Log.d(LOG_TAG, "myPositionsForPlayer2 = " + Arrays.toString(myObjectForDV.myPositionsForPlayer2));
+                        Log.d(LOG_TAG, "myPositionsForPlayer1 = " + Arrays.toString(myObjectForDV.myPositionsForPlayer1));
+                        Log.d(LOG_TAG, "myPositionsForPlayer2 = " + Arrays.toString(myObjectForDV.myPositionsForPlayer2));
 
-                            //if (myGameStage%2 == 1){
-                            if (myObjectForDV.myGameStage%2 == 1){
+                        //if (myGameStage%2 == 1){
+                        if (myObjectForDV.myGameStage%2 == 1){
 
-                                //ImageView myIV = (ImageView) findViewById(myPCsClickedButton0(myPositionsForPlayer1,myPositionsForPlayer2));
-                                //Integer btnId = getResources().getIdentifier("iv"+ myObjectForLogic.myPCsClickedButton(myPositionsForPlayer1,myPositionsForPlayer2),"id",getPackageName());
-                                ImageView myIV = (ImageView) findViewById(myObjectForLogic.myPCsClickedButton(myObjectForDV.myPositionsForPlayer1,myObjectForDV.myPositionsForPlayer2));
-                                myIV.performClick();
-                            }else{
+                            //ImageView myIV = (ImageView) findViewById(myPCsClickedButton0(myPositionsForPlayer1,myPositionsForPlayer2));
+                            //Integer btnId = getResources().getIdentifier("iv"+ myObjectForLogic.myPCsClickedButton(myPositionsForPlayer1,myPositionsForPlayer2),"id",getPackageName());
+                            ImageView myIV = (ImageView) findViewById(myObjectForLogic.myPCsClickedButton(myObjectForDV.myPositionsForPlayer1,myObjectForDV.myPositionsForPlayer2));
+                            myIV.performClick();
+                        }else{
 
-                                //ImageView myIV = (ImageView) findViewById(myPCsClickedButton0(myPositionsForPlayer2,myPositionsForPlayer1));
-                                //Integer btnId = getResources().getIdentifier("iv"+ myObjectForLogic.myPCsClickedButton(myPositionsForPlayer2,myPositionsForPlayer1),"id",getPackageName());
-                                ImageView myIV = (ImageView) findViewById(myObjectForLogic.myPCsClickedButton(myObjectForDV.myPositionsForPlayer2,myObjectForDV.myPositionsForPlayer1));
-                                myIV.performClick();
+                            //ImageView myIV = (ImageView) findViewById(myPCsClickedButton0(myPositionsForPlayer2,myPositionsForPlayer1));
+                            //Integer btnId = getResources().getIdentifier("iv"+ myObjectForLogic.myPCsClickedButton(myPositionsForPlayer2,myPositionsForPlayer1),"id",getPackageName());
+                            ImageView myIV = (ImageView) findViewById(myObjectForLogic.myPCsClickedButton(myObjectForDV.myPositionsForPlayer2,myObjectForDV.myPositionsForPlayer1));
+                            myIV.performClick();
 
-                            }
                         }
-                        break;
-                    case R.id.rb2:
-                        break;
-                    case R.id.rb3:
-                        break;
-                    default:
-                        break;
+                    }
+                    break;
+                case R.id.rb2:
+                    break;
+                case R.id.rb3:
+                    break;
+                default:
+                    break;
 
-                }
             }
         });
 
