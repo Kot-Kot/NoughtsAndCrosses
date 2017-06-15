@@ -9,6 +9,7 @@ import android.graphics.Paint;
  * Created by Kot Kot on 12.06.2017.
  */
 
+//отвечает за прорисовку bitmap
 public class myClassForDrawing implements myInterfaceForDrawing {
 
     Bitmap myBitmap = Bitmap.createBitmap(50,50, Bitmap.Config.ARGB_8888);
@@ -17,17 +18,6 @@ public class myClassForDrawing implements myInterfaceForDrawing {
 
 
 
-/*
-    @Override
-    public Bitmap myCreateBitmap() {
-        return myBitmap;
-    }
-
-    @Override
-    public Canvas myCreateCanvas() {
-        return myCanvas;
-    }
-*/
     @Override
     public Paint myCreatePaint() {
 
