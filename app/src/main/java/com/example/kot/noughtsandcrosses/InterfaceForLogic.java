@@ -4,7 +4,7 @@ package com.example.kot.noughtsandcrosses;
  * Created by Kot Kot on 13.06.2017.
  */
 
-public interface myInterfaceForLogic {
+public interface InterfaceForLogic {
     String LOG_TAG = "MY_LOG";
 
     String FirstPos = "Center";
@@ -27,6 +27,10 @@ public interface myInterfaceForLogic {
             {"TopLeft","Center","BottomRight"},
             {"TopRight","Center","BottomLeft"}};
 
+
+    String getMyNowClickedButton();
+
+    void setMyNowClickedButton(String myNowClickedButton);
 
     Integer myPCsClickedButton(String[] strPos, String[] strPosRival);
     Boolean isPosInArray(String pos, String[] posArray);

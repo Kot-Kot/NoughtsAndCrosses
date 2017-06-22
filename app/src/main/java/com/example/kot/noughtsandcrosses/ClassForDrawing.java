@@ -10,7 +10,7 @@ import android.graphics.Paint;
  */
 
 //отвечает за прорисовку bitmap
-public class myClassForDrawing implements myInterfaceForDrawing {
+public class ClassForDrawing implements InterfaceForDrawing {
 
     Bitmap myBitmap = Bitmap.createBitmap(50,50, Bitmap.Config.ARGB_8888);
     Canvas myCanvas = new Canvas(myBitmap);

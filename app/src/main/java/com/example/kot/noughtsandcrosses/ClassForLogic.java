@@ -1,10 +1,8 @@
 package com.example.kot.noughtsandcrosses;
 
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.Button;
-import android.support.annotation.IdRes;
+
 import java.util.Arrays;
 
 
@@ -17,11 +15,19 @@ import java.util.Arrays;
  */
 
 //отвечает за логику хода ПК
-public class myClassForLogic implements myInterfaceForLogic{
-    String myNowClickedButton = "";
+public class ClassForLogic implements InterfaceForLogic {
+    private String myNowClickedButton = "";
     Context myContext;
 
-    myClassForLogic(Context c){
+    public String getMyNowClickedButton() {
+        return myNowClickedButton;
+    }
+
+    public void setMyNowClickedButton(String myNowClickedButton) {
+        this.myNowClickedButton = myNowClickedButton;
+    }
+
+    ClassForLogic(Context c){
         myContext = c;
     }
 
