@@ -19,6 +19,7 @@ public class ClassUsersRealm extends RealmObject {
     @PrimaryKey
     private String myName;
     private Boolean isCurrentUser;
+    private Boolean isActive;
 
     private Integer myPcWins;
     private Integer myPlayerWins;
@@ -41,6 +42,14 @@ public class ClassUsersRealm extends RealmObject {
 
     public void setIsCurrentUser (Boolean b){
         isCurrentUser = b;
+    }
+
+    public Boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(Boolean b) {
+        isActive = b;
     }
 
     public Integer getMyPcWins() {

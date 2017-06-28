@@ -16,7 +16,6 @@ public class ClassRealmController {
     private Realm myRealm;
 
 
-
     void initializeRealm(Context c){
         Realm.init(c);
         RealmConfiguration myRealmConfiguration = new RealmConfiguration.Builder()
@@ -33,16 +32,42 @@ public class ClassRealmController {
                 realm.delete(ClassUsersRealm.class));
     }
 
-    void createNewUser(String n, Boolean b){
+    void createNewUser(String n, Context c) {
         myRealm.executeTransaction(realm -> {
-            // Add a person
+
+            ClassUsersRealm myObjForCurrentUser = myRealm.where(ClassUsersRealm.class).equalTo("myName", n).findFirst();
+            if (myObjForCurrentUser != null) {
+                myObjForCurrentUser.setIsCurrentUser(true);
+                myObjForCurrentUser.setIsActive(true);
+                realm.copyToRealmOrUpdate(myObjForCurrentUser);
+
+                Toast myToast = (Toast.makeText(c.getApplicationContext(), "Вы вошли как существующий игрок: \"" + myObjForCurrentUser.getMyName() + "\"", Toast.LENGTH_SHORT));
+                myToast.show();
+            } else {
+                ClassUsersRealm myUser = new ClassUsersRealm();
+                myUser.setMyName(n);
+                myUser.setIsCurrentUser(true);
+                myUser.setIsActive(true);
+
+                myUser.setMyPlayerWins(0);
+                myUser.setMyPcWins(0);
+                myUser.setMyTie(0);
+                realm.copyToRealmOrUpdate(myUser);
+                Toast myToast = (Toast.makeText(c.getApplicationContext(), "Создан новый игрок: \"" + myUser.getMyName() + "\"", Toast.LENGTH_SHORT));
+                myToast.show();
+            }
+
+            /*
             ClassUsersRealm myUser = new ClassUsersRealm();
             myUser.setMyName(n);
             myUser.setIsCurrentUser(b);
+            myUser.setIsActive(b);
+
             myUser.setMyPlayerWins(0);
             myUser.setMyPcWins(0);
             myUser.setMyTie(0);
-           realm.copyToRealmOrUpdate(myUser);
+            realm.copyToRealmOrUpdate(myUser);
+            */
         });
     }
 
@@ -54,6 +79,7 @@ public class ClassRealmController {
             myRealm.executeTransaction(realm -> {
                 //myObjForLastCurrentUser.setMyName(myObjForLastCurrentUser.getMyName());
                 myObjForLastCurrentUser.setIsCurrentUser(false);
+                myObjForLastCurrentUser.setIsActive(false);
                 realm.copyToRealmOrUpdate(myObjForLastCurrentUser);
 
             });
@@ -67,21 +93,37 @@ public class ClassRealmController {
         if (myObjForLastCurrentUser == null){
             Toast myToast = (Toast.makeText(c.getApplicationContext(), "База данных пуста! Создайте пользователя или просто закройте диалог.", Toast.LENGTH_LONG));
             myToast.show();
+
             return false;
         }else {
             myRealm.executeTransaction(realm -> {
-                Toast myToast = (Toast.makeText(c.getApplicationContext(), "Вы зашли как: \""+ myObjForLastCurrentUser.getMyName() + "\"", Toast.LENGTH_SHORT));
+                Toast myToast = (Toast.makeText(c.getApplicationContext(), "Вы вошли как: \"" + myObjForLastCurrentUser.getMyName() + "\"", Toast.LENGTH_SHORT));
                 myToast.show();
-
+                myObjForLastCurrentUser.setIsActive(true);
             });
         }
         return true;
     }
 
+    void lastCurrentUserIsNotActive() {
+
+        ClassUsersRealm myObjForLastCurrentUser = myRealm.where(ClassUsersRealm.class).equalTo("isCurrentUser", true).findFirst();
+        Log.d("MYL", "myObjForLastCurrentUser = " + myObjForLastCurrentUser);
+        if (myObjForLastCurrentUser != null) {
+            myRealm.executeTransaction(realm -> {
+                //myObjForLastCurrentUser.setMyName(myObjForLastCurrentUser.getMyName());
+                //myObjForLastCurrentUser.setIsCurrentUser(false);
+                myObjForLastCurrentUser.setIsActive(false);
+                realm.copyToRealmOrUpdate(myObjForLastCurrentUser);
+
+            });
+        }
+    }
+
 
     void currentUserWin(){
 
-        ClassUsersRealm myObjForLastCurrentUser = myRealm.where(ClassUsersRealm.class).equalTo("isCurrentUser", true).findFirst();
+        ClassUsersRealm myObjForLastCurrentUser = myRealm.where(ClassUsersRealm.class).equalTo("isCurrentUser", true).equalTo("isActive", true).findFirst();
         Log.d ("MYL", "myObjForLastCurrentUser = " + myObjForLastCurrentUser);
         if (myObjForLastCurrentUser != null) {
             myRealm.executeTransaction(realm -> {
@@ -95,7 +137,7 @@ public class ClassRealmController {
 
     void currentUserLost(){
 
-        ClassUsersRealm myObjForLastCurrentUser = myRealm.where(ClassUsersRealm.class).equalTo("isCurrentUser", true).findFirst();
+        ClassUsersRealm myObjForLastCurrentUser = myRealm.where(ClassUsersRealm.class).equalTo("isCurrentUser", true).equalTo("isActive", true).findFirst();
         Log.d ("MYL", "myObjForLastCurrentUser = " + myObjForLastCurrentUser);
         if (myObjForLastCurrentUser != null) {
             myRealm.executeTransaction(realm -> {
@@ -109,7 +151,7 @@ public class ClassRealmController {
 
     void currentUserTie(){
 
-        ClassUsersRealm myObjForLastCurrentUser = myRealm.where(ClassUsersRealm.class).equalTo("isCurrentUser", true).findFirst();
+        ClassUsersRealm myObjForLastCurrentUser = myRealm.where(ClassUsersRealm.class).equalTo("isCurrentUser", true).equalTo("isActive", true).findFirst();
         Log.d ("MYL", "myObjForLastCurrentUser = " + myObjForLastCurrentUser);
         if (myObjForLastCurrentUser != null) {
             myRealm.executeTransaction(realm -> {
@@ -156,9 +198,15 @@ public class ClassRealmController {
 
 
     }
-    public RealmResults<ClassUsersRealm> getAll() {
+
+
+    RealmResults<ClassUsersRealm> getAll() {
 
         return myRealm.where(ClassUsersRealm.class).findAll();
+    }
+
+    void closeRealm() {
+        myRealm.close();
     }
 
 

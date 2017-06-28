@@ -61,8 +61,10 @@ public class ClassCustomDialog extends AppCompatActivity {
 
 
             myObjForRealmController.setIsCurrentUserAsFalse();
-            myObjForRealmController.createNewUser(myUserName, true);
+            myObjForRealmController.createNewUser(myUserName, myContext);
             Log.d ("MYL", "myObjForRealmController.getAll() = " + myObjForRealmController.getAll());
+
+
         });
         myADB.setNeutralButton("Продолжить предыдущую сессию",(dialogBox, id) -> {
             if (!myObjForRealmController.showLastCurrentUser(myContext)){
@@ -75,6 +77,7 @@ public class ClassCustomDialog extends AppCompatActivity {
         myADB.setNegativeButton("Закрыть",(dialogBox, id) -> {
             Toast myToast = (Toast.makeText(myContext.getApplicationContext(), "Вы вошли инкогнито! Статистика по игрокам отключена. Работает только общая статистика.", Toast.LENGTH_LONG));
             myToast.show();
+            myObjForRealmController.lastCurrentUserIsNotActive();
             dialogBox.cancel();
                 });
 

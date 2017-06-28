@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity implements
         View.OnClickListener, RadioButton.OnCheckedChangeListener {
     static final String LOG_TAG = "MY_LOG";
 
+    //ClassRealmController myObjForRealmController = new ClassRealmController();
+
 
     ClassModeFragment myModeFragment;
     ClassFieldsFragment myFieldsFragment;
@@ -246,6 +248,13 @@ public class MainActivity extends AppCompatActivity implements
 
     }
 
+    //@Override
+    //protected void onDestroy() {
+    //super.onDestroy();
+
+    //myObjForRealmController.initializeRealm(this);
+    //myObjForRealmController.closeRealm();
+    //}
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
