@@ -12,7 +12,7 @@ import android.support.v4.content.ContextCompat;
  */
 
 //отвечает за прорисовку bitmap
-public class ClassImplDrawing1 implements IntfDrawing {
+public class ClassSkin1ImplDrawing implements IntfDrawing {
 
     private Bitmap myBitmap = Bitmap.createBitmap(50,50, Bitmap.Config.ARGB_8888);
     private Canvas myCanvas = new Canvas(myBitmap);
@@ -31,7 +31,7 @@ public class ClassImplDrawing1 implements IntfDrawing {
         return myContext;
     }
 
-    ClassImplDrawing1(Context c){
+    ClassSkin1ImplDrawing(Context c) {
         myContext = c;
     }
 

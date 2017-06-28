@@ -2,7 +2,6 @@ package com.example.kot.noughtsandcrosses;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -75,21 +74,21 @@ public class MainActivity extends AppCompatActivity implements
         myObjForSaveStatistics.loadSkin();
         switch (myObjForSaveStatistics.getSkin()){
             case 1:
-                myObjForNoughtPicture = new ClassImplDrawing1(this);
-                myObjForCrossPicture = new ClassImplDrawing1(this);
-                myObjForClearPicture = new ClassImplDrawing1(this);
+                myObjForNoughtPicture = new ClassSkin1ImplDrawing(this);
+                myObjForCrossPicture = new ClassSkin1ImplDrawing(this);
+                myObjForClearPicture = new ClassSkin1ImplDrawing(this);
                 MainActivity.this.setTheme(R.style.AppTheme1);
                 break;
             case 2:
-                myObjForNoughtPicture = new ClassImplDrawing2(this);
-                myObjForCrossPicture = new ClassImplDrawing2(this);
-                myObjForClearPicture = new ClassImplDrawing2(this);
+                myObjForNoughtPicture = new ClassSkin2ImplDrawing(this);
+                myObjForCrossPicture = new ClassSkin2ImplDrawing(this);
+                myObjForClearPicture = new ClassSkin2ImplDrawing(this);
                 MainActivity.this.setTheme(R.style.AppTheme2);
                 break;
             case 3:
-                myObjForNoughtPicture = new ClassImplDrawing3(this);
-                myObjForCrossPicture = new ClassImplDrawing3(this);
-                myObjForClearPicture = new ClassImplDrawing3(this);
+                myObjForNoughtPicture = new ClassSkin3ImplDrawing(this);
+                myObjForCrossPicture = new ClassSkin3ImplDrawing(this);
+                myObjForClearPicture = new ClassSkin3ImplDrawing(this);
                 MainActivity.this.setTheme(R.style.AppTheme3);
                 break;
             default:
