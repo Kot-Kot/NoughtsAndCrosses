@@ -178,50 +178,54 @@
         app:srcCompat="@android:color/white" />
 
     <View
+        android:id="@+id/line1"
         android:layout_width="4dp"
         android:layout_height="0dp"
+        android:background="?attr/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH090"
         app:layout_constraintLeft_toRightOf="@+id/ivTopLeft"
+
+
         app:layout_constraintRight_toLeftOf="@+id/ivTopCenter"
-        app:layout_constraintTop_toTopOf="@+id/guidelineH015"
-
-
-        android:background="@color/colorPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH090" />
+        app:layout_constraintTop_toTopOf="@+id/guidelineH015" />
 
     <View
+        android:id="@+id/line2"
         android:layout_width="4dp"
         android:layout_height="0dp"
+        android:background="?attr/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH090"
         app:layout_constraintLeft_toRightOf="@+id/ivTopCenter"
+
+
         app:layout_constraintRight_toLeftOf="@+id/ivTopRight"
-        app:layout_constraintTop_toTopOf="@+id/guidelineH015"
-
-
-        android:background="@color/colorPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH090" />
+        app:layout_constraintTop_toTopOf="@+id/guidelineH015" />
 
     <View
+        android:id="@+id/line3"
         android:layout_width="0dp"
         android:layout_height="4dp"
-        app:layout_constraintLeft_toLeftOf="@+id/guidelineV005"
+        android:background="?attr/colorPrimary"
 
-        app:layout_constraintTop_toBottomOf="@+id/ivTopLeft"
         app:layout_constraintBottom_toTopOf="@+id/ivCenterLeft"
-
-
-        android:background="@color/colorPrimary"
-        app:layout_constraintRight_toLeftOf="@+id/guidelineV095" />
-
-    <View
-        android:layout_width="0dp"
-        android:layout_height="4dp"
         app:layout_constraintLeft_toLeftOf="@+id/guidelineV005"
 
-        app:layout_constraintTop_toBottomOf="@+id/ivCenterLeft"
+
+        app:layout_constraintRight_toLeftOf="@+id/guidelineV095"
+        app:layout_constraintTop_toBottomOf="@+id/ivTopLeft" />
+
+    <View
+        android:id="@+id/line4"
+        android:layout_width="0dp"
+        android:layout_height="4dp"
+        android:background="?attr/colorPrimary"
+
         app:layout_constraintBottom_toTopOf="@+id/ivBottomLeft"
+        app:layout_constraintLeft_toLeftOf="@+id/guidelineV005"
 
 
-        android:background="@color/colorPrimary"
-        app:layout_constraintRight_toLeftOf="@+id/guidelineV095" />
+        app:layout_constraintRight_toLeftOf="@+id/guidelineV095"
+        app:layout_constraintTop_toBottomOf="@+id/ivCenterLeft" />
 
     <ProgressBar
         android:id="@+id/progressBar"

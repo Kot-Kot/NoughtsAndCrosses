@@ -6,10 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
 /**
  * Created by Kot Kot on 22.06.2017.
@@ -17,13 +15,32 @@ import android.widget.RadioGroup;
 
 public class ClassButtonFragment extends Fragment implements View.OnClickListener, RadioButton.OnCheckedChangeListener {
 
+    //interface OnClickedClearButton {
+        //void clickedClearButton(Boolean flag);
+
+    //}
+
+    //OnClickedClearButton onClickedClearButtonListener;
 
 
-    OnClickedClearButton myOnClickedClearButton;
+/*
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            onClickedClearButtonListener = (OnClickedClearButton) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement Listener");
+        }
+    }
+*/
+
+
+
 
     private View myRootView;
 
-    private Button myClearScreen;
+    //private Button myClearScreen;
 
     @Nullable
     @Override
@@ -31,20 +48,15 @@ public class ClassButtonFragment extends Fragment implements View.OnClickListene
 
 
 
-        myRootView = (View) inflater.inflate(R.layout.button_fragment, container, false);
+        myRootView = inflater.inflate(R.layout.button_fragment, container, false);
+        //myClearScreen = (Button) myRootView.findViewById(R.id.btnClear);
 
+        //myOnClickedClearButton =(OnClickedClearButton)getActivity();
 
+        //myClearScreen.setOnClickListener(v -> {
+            //onClickedClearButtonListener.clickedClearButton(true);
 
-        myClearScreen = (Button) myRootView.findViewById(R.id.btnClear);
-
-        myOnClickedClearButton =(OnClickedClearButton)getActivity();
-
-        myClearScreen.setOnClickListener(v -> {
-            myOnClickedClearButton.methClearScreen();
-            //if (myRB1.isChecked()){
-                //myOnClickedClearButton.methPcVsPcIsChecked();
-            //};
-        });
+        //});
 
         //return super.onCreateView(inflater, container, savedInstanceState);
         return myRootView;
@@ -62,9 +74,10 @@ public class ClassButtonFragment extends Fragment implements View.OnClickListene
 
     }
 
-    public interface OnClickedClearButton {
-        public void methClearScreen();
-        //public void methPcVsPcIsChecked();
-    }
+    // @Override
+   // public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+   // }
+
 
 }

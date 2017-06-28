@@ -15,9 +15,9 @@ import java.util.Arrays;
  */
 
 //отвечает за логику хода ПК
-public class ClassForLogic implements InterfaceForLogic {
+public class ClassImplLogic implements IntfLogic {
     private String myNowClickedButton = "";
-    Context myContext;
+    private Context myContext;
 
     public String getMyNowClickedButton() {
         return myNowClickedButton;
@@ -27,7 +27,7 @@ public class ClassForLogic implements InterfaceForLogic {
         this.myNowClickedButton = myNowClickedButton;
     }
 
-    ClassForLogic(Context c){
+    ClassImplLogic(Context c){
         myContext = c;
     }
 
@@ -50,7 +50,7 @@ public class ClassForLogic implements InterfaceForLogic {
                         pos[j] = 1;
                         if (number == 2){
                             for(int p = 0; p < pos.length; p++){
-                                if (pos[p]==0 & isPosInArray(myWinningCombinations[i][p],strPosRival) == false){
+                                if (pos[p]==0 & !isPosInArray(myWinningCombinations[i][p], strPosRival)){
                                     tempStr = myWinningCombinations[i][p];
                                     myNowClickedButton = tempStr;
                                     btnId = myContext.getResources().getIdentifier("iv"+tempStr,"id", myContext.getPackageName());
@@ -87,7 +87,7 @@ public class ClassForLogic implements InterfaceForLogic {
                             //Log.d(LOG_TAG, "i = " + i);
                             //Log.d(LOG_TAG, "pos[] = " + Arrays.toString(pos));
                             for(int p = 0; p < pos.length; p++){
-                                if (pos[p]==0 & isPosInArray(myWinningCombinations[i][p],strPos) == false){
+                                if (pos[p]==0 & !isPosInArray(myWinningCombinations[i][p], strPos)){
                                     tempStr = myWinningCombinations[i][p];
                                     myNowClickedButton = tempStr;
                                     btnId = myContext.getResources().getIdentifier("iv"+tempStr,"id", myContext.getPackageName());

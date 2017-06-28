@@ -1,32 +1,54 @@
 package com.example.kot.noughtsandcrosses;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.support.v4.content.ContextCompat;
 
 /**
  * Created by Kot Kot on 12.06.2017.
  */
 
 //отвечает за прорисовку bitmap
-public class ClassForDrawing implements InterfaceForDrawing {
+public class ClassImplDrawing1 implements IntfDrawing {
 
-    Bitmap myBitmap = Bitmap.createBitmap(50,50, Bitmap.Config.ARGB_8888);
-    Canvas myCanvas = new Canvas(myBitmap);
-    Paint myPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private Bitmap myBitmap = Bitmap.createBitmap(50,50, Bitmap.Config.ARGB_8888);
+    private Canvas myCanvas = new Canvas(myBitmap);
+    private Paint myPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+
+
+    private Context myContext;
+
+    @Override
+    public Paint getMyPaint() {
+        return myPaint;
+    }
+
+    @Override
+    public Context getMyContext() {
+        return myContext;
+    }
+
+    ClassImplDrawing1(Context c){
+        myContext = c;
+    }
 
 
 
     @Override
     public Paint myCreatePaint() {
 
-        myPaint.setColor(Color.BLUE);
+        myPaint.setColor(ContextCompat.getColor(myContext, R.color.colorSkin1));
         myPaint.setStrokeWidth(3);
         myPaint.setStyle(Paint.Style.STROKE);
 
         return myPaint;
     }
+
+
+
 
     @Override
     public Bitmap myDrawNought() {

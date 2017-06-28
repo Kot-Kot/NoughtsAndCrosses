@@ -11,7 +11,9 @@ import android.widget.Toast;
  * Created by Kot Kot on 14.06.2017.
  */
 //отвечает за разные варианты игры (PC vs PC, PC vs Player, Player vs Player)
-public class ClassForDiffVariants implements InterfaceForDiffVariants {
+public class ClassImplDiffVariants implements IntfDiffVariants {
+
+
 
     private Context myContext;
     private Activity myActivity;
@@ -19,9 +21,12 @@ public class ClassForDiffVariants implements InterfaceForDiffVariants {
     private String[] myPositionsForPlayer1 = {"","","","",""};
     private String[] myPositionsForPlayer2 = {"","","","",""};
 
+    //ClassImplSaveStatistics myObjForSaveStatistics = new ClassImplSaveStatistics(myContext, myActivity);
+    private IntfSaveStatistics myObjForSaveStatistics = new ClassImplSaveStatistics(myContext, myActivity);
+
     //String myNowClickedButton = "";
 
-    Integer myGameStage = 1;
+    private Integer myGameStage = 1;
 
     public String[] getMyPositionsForPlayer1() {
         return myPositionsForPlayer1;
@@ -47,15 +52,18 @@ public class ClassForDiffVariants implements InterfaceForDiffVariants {
         this.myGameStage = myGameStage;
     }
 
-    ClassForDiffVariants(Context c, Activity a) {
+
+
+    ClassImplDiffVariants(Context c, Activity a) {
         //super(c);
         myContext = c;
         myActivity = a;
     }
 
 
+
     public void myPcVsPc(ImageView iv,
-                         InterfaceForLogic myInterfaceForLogic,
+                         IntfLogic myInterfaceForLogic,
                   Bitmap myBitmapCross, Bitmap myBitmapNought){
         // final ImageView fiv = iv;
         //final Bitmap fbc = myBitmapCross;
@@ -83,11 +91,13 @@ public class ClassForDiffVariants implements InterfaceForDiffVariants {
                 Log.d(LOG_TAG, "Выиграли крестики");
                 Toast myToast = (Toast.makeText(myContext.getApplicationContext(), "Выиграли крестики", Toast.LENGTH_SHORT));
                 myToast.show();
+                myObjForSaveStatistics.saveWinForCrosses(myActivity);
                 //myHoldScreen();
             }else if(myGameStage == 10) {
                 Log.d(LOG_TAG, "Ничья");
                 Toast myToast = (Toast.makeText(myContext.getApplicationContext(), "Ничья", Toast.LENGTH_SHORT));
                 myToast.show();
+                myObjForSaveStatistics.saveTie(myActivity);
                 // myHoldScreen();
             }
 
@@ -111,6 +121,7 @@ public class ClassForDiffVariants implements InterfaceForDiffVariants {
                 Log.d(LOG_TAG, "Выиграли нолики");
                 Toast myToast = (Toast.makeText(myContext.getApplicationContext(), "Выиграли нолики", Toast.LENGTH_SHORT));
                 myToast.show();
+                myObjForSaveStatistics.saveWinForNoughts(myActivity);
                 //myHoldScreen();
             }
 
@@ -122,7 +133,7 @@ public class ClassForDiffVariants implements InterfaceForDiffVariants {
    //----------------------------------------------------------------------
 
     public void myPlayerVsPc(ImageView iv,
-                             InterfaceForLogic myInterfaceForLogic,
+                             IntfLogic myInterfaceForLogic,
                              Bitmap myBitmapCross, Bitmap myBitmapNought,
                       ImageView iv1,
                       ImageView iv2,
@@ -133,6 +144,10 @@ public class ClassForDiffVariants implements InterfaceForDiffVariants {
                       ImageView iv7,
                       ImageView iv8,
                       ImageView iv9){
+
+        ClassRealmController myObjForRealmController = new ClassRealmController();
+        myObjForRealmController.initializeRealm(myContext);
+
         if (myGameStage%2 == 1) {
             //myPositionsForPlayer1[(myGameStage/2 + myGameStage%2)-1] = myNowClickedButton;
             //myNowClickedButton = "";
@@ -149,10 +164,14 @@ public class ClassForDiffVariants implements InterfaceForDiffVariants {
             if(myInterfaceForLogic.isSomebodyWin(myPositionsForPlayer1)){
                 Toast myToast = (Toast.makeText(myContext.getApplicationContext(), "Выиграл игрок", Toast.LENGTH_SHORT));
                 myToast.show();
+                myObjForRealmController.currentUserWin();
+                myObjForSaveStatistics.saveWinForCrosses(myActivity);
                 myHoldScreen(myInterfaceForLogic, iv1, iv2, iv3, iv4, iv5, iv6, iv7, iv8, iv9);
             }else if(myGameStage == 10){
                 Toast myToast = (Toast.makeText(myContext.getApplicationContext(), "Ничья", Toast.LENGTH_SHORT));
                 myToast.show();
+                myObjForRealmController.currentUserTie();
+                myObjForSaveStatistics.saveTie(myActivity);
                 myHoldScreen(myInterfaceForLogic, iv1, iv2, iv3, iv4, iv5, iv6, iv7, iv8, iv9);
             }else if (myGameStage < 9){
                 //TextView myTV = (TextView) findViewById(myPCsClickedButton0(myPositionsForPlayer2,myPositionsForPlayer1));
@@ -182,6 +201,8 @@ public class ClassForDiffVariants implements InterfaceForDiffVariants {
             if(myInterfaceForLogic.isSomebodyWin(myPositionsForPlayer2)) {
                 Toast myToast = (Toast.makeText(myContext.getApplicationContext(), "Выиграл ПК", Toast.LENGTH_SHORT));
                 myToast.show();
+                myObjForRealmController.currentUserLost();
+                myObjForSaveStatistics.saveWinForNoughts(myActivity);
                 myHoldScreen(myInterfaceForLogic, iv1, iv2, iv3, iv4, iv5, iv6, iv7, iv8, iv9);
 
             }
@@ -192,7 +213,7 @@ public class ClassForDiffVariants implements InterfaceForDiffVariants {
 
 
     public void myPlayerVsPlayer(ImageView iv,
-                                 InterfaceForLogic myInterfaceForLogic,
+                                 IntfLogic myInterfaceForLogic,
                           Bitmap myBitmapCross, Bitmap myBitmapNought,
                           ImageView iv1,
                           ImageView iv2,
@@ -218,10 +239,12 @@ public class ClassForDiffVariants implements InterfaceForDiffVariants {
             if(myInterfaceForLogic.isSomebodyWin(myPositionsForPlayer1)){
                 Toast myToast = (Toast.makeText(myContext.getApplicationContext(), "Выиграли крестики", Toast.LENGTH_SHORT));
                 myToast.show();
+                myObjForSaveStatistics.saveWinForCrosses(myActivity);
                 myHoldScreen(myInterfaceForLogic, iv1, iv2, iv3, iv4, iv5, iv6, iv7, iv8, iv9);
             }else if(myGameStage == 10) {
                 Toast myToast = (Toast.makeText(myContext.getApplicationContext(), "Ничья", Toast.LENGTH_SHORT));
                 myToast.show();
+                myObjForSaveStatistics.saveTie(myActivity);
                 myHoldScreen(myInterfaceForLogic, iv1, iv2, iv3, iv4, iv5, iv6, iv7, iv8, iv9);
             }
 
@@ -242,6 +265,7 @@ public class ClassForDiffVariants implements InterfaceForDiffVariants {
             if(myInterfaceForLogic.isSomebodyWin(myPositionsForPlayer2)){
                 Toast myToast = (Toast.makeText(myContext.getApplicationContext(), "Выиграли нолики", Toast.LENGTH_SHORT));
                 myToast.show();
+                myObjForSaveStatistics.saveWinForNoughts(myActivity);
                 myHoldScreen(myInterfaceForLogic, iv1, iv2, iv3, iv4, iv5, iv6, iv7, iv8, iv9);
             }
         }
@@ -249,7 +273,7 @@ public class ClassForDiffVariants implements InterfaceForDiffVariants {
 
 
 
-    public void myHoldScreen(InterfaceForLogic myInterfaceForLogic,
+    public void myHoldScreen(IntfLogic myInterfaceForLogic,
                       ImageView iv1,
                       ImageView iv2,
                       ImageView iv3,
@@ -280,7 +304,7 @@ public class ClassForDiffVariants implements InterfaceForDiffVariants {
     }
 
 
-    public void myClearScreen(InterfaceForLogic myInterfaceForLogic,
+    public void myClearScreen(IntfLogic myInterfaceForLogic,
                        Bitmap myBitmapForClean,
                        ImageView iv1,
                        ImageView iv2,

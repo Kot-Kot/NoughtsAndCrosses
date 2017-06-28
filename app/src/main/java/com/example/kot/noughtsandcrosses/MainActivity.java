@@ -1,27 +1,35 @@
 package com.example.kot.noughtsandcrosses;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
-import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import java.util.Arrays;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, RadioButton.OnCheckedChangeListener, ClassModeFragment.OnClickedClearButton {
+public class MainActivity extends AppCompatActivity implements
+        View.OnClickListener, RadioButton.OnCheckedChangeListener {
     static final String LOG_TAG = "MY_LOG";
+
 
     ClassModeFragment myModeFragment;
     ClassFieldsFragment myFieldsFragment;
+    ClassButtonFragment myButtonFragment;
 
 
-    //Button myClearScreen;
+    Button myClearScreen;
 
     RadioGroup myRG;
 
@@ -29,12 +37,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     RadioButton myRB2;
     RadioButton myRB3;
 
-    InterfaceForLogic myObjForLogic = new ClassForLogic(this);
-    InterfaceForDiffVariants myObjForDV = new ClassForDiffVariants(this, this);
 
-    InterfaceForDrawing myObjForNoughtPicture = new ClassForDrawing();
-    InterfaceForDrawing myObjForCrossPicture = new ClassForDrawing();
-    InterfaceForDrawing myObjForClearPicture = new ClassForDrawing();
+    IntfSaveStatistics myObjForSaveStatistics = new ClassImplSaveStatistics(this, this);
+
+    IntfLogic myObjForLogic = new ClassImplLogic(this);
+    IntfDiffVariants myObjForDV = new ClassImplDiffVariants(this, this);
+
+    IntfDrawing myObjForNoughtPicture;
+    IntfDrawing myObjForCrossPicture;
+    IntfDrawing myObjForClearPicture;
 
     Bitmap myBitmapCross;
     Bitmap myBitmapNought;
@@ -55,19 +66,70 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //int myProgress = 0;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        myObjForSaveStatistics.loadSkin();
+        switch (myObjForSaveStatistics.getSkin()){
+            case 1:
+                myObjForNoughtPicture = new ClassImplDrawing1(this);
+                myObjForCrossPicture = new ClassImplDrawing1(this);
+                myObjForClearPicture = new ClassImplDrawing1(this);
+                MainActivity.this.setTheme(R.style.AppTheme1);
+                break;
+            case 2:
+                myObjForNoughtPicture = new ClassImplDrawing2(this);
+                myObjForCrossPicture = new ClassImplDrawing2(this);
+                myObjForClearPicture = new ClassImplDrawing2(this);
+                MainActivity.this.setTheme(R.style.AppTheme2);
+                break;
+            case 3:
+                myObjForNoughtPicture = new ClassImplDrawing3(this);
+                myObjForCrossPicture = new ClassImplDrawing3(this);
+                myObjForClearPicture = new ClassImplDrawing3(this);
+                MainActivity.this.setTheme(R.style.AppTheme3);
+                break;
+            default:
+                myBitmapCross = myObjForNoughtPicture.myDrawCross();
+                myBitmapNought = myObjForCrossPicture.myDrawNought();
+                myBitmapForClean = myObjForClearPicture.myDrawClear();
+                break;
+
+
+
+        }
+
         setContentView(R.layout.activity_main);
+        //ClassRealmController RC = new ClassRealmController();
+        //RC.initializeRealm(this);
+        //RC.clearAllUsers();
+        //Log.d ("MYL", "RC.getAll() =" + RC.getAll());
+        //Log.d ("MYL", "RC.getAll() =" + RC.getAll());
+        //Log.d ("MYL", "RC.getItem(\"вася\") =" + RC.getItemByName("вася"));
+
+        ClassCustomDialog myObjForCustomDialog = new ClassCustomDialog(this, this);
+
+        myObjForCustomDialog.createCustomDialog();
+
+
+
+
+
+
+
 
         View view = this.getWindow().getDecorView();
         view.setBackgroundColor(getResources().getColor(R.color.colorWhite));
 
         //myModeFragment = getFragmentManager().findFragmentById(R.id.mode_fragment);
         myModeFragment = (ClassModeFragment) getSupportFragmentManager().findFragmentById(R.id.mode_fragment);
-
-        //myFieldsFragment = getFragmentManager().findFragmentById(R.id.fields_fragment);
         myFieldsFragment = (ClassFieldsFragment) getSupportFragmentManager().findFragmentById(R.id.fields_fragment);
+        myButtonFragment = (ClassButtonFragment) getSupportFragmentManager().findFragmentById(R.id.button_fragment);
+
+
 
         //myProgressBar = (ProgressBar)findViewById(R.id.progressBar);
 
@@ -77,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         myRB2 = (RadioButton) myModeFragment.getView().findViewById(R.id.rb2);
         myRB3 = (RadioButton) myModeFragment.getView().findViewById(R.id.rb3);
 
-        //myClearScreen = (Button) myModeFragment.getView().findViewById(R.id.btnClear);
+        myClearScreen = (Button) myButtonFragment.getView().findViewById(R.id.btnClear);
 
 
         myIVTopLeft = (ImageView) myFieldsFragment.getView().findViewById(R.id.ivTopLeft);
@@ -91,11 +153,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         myIVBottomRight = (ImageView) myFieldsFragment.getView().findViewById(R.id.ivBottomRight);
 
 
-       // myRB1.setOnCheckedChangeListener(this);
-       // myRB2.setOnCheckedChangeListener(this);
-       // myRB3.setOnCheckedChangeListener(this);
+        myRB1.setOnCheckedChangeListener(this);
+        myRB2.setOnCheckedChangeListener(this);
+        myRB3.setOnCheckedChangeListener(this);
 
-        /*
+
         myClearScreen.setOnClickListener(v -> {
             //myClearScreen();
 
@@ -113,15 +175,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Log.d(LOG_TAG, "myPositionsForPlayer2 = " + Arrays.toString(myObjForDV.getMyPositionsForPlayer2()));
                     //if (myGameStage%2 == 1){
                     if (myObjForDV.getMyGameStage()%2 == 1){
-
-                        //ImageView myIV = (ImageView) findViewById(myPCsClickedButton0(myPositionsForPlayer1,myPositionsForPlayer2));
-                        //Integer btnId = getResources().getIdentifier("iv"+ myObjForLogic.myPCsClickedButton(myPositionsForPlayer1,myPositionsForPlayer2),"id",getPackageName());
                         ImageView myIV = (ImageView) findViewById(myObjForLogic.myPCsClickedButton(myObjForDV.getMyPositionsForPlayer1(), myObjForDV.getMyPositionsForPlayer2()));
                         myIV.performClick();
                     }else{
-
-                        //ImageView myIV = (ImageView) findViewById(myPCsClickedButton0(myPositionsForPlayer2,myPositionsForPlayer1));
-                        //Integer btnId = getResources().getIdentifier("iv"+ myObjForLogic.myPCsClickedButton(myPositionsForPlayer2,myPositionsForPlayer1),"id",getPackageName());
                         ImageView myIV = (ImageView) findViewById(myObjForLogic.myPCsClickedButton(myObjForDV.getMyPositionsForPlayer2(), myObjForDV.getMyPositionsForPlayer1()));
                         myIV.performClick();
                     }
@@ -129,7 +185,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        */
+
 
         myIVTopLeft.setOnClickListener(this);
         myIVTopCenter.setOnClickListener(this);
@@ -144,7 +200,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-/*
+
         myRG.setOnCheckedChangeListener((group, checkedId) -> {
             //myClearScreen();
             myObjForDV.myClearScreen(myObjForLogic, myBitmapForClean,
@@ -154,23 +210,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             switch (checkedId){
                 case R.id.rb1:
 
-                    //while (myGameStage <= 9){
+
                     while (myObjForDV.getMyGameStage() <= 9){
 
                         Log.d(LOG_TAG, "myPositionsForPlayer1 = " + Arrays.toString(myObjForDV.getMyPositionsForPlayer1()));
                         Log.d(LOG_TAG, "myPositionsForPlayer2 = " + Arrays.toString(myObjForDV.getMyPositionsForPlayer2()));
 
-                        //if (myGameStage%2 == 1){
+
                         if (myObjForDV.getMyGameStage()%2 == 1){
 
-                            //ImageView myIV = (ImageView) findViewById(myPCsClickedButton0(myPositionsForPlayer1,myPositionsForPlayer2));
-                            //Integer btnId = getResources().getIdentifier("iv"+ myObjForLogic.myPCsClickedButton(myPositionsForPlayer1,myPositionsForPlayer2),"id",getPackageName());
                             ImageView myIV = (ImageView) findViewById(myObjForLogic.myPCsClickedButton(myObjForDV.getMyPositionsForPlayer1(), myObjForDV.getMyPositionsForPlayer2()));
                             myIV.performClick();
                         }else{
 
-                            //ImageView myIV = (ImageView) findViewById(myPCsClickedButton0(myPositionsForPlayer2,myPositionsForPlayer1));
-                            //Integer btnId = getResources().getIdentifier("iv"+ myObjForLogic.myPCsClickedButton(myPositionsForPlayer2,myPositionsForPlayer1),"id",getPackageName());
                             ImageView myIV = (ImageView) findViewById(myObjForLogic.myPCsClickedButton(myObjForDV.getMyPositionsForPlayer2(), myObjForDV.getMyPositionsForPlayer1()));
                             myIV.performClick();
 
@@ -187,13 +239,94 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-*/
+
 
         myBitmapCross = myObjForNoughtPicture.myDrawCross();
         myBitmapNought = myObjForCrossPicture.myDrawNought();
         myBitmapForClean = myObjForClearPicture.myDrawClear();
 
     }
+
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        myObjForSaveStatistics.loadSkin();
+        switch (myObjForSaveStatistics.getSkin()){
+            case 1:
+                menu.findItem(R.id.menu_skin1).setChecked(true);
+                //menu.getItem(R.id.menu_skin1).setChecked(true);
+                break;
+            case 2:
+                menu.findItem(R.id.menu_skin2).setChecked(true);
+                //menu.getItem(R.id.menu_skin2).setChecked(true);
+                break;
+            case 3:
+                menu.findItem(R.id.menu_skin3).setChecked(true);
+                //menu.getItem(R.id.menu_skin3).setChecked(true);
+                break;
+        }
+
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+         getMenuInflater().inflate(R.menu.menu, menu);
+         return super.onCreateOptionsMenu(menu);
+
+
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.menu_reload:
+                Intent i = getBaseContext().getPackageManager()
+                        .getLaunchIntentForPackage( getBaseContext().getPackageName() );
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+                return true;
+            case R.id.menu_stat:
+                ClassDialogStat myObjForDialogStat = new ClassDialogStat(this, this);
+                myObjForDialogStat.openStatDialog();
+
+                //openStatDialog();
+                return true;
+            case R.id.menu_stat_by_users:
+                ClassDialogStatByUser myObjForDialogStatByUser = new ClassDialogStatByUser(this, this);
+                myObjForDialogStatByUser.openStatDialog();
+
+                //openStatDialog();
+                return true;
+            case R.id.menu_skin1:
+                item.setChecked(!item.isChecked());
+                //item.setEnabled(!item.isEnabled());
+                myObjForSaveStatistics.saveSkin(1);
+                Toast.makeText(this, "Перезагрузите приложение!", Toast.LENGTH_SHORT).show();
+                return true;
+
+            case R.id.menu_skin2:
+                item.setChecked(!item.isChecked());
+                //item.setEnabled(!item.isEnabled());
+                myObjForSaveStatistics.saveSkin(2);
+                Toast.makeText(this, "Перезагрузите приложение!", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.menu_skin3:
+                item.setChecked(!item.isChecked());
+                //item.setEnabled(!item.isEnabled());
+                myObjForSaveStatistics.saveSkin(3);
+                Toast.makeText(this, "Перезагрузите приложение!", Toast.LENGTH_SHORT).show();
+                return true;
+
+            default:
+
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
+
 
 
     @Override
@@ -227,6 +360,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(myRB3.isChecked()){
             Log.d(LOG_TAG, "---myPlayerVsPlayer---");
             //myPlayerVsPlayer(myIV)
+
             myObjForDV.myPlayerVsPlayer(myIV,
                     myObjForLogic, myBitmapCross, myBitmapNought,
                     myIVTopLeft,myIVTopCenter,myIVTopRight,
@@ -257,42 +391,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    @Override
-    public void methClearScreen() {
-        //myClearScreen();
-
-        myObjForDV.myClearScreen(myObjForLogic, myBitmapForClean,
-                myIVTopLeft,myIVTopCenter,myIVTopRight,
-                myIVCenterLeft,myIVCenter,myIVCenterRight,
-                myIVBottomLeft,myIVBottomCenter,myIVBottomRight);
-
-    }
-
-    @Override
-    public void methPcVsPcIsChecked() {
-        //if (myRB1.isChecked()){
-            //myHoldScreen();
-
-
-            //while (myGameStage <= 9){
-            while (myObjForDV.getMyGameStage() <= 9){
-                Log.d(LOG_TAG, "myPositionsForPlayer1 = " + Arrays.toString(myObjForDV.getMyPositionsForPlayer1()));
-                Log.d(LOG_TAG, "myPositionsForPlayer2 = " + Arrays.toString(myObjForDV.getMyPositionsForPlayer2()));
-                //if (myGameStage%2 == 1){
-                if (myObjForDV.getMyGameStage()%2 == 1){
-
-                    //ImageView myIV = (ImageView) findViewById(myPCsClickedButton0(myPositionsForPlayer1,myPositionsForPlayer2));
-                    //Integer btnId = getResources().getIdentifier("iv"+ myObjForLogic.myPCsClickedButton(myPositionsForPlayer1,myPositionsForPlayer2),"id",getPackageName());
-                    ImageView myIV = (ImageView) findViewById(myObjForLogic.myPCsClickedButton(myObjForDV.getMyPositionsForPlayer1(), myObjForDV.getMyPositionsForPlayer2()));
-                    myIV.performClick();
-                }else{
-
-                    //ImageView myIV = (ImageView) findViewById(myPCsClickedButton0(myPositionsForPlayer2,myPositionsForPlayer1));
-                    //Integer btnId = getResources().getIdentifier("iv"+ myObjForLogic.myPCsClickedButton(myPositionsForPlayer2,myPositionsForPlayer1),"id",getPackageName());
-                    ImageView myIV = (ImageView) findViewById(myObjForLogic.myPCsClickedButton(myObjForDV.getMyPositionsForPlayer2(), myObjForDV.getMyPositionsForPlayer1()));
-                    myIV.performClick();
-                }
-            }
-        }
-    //}
 }

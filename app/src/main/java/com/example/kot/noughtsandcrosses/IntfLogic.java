@@ -4,7 +4,7 @@ package com.example.kot.noughtsandcrosses;
  * Created by Kot Kot on 13.06.2017.
  */
 
-public interface InterfaceForLogic {
+public interface IntfLogic {
     String LOG_TAG = "MY_LOG";
 
     String FirstPos = "Center";

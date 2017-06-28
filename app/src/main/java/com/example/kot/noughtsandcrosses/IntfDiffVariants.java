@@ -7,7 +7,7 @@ import android.widget.ImageView;
  * Created by Kot Kot on 15.06.2017.
  */
 
-public interface InterfaceForDiffVariants {
+public interface IntfDiffVariants {
     String LOG_TAG = "MY_LOG";
 
 
@@ -21,11 +21,11 @@ public interface InterfaceForDiffVariants {
     void setMyGameStage(Integer myGameStage);
 
     void myPcVsPc(ImageView iv,
-                  InterfaceForLogic myInterfaceForLogic,
+                  IntfLogic myInterfaceForLogic,
                   Bitmap myBitmapCross, Bitmap myBitmapNought);
 
     void myPlayerVsPc(ImageView iv,
-                      InterfaceForLogic myInterfaceForLogic,
+                      IntfLogic myInterfaceForLogic,
                       Bitmap myBitmapCross, Bitmap myBitmapNought,
                       ImageView iv1,
                       ImageView iv2,
@@ -38,7 +38,7 @@ public interface InterfaceForDiffVariants {
                       ImageView iv9);
 
     void myPlayerVsPlayer(ImageView iv,
-                          InterfaceForLogic myInterfaceForLogic,
+                          IntfLogic myInterfaceForLogic,
                           Bitmap myBitmapCross, Bitmap myBitmapNought,
                           ImageView iv1,
                           ImageView iv2,
@@ -50,7 +50,7 @@ public interface InterfaceForDiffVariants {
                           ImageView iv8,
                           ImageView iv9);
 
-    void myHoldScreen(InterfaceForLogic myInterfaceForLogic,
+    void myHoldScreen(IntfLogic myInterfaceForLogic,
                       ImageView iv1,
                       ImageView iv2,
                       ImageView iv3,
@@ -61,7 +61,7 @@ public interface InterfaceForDiffVariants {
                       ImageView iv8,
                       ImageView iv9);
 
-    void myClearScreen(InterfaceForLogic myInterfaceForLogic,
+    void myClearScreen(IntfLogic myInterfaceForLogic,
                        Bitmap myBitmapForClean,
                        ImageView iv1,
                        ImageView iv2,

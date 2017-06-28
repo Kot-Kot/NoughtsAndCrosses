@@ -22,18 +22,24 @@ import java.util.Arrays;
 public class ClassModeFragment extends Fragment implements View.OnClickListener, RadioButton.OnCheckedChangeListener {
 
 
+   // interface OnCheckedRadioButtons {
+        //void isRadioButtonsChanged(Boolean flag);
+        //void whatRadioButtonsChanged(int flag);
 
-    OnClickedClearButton myOnClickedClearButton;
+    //}
+
+
+    //OnCheckedRadioButtons onCheckedRadioButtonsListener;
 
     private View myRootView;
 
-    private Button myClearScreen;
 
-    private RadioGroup myRG;
 
-    private RadioButton myRB1;
-    private RadioButton myRB2;
-    private RadioButton myRB3;
+    ///private RadioGroup myRG;
+
+    //private RadioButton myRB1;
+    //private RadioButton myRB2;
+    //private RadioButton myRB3;
 
 
 
@@ -43,45 +49,33 @@ public class ClassModeFragment extends Fragment implements View.OnClickListener,
 
 
 
-        myRootView = (View) inflater.inflate(R.layout.mode_fragment, container, false);
+        myRootView = inflater.inflate(R.layout.mode_fragment, container, false);
 
-        myRG = (RadioGroup) myRootView.findViewById(R.id.rg);
-        myRB1 = (RadioButton) myRootView.findViewById(R.id.rb1);
-        myRB2 = (RadioButton) myRootView.findViewById(R.id.rb2);
-        myRB3 = (RadioButton) myRootView.findViewById(R.id.rb3);
-
-        myClearScreen = (Button) myRootView.findViewById(R.id.btnClear);
-
-        myOnClickedClearButton =(OnClickedClearButton)getActivity();
-
-        myClearScreen.setOnClickListener(v -> {
-            myOnClickedClearButton.methClearScreen();
-            if (myRB1.isChecked()){
-                myOnClickedClearButton.methPcVsPcIsChecked();
-            };
-        });
-
-
-
-
-
-
+        //myRG = (RadioGroup) myRootView.findViewById(R.id.rg);
+        //myRB1 = (RadioButton) myRootView.findViewById(R.id.rb1);
+        //myRB2 = (RadioButton) myRootView.findViewById(R.id.rb2);
+        //myRB3 = (RadioButton) myRootView.findViewById(R.id.rb3);
+        //onCheckedRadioButtonsListener =(OnCheckedRadioButtons)getActivity();
+/*
         myRG.setOnCheckedChangeListener((group, checkedId) -> {
             //myClearScreen();
-            myOnClickedClearButton.methClearScreen();
+            onCheckedRadioButtonsListener.isRadioButtonsChanged(true);
             switch (checkedId){
                 case R.id.rb1:
-                    myOnClickedClearButton.methPcVsPcIsChecked();
+                    onCheckedRadioButtonsListener.whatRadioButtonsChanged(1);
                     break;
                 case R.id.rb2:
+                    onCheckedRadioButtonsListener.whatRadioButtonsChanged(2);
                     break;
                 case R.id.rb3:
+                    onCheckedRadioButtonsListener.whatRadioButtonsChanged(3);
                     break;
                 default:
                     break;
 
             }
         });
+*/
 
         //return super.onCreateView(inflater, container, savedInstanceState);
         return myRootView;
@@ -98,9 +92,9 @@ public class ClassModeFragment extends Fragment implements View.OnClickListener,
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
     }
-
+/*
     public interface OnClickedClearButton {
-        public void methClearScreen();
+        //public void methClearScreen();
         public void methPcVsPcIsChecked();
     }
 
@@ -120,4 +114,6 @@ public class ClassModeFragment extends Fragment implements View.OnClickListener,
         }
         return index;
     }
+
+    */
 }

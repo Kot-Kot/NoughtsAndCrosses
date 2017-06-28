@@ -1,7 +1,14 @@
 <resources>
     <string name="app_name">Крестики-нолики</string>
-    <string name="rb1">PC vs PC</string>
-    <string name="rb2">Player vs PC</string>
-    <string name="rb3">Player vs Player</string>
-    <string name="btnClear">Clear screen</string>
+    <string name="rb1">ПК vs ПК</string>
+    <string name="rb2">Игрок vs ПК</string>
+    <string name="rb3">Игрок vs Игрок</string>
+    <string name="btnClear">Очистить экран</string>
+    <string name="menu_item_stat">Статистика (Общая)</string>
+    <string name="menu_item_skin">Скины</string>
+    <string name="menu_item_color1">Синий</string>
+    <string name="menu_item_color2">Фиолетовый</string>
+    <string name="menu_item_color3">Зеленый</string>
+    <string name="menu_item_reload">Перезагрузить</string>
+    <string name="menu_item_stat_by_users">Статистика (По игрокам)</string>
 </resources>

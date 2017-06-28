@@ -25,6 +25,14 @@
 
         />
 
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/button_fragment"
+        android:name="com.example.kot.noughtsandcrosses.ClassButtonFragment"
+
+        />
+
 
 
 </android.support.constraint.ConstraintLayout>
