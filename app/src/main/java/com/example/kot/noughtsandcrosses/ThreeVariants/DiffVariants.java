@@ -1,13 +1,15 @@
-package com.example.kot.noughtsandcrosses;
+package com.example.kot.noughtsandcrosses.ThreeVariants;
 
 import android.graphics.Bitmap;
 import android.widget.ImageView;
+
+import com.example.kot.noughtsandcrosses.Logic.Logic;
 
 /**
  * Created by Kot Kot on 15.06.2017.
  */
 
-public interface IntfDiffVariants {
+public interface DiffVariants {
     String LOG_TAG = "MY_LOG";
 
 
@@ -21,11 +23,11 @@ public interface IntfDiffVariants {
     void setMyGameStage(Integer myGameStage);
 
     void myPcVsPc(ImageView iv,
-                  IntfLogic myInterfaceForLogic,
+                  Logic myInterfaceForLogic,
                   Bitmap myBitmapCross, Bitmap myBitmapNought);
 
     void myPlayerVsPc(ImageView iv,
-                      IntfLogic myInterfaceForLogic,
+                      Logic myInterfaceForLogic,
                       Bitmap myBitmapCross, Bitmap myBitmapNought,
                       ImageView iv1,
                       ImageView iv2,
@@ -38,7 +40,7 @@ public interface IntfDiffVariants {
                       ImageView iv9);
 
     void myPlayerVsPlayer(ImageView iv,
-                          IntfLogic myInterfaceForLogic,
+                          Logic myInterfaceForLogic,
                           Bitmap myBitmapCross, Bitmap myBitmapNought,
                           ImageView iv1,
                           ImageView iv2,
@@ -50,7 +52,7 @@ public interface IntfDiffVariants {
                           ImageView iv8,
                           ImageView iv9);
 
-    void myHoldScreen(IntfLogic myInterfaceForLogic,
+    void myHoldScreen(Logic myInterfaceForLogic,
                       ImageView iv1,
                       ImageView iv2,
                       ImageView iv3,
@@ -61,7 +63,7 @@ public interface IntfDiffVariants {
                       ImageView iv8,
                       ImageView iv9);
 
-    void myClearScreen(IntfLogic myInterfaceForLogic,
+    void myClearScreen(Logic myInterfaceForLogic,
                        Bitmap myBitmapForClean,
                        ImageView iv1,
                        ImageView iv2,

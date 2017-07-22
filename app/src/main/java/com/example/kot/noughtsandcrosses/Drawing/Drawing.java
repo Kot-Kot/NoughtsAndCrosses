@@ -1,4 +1,4 @@
-package com.example.kot.noughtsandcrosses;
+package com.example.kot.noughtsandcrosses.Drawing;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -10,7 +10,7 @@ import android.graphics.Paint;
  * Created by Kot Kot on 12.06.2017.
  */
 
-public interface IntfDrawing {
+public interface Drawing {
     Paint getMyPaint();
     Context getMyContext();
 

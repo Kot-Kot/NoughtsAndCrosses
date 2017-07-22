@@ -1,4 +1,4 @@
-package com.example.kot.noughtsandcrosses;
+package com.example.kot.noughtsandcrosses.Drawing;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -7,12 +7,15 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.v4.content.ContextCompat;
 
+import com.example.kot.noughtsandcrosses.Drawing.Drawing;
+import com.example.kot.noughtsandcrosses.R;
+
 /**
  * Created by Kot Kot on 12.06.2017.
  */
 
 //отвечает за прорисовку bitmap
-public class ClassSkin1ImplDrawing implements IntfDrawing {
+public class Skin1ImplDrawing implements Drawing {
 
     private Bitmap myBitmap = Bitmap.createBitmap(50,50, Bitmap.Config.ARGB_8888);
     private Canvas myCanvas = new Canvas(myBitmap);
@@ -31,7 +34,7 @@ public class ClassSkin1ImplDrawing implements IntfDrawing {
         return myContext;
     }
 
-    ClassSkin1ImplDrawing(Context c) {
+    public Skin1ImplDrawing(Context c) {
         myContext = c;
     }
 

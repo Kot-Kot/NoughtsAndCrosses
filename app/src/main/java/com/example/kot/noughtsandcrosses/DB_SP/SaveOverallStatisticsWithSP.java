@@ -1,4 +1,4 @@
-package com.example.kot.noughtsandcrosses;
+package com.example.kot.noughtsandcrosses.DB_SP;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,7 +8,7 @@ import android.content.SharedPreferences;
  * Created by Kot Kot on 24.06.2017.
  */
 
-public class ClassImplSaveStatistics implements IntfSaveStatistics {
+public class SaveOverallStatisticsWithSP implements SaveStatisticsWithSP {
 
     private Context myContext;
     private Activity myActivity;
@@ -40,7 +40,7 @@ public class ClassImplSaveStatistics implements IntfSaveStatistics {
         return skin;
     }
 
-    ClassImplSaveStatistics(Context c, Activity a){
+    public SaveOverallStatisticsWithSP(Context c, Activity a) {
         myContext = c;
         myActivity = a;
 

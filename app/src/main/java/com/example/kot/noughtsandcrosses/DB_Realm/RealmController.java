@@ -1,4 +1,4 @@
-package com.example.kot.noughtsandcrosses;
+package com.example.kot.noughtsandcrosses.DB_Realm;
 
 import android.content.Context;
 import android.util.Log;
@@ -12,11 +12,11 @@ import io.realm.RealmResults;
  * Created by Kot Kot on 26.06.2017.
  */
 
-public class ClassRealmController {
+public class RealmController {
     private Realm myRealm;
 
 
-    void initializeRealm(Context c){
+    public void initializeRealm(Context c) {
         Realm.init(c);
         RealmConfiguration myRealmConfiguration = new RealmConfiguration.Builder()
                 .name(Realm.DEFAULT_REALM_NAME)
@@ -27,15 +27,15 @@ public class ClassRealmController {
         myRealm = Realm.getInstance(myRealmConfiguration);
     }
 
-    void clearAllUsers() {
+    public void clearAllUsers() {
         myRealm.executeTransaction(realm ->
-                realm.delete(ClassUsersRealm.class));
+                realm.delete(UsersRealm.class));
     }
 
-    void createNewUser(String n, Context c) {
+    public void createNewUser(String n, Context c) {
         myRealm.executeTransaction(realm -> {
 
-            ClassUsersRealm myObjForCurrentUser = myRealm.where(ClassUsersRealm.class).equalTo("myName", n).findFirst();
+            UsersRealm myObjForCurrentUser = myRealm.where(UsersRealm.class).equalTo("myName", n).findFirst();
             if (myObjForCurrentUser != null) {
                 myObjForCurrentUser.setIsCurrentUser(true);
                 myObjForCurrentUser.setIsActive(true);
@@ -44,7 +44,7 @@ public class ClassRealmController {
                 Toast myToast = (Toast.makeText(c.getApplicationContext(), "Вы вошли как существующий игрок: \"" + myObjForCurrentUser.getMyName() + "\"", Toast.LENGTH_SHORT));
                 myToast.show();
             } else {
-                ClassUsersRealm myUser = new ClassUsersRealm();
+                UsersRealm myUser = new UsersRealm();
                 myUser.setMyName(n);
                 myUser.setIsCurrentUser(true);
                 myUser.setIsActive(true);
@@ -58,7 +58,7 @@ public class ClassRealmController {
             }
 
             /*
-            ClassUsersRealm myUser = new ClassUsersRealm();
+            UsersRealm myUser = new UsersRealm();
             myUser.setMyName(n);
             myUser.setIsCurrentUser(b);
             myUser.setIsActive(b);
@@ -71,9 +71,9 @@ public class ClassRealmController {
         });
     }
 
-    void setIsCurrentUserAsFalse(){
+    public void setIsCurrentUserAsFalse() {
 
-        ClassUsersRealm myObjForLastCurrentUser = myRealm.where(ClassUsersRealm.class).equalTo("isCurrentUser", true).findFirst();
+        UsersRealm myObjForLastCurrentUser = myRealm.where(UsersRealm.class).equalTo("isCurrentUser", true).findFirst();
         Log.d ("MYL", "myObjForLastCurrentUser = " + myObjForLastCurrentUser);
         if (myObjForLastCurrentUser != null) {
             myRealm.executeTransaction(realm -> {
@@ -86,9 +86,9 @@ public class ClassRealmController {
         }
     }
 
-    Boolean showLastCurrentUser(Context c){
+    public Boolean showLastCurrentUser(Context c) {
 
-        ClassUsersRealm myObjForLastCurrentUser = myRealm.where(ClassUsersRealm.class).equalTo("isCurrentUser", true).findFirst();
+        UsersRealm myObjForLastCurrentUser = myRealm.where(UsersRealm.class).equalTo("isCurrentUser", true).findFirst();
         Log.d ("MYL", "myObjForLastCurrentUser = " + myObjForLastCurrentUser);
         if (myObjForLastCurrentUser == null){
             Toast myToast = (Toast.makeText(c.getApplicationContext(), "База данных пуста! Создайте пользователя или просто закройте диалог.", Toast.LENGTH_LONG));
@@ -105,9 +105,9 @@ public class ClassRealmController {
         return true;
     }
 
-    void lastCurrentUserIsNotActive() {
+    public void lastCurrentUserIsNotActive() {
 
-        ClassUsersRealm myObjForLastCurrentUser = myRealm.where(ClassUsersRealm.class).equalTo("isCurrentUser", true).findFirst();
+        UsersRealm myObjForLastCurrentUser = myRealm.where(UsersRealm.class).equalTo("isCurrentUser", true).findFirst();
         Log.d("MYL", "myObjForLastCurrentUser = " + myObjForLastCurrentUser);
         if (myObjForLastCurrentUser != null) {
             myRealm.executeTransaction(realm -> {
@@ -121,9 +121,9 @@ public class ClassRealmController {
     }
 
 
-    void currentUserWin(){
+    public void currentUserWin() {
 
-        ClassUsersRealm myObjForLastCurrentUser = myRealm.where(ClassUsersRealm.class).equalTo("isCurrentUser", true).equalTo("isActive", true).findFirst();
+        UsersRealm myObjForLastCurrentUser = myRealm.where(UsersRealm.class).equalTo("isCurrentUser", true).equalTo("isActive", true).findFirst();
         Log.d ("MYL", "myObjForLastCurrentUser = " + myObjForLastCurrentUser);
         if (myObjForLastCurrentUser != null) {
             myRealm.executeTransaction(realm -> {
@@ -135,9 +135,9 @@ public class ClassRealmController {
         }
     }
 
-    void currentUserLost(){
+    public void currentUserLost() {
 
-        ClassUsersRealm myObjForLastCurrentUser = myRealm.where(ClassUsersRealm.class).equalTo("isCurrentUser", true).equalTo("isActive", true).findFirst();
+        UsersRealm myObjForLastCurrentUser = myRealm.where(UsersRealm.class).equalTo("isCurrentUser", true).equalTo("isActive", true).findFirst();
         Log.d ("MYL", "myObjForLastCurrentUser = " + myObjForLastCurrentUser);
         if (myObjForLastCurrentUser != null) {
             myRealm.executeTransaction(realm -> {
@@ -149,9 +149,9 @@ public class ClassRealmController {
         }
     }
 
-    void currentUserTie(){
+    public void currentUserTie() {
 
-        ClassUsersRealm myObjForLastCurrentUser = myRealm.where(ClassUsersRealm.class).equalTo("isCurrentUser", true).equalTo("isActive", true).findFirst();
+        UsersRealm myObjForLastCurrentUser = myRealm.where(UsersRealm.class).equalTo("isCurrentUser", true).equalTo("isActive", true).findFirst();
         Log.d ("MYL", "myObjForLastCurrentUser = " + myObjForLastCurrentUser);
         if (myObjForLastCurrentUser != null) {
             myRealm.executeTransaction(realm -> {
@@ -163,10 +163,10 @@ public class ClassRealmController {
         }
     }
 
-    String showAllSortedByAlphabet(){
-        RealmResults<ClassUsersRealm> results = myRealm.where(ClassUsersRealm.class).findAllSorted("myName");
+    public String showAllSortedByAlphabet() {
+        RealmResults<UsersRealm> results = myRealm.where(UsersRealm.class).findAllSorted("myName");
         StringBuilder myBuilder = new StringBuilder();
-        for (ClassUsersRealm singleUser : results){
+        for (UsersRealm singleUser : results) {
 
             String temp = singleUser.getMyName() + ":\n";
             myBuilder.append(temp);
@@ -184,11 +184,11 @@ public class ClassRealmController {
         return completedString;
     }
 
-    void setAllToZeros(){
-        RealmResults<ClassUsersRealm> results = myRealm.where(ClassUsersRealm.class).findAll();
+    public void setAllToZeros() {
+        RealmResults<UsersRealm> results = myRealm.where(UsersRealm.class).findAll();
 
         myRealm.executeTransaction(realm -> {
-            for (ClassUsersRealm singleUser : results){
+            for (UsersRealm singleUser : results) {
                 singleUser.setMyPlayerWins(0);
                 singleUser.setMyPcWins(0);
                 singleUser.setMyTie(0);
@@ -200,9 +200,9 @@ public class ClassRealmController {
     }
 
 
-    RealmResults<ClassUsersRealm> getAll() {
+    public RealmResults<UsersRealm> getAll() {
 
-        return myRealm.where(ClassUsersRealm.class).findAll();
+        return myRealm.where(UsersRealm.class).findAll();
     }
 
     void closeRealm() {
@@ -218,15 +218,15 @@ public class ClassRealmController {
 
     void clearAll() {
         myRealm.beginTransaction();
-        myRealm.delete(ClassUsersRealm.class);
+        myRealm.delete(UsersRealm.class);
         myRealm.commitTransaction();
     }
 
 
 
-    public ClassUsersRealm getItemByName(String name) {
+    public UsersRealm getItemByName(String name) {
 
-        return myRealm.where(ClassUsersRealm.class).equalTo("myName", name).findFirst();
+        return myRealm.where(UsersRealm.class).equalTo("myName", name).findFirst();
     }
 
     void saveCurrentUser(){

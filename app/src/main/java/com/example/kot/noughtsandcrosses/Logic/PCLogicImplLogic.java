@@ -1,7 +1,9 @@
-package com.example.kot.noughtsandcrosses;
+package com.example.kot.noughtsandcrosses.Logic;
 
 import android.content.Context;
 import android.util.Log;
+
+import com.example.kot.noughtsandcrosses.Logic.Logic;
 
 import java.util.Arrays;
 
@@ -15,7 +17,7 @@ import java.util.Arrays;
  */
 
 //отвечает за логику хода ПК
-public class ClassImplLogic implements IntfLogic {
+public class PCLogicImplLogic implements Logic {
     private String myNowClickedButton = "";
     private Context myContext;
 
@@ -27,7 +29,7 @@ public class ClassImplLogic implements IntfLogic {
         this.myNowClickedButton = myNowClickedButton;
     }
 
-    ClassImplLogic(Context c){
+    public PCLogicImplLogic(Context c) {
         myContext = c;
     }
 

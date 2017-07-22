@@ -1,4 +1,4 @@
-package com.example.kot.noughtsandcrosses;
+package com.example.kot.noughtsandcrosses.ThreeVariants;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,11 +7,16 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.kot.noughtsandcrosses.DB_Realm.RealmController;
+import com.example.kot.noughtsandcrosses.DB_SP.SaveOverallStatisticsWithSP;
+import com.example.kot.noughtsandcrosses.DB_SP.SaveStatisticsWithSP;
+import com.example.kot.noughtsandcrosses.Logic.Logic;
+
 /**
  * Created by Kot Kot on 14.06.2017.
  */
 //отвечает за разные варианты игры (PC vs PC, PC vs Player, Player vs Player)
-public class ClassImplDiffVariants implements IntfDiffVariants {
+public class ThreeVariantsImplDiffVariants implements DiffVariants {
 
 
 
@@ -21,8 +26,8 @@ public class ClassImplDiffVariants implements IntfDiffVariants {
     private String[] myPositionsForPlayer1 = {"","","","",""};
     private String[] myPositionsForPlayer2 = {"","","","",""};
 
-    //ClassImplSaveStatistics myObjForSaveStatistics = new ClassImplSaveStatistics(myContext, myActivity);
-    private IntfSaveStatistics myObjForSaveStatistics = new ClassImplSaveStatistics(myContext, myActivity);
+    //SaveOverallStatisticsWithSP myObjForSaveStatistics = new SaveOverallStatisticsWithSP(myContext, myActivity);
+    private SaveStatisticsWithSP myObjForSaveStatistics = new SaveOverallStatisticsWithSP(myContext, myActivity);
 
     //String myNowClickedButton = "";
 
@@ -53,8 +58,7 @@ public class ClassImplDiffVariants implements IntfDiffVariants {
     }
 
 
-
-    ClassImplDiffVariants(Context c, Activity a) {
+    public ThreeVariantsImplDiffVariants(Context c, Activity a) {
         //super(c);
         myContext = c;
         myActivity = a;
@@ -63,8 +67,8 @@ public class ClassImplDiffVariants implements IntfDiffVariants {
 
 
     public void myPcVsPc(ImageView iv,
-                         IntfLogic myInterfaceForLogic,
-                  Bitmap myBitmapCross, Bitmap myBitmapNought){
+                         Logic myInterfaceForLogic,
+                         Bitmap myBitmapCross, Bitmap myBitmapNought){
         // final ImageView fiv = iv;
         //final Bitmap fbc = myBitmapCross;
         // final Bitmap fbn = myBitmapNought;
@@ -80,7 +84,9 @@ public class ClassImplDiffVariants implements IntfDiffVariants {
             Log.d(LOG_TAG,"----Cross---- ");
             //myDelay(fiv,fbc);
             //new Thread(myThread).start();
+            //iv.setTranslationY(-1000f);
             iv.setImageBitmap(myBitmapCross);
+            //iv.animate().translationYBy(1000f).setDuration(500);
             //iv.setImageBitmap(myObjForCrossPicture.myDrawCross());
 
             iv.setClickable(false);
@@ -111,7 +117,9 @@ public class ClassImplDiffVariants implements IntfDiffVariants {
             myInterfaceForLogic.setMyNowClickedButton("");
             Log.d(LOG_TAG,"----Naught---- ");
             //myDelay(fiv,fbn);
+            //iv.setTranslationY(-1000f);
             iv.setImageBitmap(myBitmapNought);
+            //iv.animate().translationYBy(1000f).setDuration(500);
             //iv.setImageBitmap(myObjForNoughtPicture.myDrawNought());
             iv.setClickable(false);
             myGameStage++;
@@ -133,19 +141,19 @@ public class ClassImplDiffVariants implements IntfDiffVariants {
    //----------------------------------------------------------------------
 
     public void myPlayerVsPc(ImageView iv,
-                             IntfLogic myInterfaceForLogic,
+                             Logic myInterfaceForLogic,
                              Bitmap myBitmapCross, Bitmap myBitmapNought,
-                      ImageView iv1,
-                      ImageView iv2,
-                      ImageView iv3,
-                      ImageView iv4,
-                      ImageView iv5,
-                      ImageView iv6,
-                      ImageView iv7,
-                      ImageView iv8,
-                      ImageView iv9){
+                             ImageView iv1,
+                             ImageView iv2,
+                             ImageView iv3,
+                             ImageView iv4,
+                             ImageView iv5,
+                             ImageView iv6,
+                             ImageView iv7,
+                             ImageView iv8,
+                             ImageView iv9){
 
-        ClassRealmController myObjForRealmController = new ClassRealmController();
+        RealmController myObjForRealmController = new RealmController();
         myObjForRealmController.initializeRealm(myContext);
 
         if (myGameStage%2 == 1) {
@@ -154,7 +162,10 @@ public class ClassImplDiffVariants implements IntfDiffVariants {
             myPositionsForPlayer1[(myGameStage/2 + myGameStage%2)-1] = myInterfaceForLogic.getMyNowClickedButton();
             myInterfaceForLogic.setMyNowClickedButton("");
             Log.d(LOG_TAG,"----Cross---- ");
+
+            //iv.setTranslationY(-1000f);
             iv.setImageBitmap(myBitmapCross);
+            //iv.animate().translationYBy(1000f).setDuration(500);
             //iv.setImageBitmap(myObjForCrossPicture.myDrawCross());
 
             iv.setClickable(false);
@@ -180,7 +191,10 @@ public class ClassImplDiffVariants implements IntfDiffVariants {
                 //Integer btnId = myContext.getResources().getIdentifier("iv"+myObjForLogic.myPCsClickedButton(myPositionsForPlayer2,myPositionsForPlayer1),"id",myContext.getPackageName());
                 //ImageView myIV = (ImageView) findViewById(btnId);
                 ImageView myIV = (ImageView) myActivity.findViewById(myInterfaceForLogic.myPCsClickedButton(myPositionsForPlayer2,myPositionsForPlayer1));
+
                 myIV.performClick();
+
+
             }
 
 
@@ -192,7 +206,10 @@ public class ClassImplDiffVariants implements IntfDiffVariants {
             myPositionsForPlayer2[(myGameStage/2 + myGameStage%2)-1] = myInterfaceForLogic.getMyNowClickedButton();
             myInterfaceForLogic.setMyNowClickedButton("");
             Log.d(LOG_TAG,"----Naught---- ");
+            //iv.setTranslationY(-1000f);
             iv.setImageBitmap(myBitmapNought);
+
+            //iv.animate().translationYBy(1000f).setDuration(500);
             //iv.setImageBitmap(myObjForNoughtPicture.myDrawNought());
             iv.setClickable(false);
             myGameStage++;
@@ -213,24 +230,26 @@ public class ClassImplDiffVariants implements IntfDiffVariants {
 
 
     public void myPlayerVsPlayer(ImageView iv,
-                                 IntfLogic myInterfaceForLogic,
-                          Bitmap myBitmapCross, Bitmap myBitmapNought,
-                          ImageView iv1,
-                          ImageView iv2,
-                          ImageView iv3,
-                          ImageView iv4,
-                          ImageView iv5,
-                          ImageView iv6,
-                          ImageView iv7,
-                          ImageView iv8,
-                          ImageView iv9){
+                                 Logic myInterfaceForLogic,
+                                 Bitmap myBitmapCross, Bitmap myBitmapNought,
+                                 ImageView iv1,
+                                 ImageView iv2,
+                                 ImageView iv3,
+                                 ImageView iv4,
+                                 ImageView iv5,
+                                 ImageView iv6,
+                                 ImageView iv7,
+                                 ImageView iv8,
+                                 ImageView iv9){
         if (myGameStage%2 == 1) {
             //myPositionsForPlayer1[(myGameStage/2 + myGameStage%2)-1] = myNowClickedButton;
             //myNowClickedButton = "";
             myPositionsForPlayer1[(myGameStage/2 + myGameStage%2)-1] = myInterfaceForLogic.getMyNowClickedButton();
             myInterfaceForLogic.setMyNowClickedButton("");
             Log.d(LOG_TAG,"----Cross---- ");
+            iv.setTranslationY(-1000f);
             iv.setImageBitmap(myBitmapCross);
+            iv.animate().translationYBy(1000f).setDuration(500);
             //iv.setImageBitmap(myObjForCrossPicture.myDrawCross());
             iv.setClickable(false);
             myGameStage++;
@@ -255,7 +274,10 @@ public class ClassImplDiffVariants implements IntfDiffVariants {
             myPositionsForPlayer2[(myGameStage/2 + myGameStage%2)-1] = myInterfaceForLogic.getMyNowClickedButton();
             myInterfaceForLogic.setMyNowClickedButton("");
             Log.d(LOG_TAG,"----Naught---- ");
+            iv.setTranslationY(-1000f);
             iv.setImageBitmap(myBitmapNought);
+
+            iv.animate().translationYBy(1000f).setDuration(500);
             //iv.setImageBitmap(myObjForNoughtPicture.myDrawNought());
 
             iv.setClickable(false);
@@ -272,17 +294,16 @@ public class ClassImplDiffVariants implements IntfDiffVariants {
     }
 
 
-
-    public void myHoldScreen(IntfLogic myInterfaceForLogic,
-                      ImageView iv1,
-                      ImageView iv2,
-                      ImageView iv3,
-                      ImageView iv4,
-                      ImageView iv5,
-                      ImageView iv6,
-                      ImageView iv7,
-                      ImageView iv8,
-                      ImageView iv9){
+    public void myHoldScreen(Logic myInterfaceForLogic,
+                             ImageView iv1,
+                             ImageView iv2,
+                             ImageView iv3,
+                             ImageView iv4,
+                             ImageView iv5,
+                             ImageView iv6,
+                             ImageView iv7,
+                             ImageView iv8,
+                             ImageView iv9){
         //myNowClickedButton = "";
         myInterfaceForLogic.setMyNowClickedButton("");
         myGameStage = 1;
@@ -304,17 +325,17 @@ public class ClassImplDiffVariants implements IntfDiffVariants {
     }
 
 
-    public void myClearScreen(IntfLogic myInterfaceForLogic,
-                       Bitmap myBitmapForClean,
-                       ImageView iv1,
-                       ImageView iv2,
-                       ImageView iv3,
-                       ImageView iv4,
-                       ImageView iv5,
-                       ImageView iv6,
-                       ImageView iv7,
-                       ImageView iv8,
-                       ImageView iv9){
+    public void myClearScreen(Logic myInterfaceForLogic,
+                              Bitmap myBitmapForClean,
+                              ImageView iv1,
+                              ImageView iv2,
+                              ImageView iv3,
+                              ImageView iv4,
+                              ImageView iv5,
+                              ImageView iv6,
+                              ImageView iv7,
+                              ImageView iv8,
+                              ImageView iv9){
 
         //myNowClickedButton = "";
         myInterfaceForLogic.setMyNowClickedButton("");

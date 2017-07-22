@@ -1,10 +1,10 @@
-package com.example.kot.noughtsandcrosses;
+package com.example.kot.noughtsandcrosses.Logic;
 
 /**
  * Created by Kot Kot on 13.06.2017.
  */
 
-public interface IntfLogic {
+public interface Logic {
     String LOG_TAG = "MY_LOG";
 
     String FirstPos = "Center";

@@ -1,4 +1,4 @@
-package com.example.kot.noughtsandcrosses;
+package com.example.kot.noughtsandcrosses.DB_Realm;
 
 
 import io.realm.RealmObject;
@@ -10,7 +10,7 @@ import io.realm.annotations.PrimaryKey;
  * Created by Kot Kot on 26.06.2017.
  */
 
-public class ClassUsersRealm extends RealmObject {
+public class UsersRealm extends RealmObject {
 
     //private Context myContext;
     //@Index
@@ -77,7 +77,7 @@ public class ClassUsersRealm extends RealmObject {
     }
 
 
-    //ClassUsersRealm(Context c){
+    //UsersRealm(Context c){
         //myContext = c;
     //}
 

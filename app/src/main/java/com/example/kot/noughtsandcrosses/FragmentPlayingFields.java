@@ -11,7 +11,7 @@ import android.view.ViewGroup;
  * Created by Kot Kot on 22.06.2017.
  */
 
-public class ClassFieldsFragment extends Fragment implements View.OnClickListener {
+public class FragmentPlayingFields extends Fragment implements View.OnClickListener {
 
     /*
     private ImageView myIVTopLeft;
@@ -66,7 +66,7 @@ public class ClassFieldsFragment extends Fragment implements View.OnClickListene
     }
 
 
-     /*IntfSaveStatistics myObjForSaveStatistics = new ClassImplSaveStatistics(getContext(),getActivity());
+     /*SaveStatisticsWithSP myObjForSaveStatistics = new SaveOverallStatisticsWithSP(getContext(),getActivity());
 
         myObjForSaveStatistics.loadSkin();
         Context contextThemeWrapper = new ContextThemeWrapper(getActivity(), R.style.AppTheme1);

@@ -13,7 +13,7 @@ import android.widget.RadioButton;
  * Created by Kot Kot on 22.06.2017.
  */
 
-public class ClassButtonFragment extends Fragment implements View.OnClickListener, RadioButton.OnCheckedChangeListener {
+public class FragmentButtonClear extends Fragment implements View.OnClickListener, RadioButton.OnCheckedChangeListener {
 
     //interface OnClickedClearButton {
         //void clickedClearButton(Boolean flag);

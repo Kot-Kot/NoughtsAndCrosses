@@ -1,14 +1,12 @@
-package com.example.kot.noughtsandcrosses;
+package com.example.kot.noughtsandcrosses.DB_SP;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
 
 /**
  * Created by Kot Kot on 24.06.2017.
  */
 
-public interface IntfSaveStatistics {
+public interface SaveStatisticsWithSP {
     String FILE_NAME = "my_stat";
 
     String CROSSES_WIN = "crosses_win";

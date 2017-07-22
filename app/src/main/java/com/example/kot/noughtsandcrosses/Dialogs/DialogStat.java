@@ -1,15 +1,17 @@
-package com.example.kot.noughtsandcrosses;
+package com.example.kot.noughtsandcrosses.Dialogs;
 
 import android.app.Activity;
 import android.content.Context;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.kot.noughtsandcrosses.DB_SP.SaveOverallStatisticsWithSP;
+
 /**
  * Created by Kot Kot on 28.06.2017.
  */
 
-public class ClassDialogStat extends AppCompatActivity {
+public class DialogStat extends AppCompatActivity {
     private Context myContext;
     private Activity myActivity;
 
@@ -21,14 +23,14 @@ public class ClassDialogStat extends AppCompatActivity {
         return myActivity;
     }
 
-    ClassDialogStat(Context c, Activity a){
+    public DialogStat(Context c, Activity a) {
         myContext = c;
         myActivity = a;
     }
 
 
-    void openStatDialog() {
-        ClassImplSaveStatistics myObjForSaveStatistics = new ClassImplSaveStatistics(myContext, myActivity);
+    public void openStatDialog() {
+        SaveOverallStatisticsWithSP myObjForSaveStatistics = new SaveOverallStatisticsWithSP(myContext, myActivity);
         myObjForSaveStatistics.loadStat();
 
         String title = "Статистика (Общая)";

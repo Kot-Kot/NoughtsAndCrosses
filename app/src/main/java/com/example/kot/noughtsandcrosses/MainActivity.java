@@ -15,6 +15,20 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.example.kot.noughtsandcrosses.DB_SP.SaveOverallStatisticsWithSP;
+import com.example.kot.noughtsandcrosses.DB_SP.SaveStatisticsWithSP;
+import com.example.kot.noughtsandcrosses.Dialogs.CustomDialog;
+import com.example.kot.noughtsandcrosses.Dialogs.DialogStat;
+import com.example.kot.noughtsandcrosses.Dialogs.DialogStatByUser;
+import com.example.kot.noughtsandcrosses.Drawing.Drawing;
+import com.example.kot.noughtsandcrosses.Drawing.Skin1ImplDrawing;
+import com.example.kot.noughtsandcrosses.Drawing.Skin2ImplDrawing;
+import com.example.kot.noughtsandcrosses.Drawing.Skin3ImplDrawing;
+import com.example.kot.noughtsandcrosses.Logic.Logic;
+import com.example.kot.noughtsandcrosses.Logic.PCLogicImplLogic;
+import com.example.kot.noughtsandcrosses.ThreeVariants.DiffVariants;
+import com.example.kot.noughtsandcrosses.ThreeVariants.ThreeVariantsImplDiffVariants;
+
 import java.util.Arrays;
 
 
@@ -22,12 +36,12 @@ public class MainActivity extends AppCompatActivity implements
         View.OnClickListener, RadioButton.OnCheckedChangeListener {
     static final String LOG_TAG = "MY_LOG";
 
-    //ClassRealmController myObjForRealmController = new ClassRealmController();
+    //RealmController myObjForRealmController = new RealmController();
 
 
-    ClassModeFragment myModeFragment;
-    ClassFieldsFragment myFieldsFragment;
-    ClassButtonFragment myButtonFragment;
+    FragmentChooseMode myModeFragment;
+    FragmentPlayingFields myFieldsFragment;
+    FragmentButtonClear myButtonFragment;
 
 
     Button myClearScreen;
@@ -39,14 +53,14 @@ public class MainActivity extends AppCompatActivity implements
     RadioButton myRB3;
 
 
-    IntfSaveStatistics myObjForSaveStatistics = new ClassImplSaveStatistics(this, this);
+    SaveStatisticsWithSP myObjForSaveStatistics = new SaveOverallStatisticsWithSP(this, this);
 
-    IntfLogic myObjForLogic = new ClassImplLogic(this);
-    IntfDiffVariants myObjForDV = new ClassImplDiffVariants(this, this);
+    Logic myObjForLogic = new PCLogicImplLogic(this);
+    DiffVariants myObjForDV = new ThreeVariantsImplDiffVariants(this, this);
 
-    IntfDrawing myObjForNoughtPicture;
-    IntfDrawing myObjForCrossPicture;
-    IntfDrawing myObjForClearPicture;
+    Drawing myObjForNoughtPicture;
+    Drawing myObjForCrossPicture;
+    Drawing myObjForClearPicture;
 
     Bitmap myBitmapCross;
     Bitmap myBitmapNought;
@@ -76,21 +90,21 @@ public class MainActivity extends AppCompatActivity implements
         myObjForSaveStatistics.loadSkin();
         switch (myObjForSaveStatistics.getSkin()){
             case 1:
-                myObjForNoughtPicture = new ClassSkin1ImplDrawing(this);
-                myObjForCrossPicture = new ClassSkin1ImplDrawing(this);
-                myObjForClearPicture = new ClassSkin1ImplDrawing(this);
+                myObjForNoughtPicture = new Skin1ImplDrawing(this);
+                myObjForCrossPicture = new Skin1ImplDrawing(this);
+                myObjForClearPicture = new Skin1ImplDrawing(this);
                 MainActivity.this.setTheme(R.style.AppTheme1);
                 break;
             case 2:
-                myObjForNoughtPicture = new ClassSkin2ImplDrawing(this);
-                myObjForCrossPicture = new ClassSkin2ImplDrawing(this);
-                myObjForClearPicture = new ClassSkin2ImplDrawing(this);
+                myObjForNoughtPicture = new Skin2ImplDrawing(this);
+                myObjForCrossPicture = new Skin2ImplDrawing(this);
+                myObjForClearPicture = new Skin2ImplDrawing(this);
                 MainActivity.this.setTheme(R.style.AppTheme2);
                 break;
             case 3:
-                myObjForNoughtPicture = new ClassSkin3ImplDrawing(this);
-                myObjForCrossPicture = new ClassSkin3ImplDrawing(this);
-                myObjForClearPicture = new ClassSkin3ImplDrawing(this);
+                myObjForNoughtPicture = new Skin3ImplDrawing(this);
+                myObjForCrossPicture = new Skin3ImplDrawing(this);
+                myObjForClearPicture = new Skin3ImplDrawing(this);
                 MainActivity.this.setTheme(R.style.AppTheme3);
                 break;
             default:
@@ -104,14 +118,14 @@ public class MainActivity extends AppCompatActivity implements
         }
 
         setContentView(R.layout.activity_main);
-        //ClassRealmController RC = new ClassRealmController();
+        //RealmController RC = new RealmController();
         //RC.initializeRealm(this);
         //RC.clearAllUsers();
         //Log.d ("MYL", "RC.getAll() =" + RC.getAll());
         //Log.d ("MYL", "RC.getAll() =" + RC.getAll());
         //Log.d ("MYL", "RC.getItem(\"вася\") =" + RC.getItemByName("вася"));
 
-        ClassCustomDialog myObjForCustomDialog = new ClassCustomDialog(this, this);
+        CustomDialog myObjForCustomDialog = new CustomDialog(this, this);
 
         myObjForCustomDialog.createCustomDialog();
 
@@ -126,9 +140,9 @@ public class MainActivity extends AppCompatActivity implements
         view.setBackgroundColor(getResources().getColor(R.color.colorWhite));
 
         //myModeFragment = getFragmentManager().findFragmentById(R.id.mode_fragment);
-        myModeFragment = (ClassModeFragment) getSupportFragmentManager().findFragmentById(R.id.mode_fragment);
-        myFieldsFragment = (ClassFieldsFragment) getSupportFragmentManager().findFragmentById(R.id.fields_fragment);
-        myButtonFragment = (ClassButtonFragment) getSupportFragmentManager().findFragmentById(R.id.button_fragment);
+        myModeFragment = (FragmentChooseMode) getSupportFragmentManager().findFragmentById(R.id.mode_fragment);
+        myFieldsFragment = (FragmentPlayingFields) getSupportFragmentManager().findFragmentById(R.id.fields_fragment);
+        myButtonFragment = (FragmentButtonClear) getSupportFragmentManager().findFragmentById(R.id.button_fragment);
 
 
 
@@ -177,9 +191,11 @@ public class MainActivity extends AppCompatActivity implements
                     //if (myGameStage%2 == 1){
                     if (myObjForDV.getMyGameStage()%2 == 1){
                         ImageView myIV = (ImageView) findViewById(myObjForLogic.myPCsClickedButton(myObjForDV.getMyPositionsForPlayer1(), myObjForDV.getMyPositionsForPlayer2()));
+
                         myIV.performClick();
                     }else{
                         ImageView myIV = (ImageView) findViewById(myObjForLogic.myPCsClickedButton(myObjForDV.getMyPositionsForPlayer2(), myObjForDV.getMyPositionsForPlayer1()));
+
                         myIV.performClick();
                     }
                 }
@@ -221,10 +237,13 @@ public class MainActivity extends AppCompatActivity implements
                         if (myObjForDV.getMyGameStage()%2 == 1){
 
                             ImageView myIV = (ImageView) findViewById(myObjForLogic.myPCsClickedButton(myObjForDV.getMyPositionsForPlayer1(), myObjForDV.getMyPositionsForPlayer2()));
+
                             myIV.performClick();
+
                         }else{
 
                             ImageView myIV = (ImageView) findViewById(myObjForLogic.myPCsClickedButton(myObjForDV.getMyPositionsForPlayer2(), myObjForDV.getMyPositionsForPlayer1()));
+
                             myIV.performClick();
 
                         }
@@ -297,13 +316,13 @@ public class MainActivity extends AppCompatActivity implements
                 startActivity(i);
                 return true;
             case R.id.menu_stat:
-                ClassDialogStat myObjForDialogStat = new ClassDialogStat(this, this);
+                DialogStat myObjForDialogStat = new DialogStat(this, this);
                 myObjForDialogStat.openStatDialog();
 
                 //openStatDialog();
                 return true;
             case R.id.menu_stat_by_users:
-                ClassDialogStatByUser myObjForDialogStatByUser = new ClassDialogStatByUser(this, this);
+                DialogStatByUser myObjForDialogStatByUser = new DialogStatByUser(this, this);
                 myObjForDialogStatByUser.openStatDialog();
 
                 //openStatDialog();

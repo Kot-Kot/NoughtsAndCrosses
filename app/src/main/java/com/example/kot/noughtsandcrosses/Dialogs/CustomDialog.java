@@ -1,4 +1,4 @@
-package com.example.kot.noughtsandcrosses;
+package com.example.kot.noughtsandcrosses.Dialogs;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,11 +10,14 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.kot.noughtsandcrosses.DB_Realm.RealmController;
+import com.example.kot.noughtsandcrosses.R;
+
 /**
  * Created by Kot Kot on 26.06.2017.
  */
 
-public class ClassCustomDialog extends AppCompatActivity {
+public class CustomDialog extends AppCompatActivity {
     private EditText myEditTextUserName;
     private String myUserName;
     private Context myContext;
@@ -28,13 +31,13 @@ public class ClassCustomDialog extends AppCompatActivity {
         return myUserName;
     }
 
-    ClassCustomDialog(Context c, Activity a) {
+    public CustomDialog(Context c, Activity a) {
         myContext = c;
         myActivity = a;
     }
 
-    void createCustomDialog() {
-        ClassRealmController myObjForRealmController = new ClassRealmController();
+    public void createCustomDialog() {
+        RealmController myObjForRealmController = new RealmController();
         myObjForRealmController.initializeRealm(myContext);
 
         LayoutInflater myLI = LayoutInflater.from(myContext);
@@ -50,7 +53,7 @@ public class ClassCustomDialog extends AppCompatActivity {
             if (myUserName.equals("")){
                 Toast myToast = (Toast.makeText(myContext.getApplicationContext(), "Введите Ваше имя!", Toast.LENGTH_SHORT));
                 myToast.show();
-                //ClassCustomDialog myObjForCustomDialog = new ClassCustomDialog(this,this);
+                //CustomDialog myObjForCustomDialog = new CustomDialog(this,this);
                 this.createCustomDialog();
 
                 return;

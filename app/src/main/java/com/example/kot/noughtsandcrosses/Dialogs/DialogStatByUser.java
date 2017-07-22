@@ -1,20 +1,23 @@
-package com.example.kot.noughtsandcrosses;
+package com.example.kot.noughtsandcrosses.Dialogs;
 
 import android.app.Activity;
 import android.content.Context;
 import android.support.v7.app.AlertDialog;
 
+import com.example.kot.noughtsandcrosses.DB_Realm.RealmController;
+import com.example.kot.noughtsandcrosses.Dialogs.DialogStat;
+
 /**
  * Created by Kot Kot on 28.06.2017.
  */
 
-public class ClassDialogStatByUser extends ClassDialogStat {
-    ClassDialogStatByUser(Context c, Activity a) {
+public class DialogStatByUser extends DialogStat {
+    public DialogStatByUser(Context c, Activity a) {
         super(c, a);
     }
 
-    void openStatDialog() {
-        ClassRealmController myObjForRealmController = new ClassRealmController();
+    public void openStatDialog() {
+        RealmController myObjForRealmController = new RealmController();
         myObjForRealmController.initializeRealm(super.getMyContext());
 
         String title = "Статистика (По игрокам)";

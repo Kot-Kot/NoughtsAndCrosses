@@ -19,7 +19,7 @@ import java.util.Arrays;
  * Created by Kot Kot on 22.06.2017.
  */
 
-public class ClassModeFragment extends Fragment implements View.OnClickListener, RadioButton.OnCheckedChangeListener {
+public class FragmentChooseMode extends Fragment implements View.OnClickListener, RadioButton.OnCheckedChangeListener {
 
 
    // interface OnCheckedRadioButtons {
