@@ -4,6 +4,8 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.kot.noughtsandcrosses.R;
+
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
@@ -41,7 +43,8 @@ public class RealmControllerImpl implements RealmConroller {
                 myObjForCurrentUser.setIsActive(true);
                 realm.copyToRealmOrUpdate(myObjForCurrentUser);
 
-                Toast myToast = (Toast.makeText(c.getApplicationContext(), "Вы вошли как существующий игрок: \"" + myObjForCurrentUser.getMyName() + "\"", Toast.LENGTH_SHORT));
+                Toast myToast = (Toast.makeText(c.getApplicationContext(),
+                        c.getResources().getString(R.string.realm_controller_existing_player) + "\"" + myObjForCurrentUser.getMyName() + "\"", Toast.LENGTH_SHORT));
                 myToast.show();
             } else {
                 UsersRealm myUser = new UsersRealm();
@@ -53,7 +56,8 @@ public class RealmControllerImpl implements RealmConroller {
                 myUser.setMyPcWins(0);
                 myUser.setMyTie(0);
                 realm.copyToRealmOrUpdate(myUser);
-                Toast myToast = (Toast.makeText(c.getApplicationContext(), "Создан новый игрок: \"" + myUser.getMyName() + "\"", Toast.LENGTH_SHORT));
+                Toast myToast = (Toast.makeText(c.getApplicationContext(),
+                        c.getResources().getString(R.string.realm_controller_new_player) + "\"" + myUser.getMyName() + "\"", Toast.LENGTH_SHORT));
                 myToast.show();
             }
 
@@ -91,13 +95,14 @@ public class RealmControllerImpl implements RealmConroller {
         UsersRealm myObjForLastCurrentUser = myRealm.where(UsersRealm.class).equalTo("isCurrentUser", true).findFirst();
         Log.d ("MYL", "myObjForLastCurrentUser = " + myObjForLastCurrentUser);
         if (myObjForLastCurrentUser == null){
-            Toast myToast = (Toast.makeText(c.getApplicationContext(), "База данных пуста! Создайте пользователя или просто закройте диалог.", Toast.LENGTH_LONG));
+            Toast myToast = (Toast.makeText(c.getApplicationContext(), c.getResources().getString(R.string.realm_controller_empty_DB), Toast.LENGTH_LONG));
             myToast.show();
 
             return false;
         }else {
             myRealm.executeTransaction(realm -> {
-                Toast myToast = (Toast.makeText(c.getApplicationContext(), "Вы вошли как: \"" + myObjForLastCurrentUser.getMyName() + "\"", Toast.LENGTH_SHORT));
+                Toast myToast = (Toast.makeText(c.getApplicationContext(),
+                        c.getResources().getString(R.string.realm_controller_enterAs) + "\"" + myObjForLastCurrentUser.getMyName() + "\"", Toast.LENGTH_SHORT));
                 myToast.show();
                 myObjForLastCurrentUser.setIsActive(true);
             });
@@ -163,18 +168,21 @@ public class RealmControllerImpl implements RealmConroller {
         }
     }
 
-    public String showAllSortedByAlphabet() {
+    public String showAllSortedByAlphabet(Context c) {
         RealmResults<UsersRealm> results = myRealm.where(UsersRealm.class).findAllSorted("myName");
         StringBuilder myBuilder = new StringBuilder();
         for (UsersRealm singleUser : results) {
 
             String temp = singleUser.getMyName() + ":\n";
             myBuilder.append(temp);
-            temp = "Игрок выиграл: " + singleUser.getMyPlayerWins() + "\n";
+            temp = c.getResources().getString(R.string.realm_controller_player_win)
+                    + singleUser.getMyPlayerWins() + "\n";
             myBuilder.append(temp);
-            temp = "ПК выиграл: " + singleUser.getMyPcWins() + "\n";
+            temp = c.getResources().getString(R.string.realm_controller_pc_win)
+                    + singleUser.getMyPcWins() + "\n";
             myBuilder.append(temp);
-            temp = "Ничья: " + singleUser.getMyTie() + "\n";
+            temp = c.getResources().getString(R.string.realm_controller_tie)
+                    + singleUser.getMyTie() + "\n";
             myBuilder.append(temp);
             temp = "_________________" + "\n\n";
             myBuilder.append(temp);

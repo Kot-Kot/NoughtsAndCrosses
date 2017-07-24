@@ -11,6 +11,7 @@ import com.example.kot.noughtsandcrosses.DB_Realm.RealmControllerImpl;
 import com.example.kot.noughtsandcrosses.DB_SP.SaveGeneralStatisticsWithSP;
 import com.example.kot.noughtsandcrosses.DB_SP.SaveGeneralStatisticsWithSPImpl;
 import com.example.kot.noughtsandcrosses.Logic.PCLogic;
+import com.example.kot.noughtsandcrosses.R;
 
 /**
  * Created by Kot Kot on 14.06.2017.
@@ -95,13 +96,15 @@ public class ThreeVariantsImpl implements ThreeVariants {
             //if(isSomebodyWin(myPositionsForPlayer1)==true){
             if(myInterfaceForLogic.isSomebodyWin(myPositionsForPlayer1)){
                 Log.d(LOG_TAG, "Выиграли крестики");
-                Toast myToast = (Toast.makeText(myContext.getApplicationContext(), "Выиграли крестики", Toast.LENGTH_SHORT));
+                Toast myToast = (Toast.makeText(myContext.getApplicationContext(),
+                        myContext.getResources().getString(R.string.three_variants_crosses_win), Toast.LENGTH_SHORT));
                 myToast.show();
                 myObjForSaveStatistics.saveWinForCrosses(myActivity);
                 //myHoldScreen();
             }else if(myGameStage == 10) {
                 Log.d(LOG_TAG, "Ничья");
-                Toast myToast = (Toast.makeText(myContext.getApplicationContext(), "Ничья", Toast.LENGTH_SHORT));
+                Toast myToast = (Toast.makeText(myContext.getApplicationContext(),
+                        myContext.getResources().getString(R.string.three_variants_tie), Toast.LENGTH_SHORT));
                 myToast.show();
                 myObjForSaveStatistics.saveTie(myActivity);
                 // myHoldScreen();
@@ -127,7 +130,8 @@ public class ThreeVariantsImpl implements ThreeVariants {
             //if(isSomebodyWin(myPositionsForPlayer2)==true){
             if(myInterfaceForLogic.isSomebodyWin(myPositionsForPlayer2)){
                 Log.d(LOG_TAG, "Выиграли нолики");
-                Toast myToast = (Toast.makeText(myContext.getApplicationContext(), "Выиграли нолики", Toast.LENGTH_SHORT));
+                Toast myToast = (Toast.makeText(myContext.getApplicationContext(),
+                        myContext.getResources().getString(R.string.three_variants_noughts_win), Toast.LENGTH_SHORT));
                 myToast.show();
                 myObjForSaveStatistics.saveWinForNoughts(myActivity);
                 //myHoldScreen();
@@ -173,13 +177,15 @@ public class ThreeVariantsImpl implements ThreeVariants {
 
             //if(isSomebodyWin(myPositionsForPlayer1)==true){
             if(myInterfaceForLogic.isSomebodyWin(myPositionsForPlayer1)){
-                Toast myToast = (Toast.makeText(myContext.getApplicationContext(), "Выиграл игрок", Toast.LENGTH_SHORT));
+                Toast myToast = (Toast.makeText(myContext.getApplicationContext(),
+                        myContext.getResources().getString(R.string.three_variants_player_win), Toast.LENGTH_SHORT));
                 myToast.show();
                 myObjForRealmControllerImpl.currentUserWin();
                 myObjForSaveStatistics.saveWinForCrosses(myActivity);
                 myHoldScreen(myInterfaceForLogic, iv1, iv2, iv3, iv4, iv5, iv6, iv7, iv8, iv9);
             }else if(myGameStage == 10){
-                Toast myToast = (Toast.makeText(myContext.getApplicationContext(), "Ничья", Toast.LENGTH_SHORT));
+                Toast myToast = (Toast.makeText(myContext.getApplicationContext(),
+                        myContext.getResources().getString(R.string.three_variants_tie), Toast.LENGTH_SHORT));
                 myToast.show();
                 myObjForRealmControllerImpl.currentUserTie();
                 myObjForSaveStatistics.saveTie(myActivity);
@@ -208,7 +214,6 @@ public class ThreeVariantsImpl implements ThreeVariants {
             Log.d(LOG_TAG,"----Naught---- ");
             //iv.setTranslationY(-1000f);
             iv.setImageBitmap(myBitmapNought);
-
             //iv.animate().translationYBy(1000f).setDuration(500);
             //iv.setImageBitmap(myObjForNoughtPicture.myDrawNought());
             iv.setClickable(false);
@@ -216,7 +221,8 @@ public class ThreeVariantsImpl implements ThreeVariants {
 
             //if(isSomebodyWin(myPositionsForPlayer2)==true) {
             if(myInterfaceForLogic.isSomebodyWin(myPositionsForPlayer2)) {
-                Toast myToast = (Toast.makeText(myContext.getApplicationContext(), "Выиграл ПК", Toast.LENGTH_SHORT));
+                Toast myToast = (Toast.makeText(myContext.getApplicationContext(),
+                        myContext.getResources().getString(R.string.three_variants_pc_win), Toast.LENGTH_SHORT));
                 myToast.show();
                 myObjForRealmControllerImpl.currentUserLost();
                 myObjForSaveStatistics.saveWinForNoughts(myActivity);
@@ -256,12 +262,14 @@ public class ThreeVariantsImpl implements ThreeVariants {
 
             //if(isSomebodyWin(myPositionsForPlayer1)==true){
             if(myInterfaceForLogic.isSomebodyWin(myPositionsForPlayer1)){
-                Toast myToast = (Toast.makeText(myContext.getApplicationContext(), "Выиграли крестики", Toast.LENGTH_SHORT));
+                Toast myToast = (Toast.makeText(myContext.getApplicationContext(),
+                        myContext.getResources().getString(R.string.three_variants_crosses_win), Toast.LENGTH_SHORT));
                 myToast.show();
                 myObjForSaveStatistics.saveWinForCrosses(myActivity);
                 myHoldScreen(myInterfaceForLogic, iv1, iv2, iv3, iv4, iv5, iv6, iv7, iv8, iv9);
             }else if(myGameStage == 10) {
-                Toast myToast = (Toast.makeText(myContext.getApplicationContext(), "Ничья", Toast.LENGTH_SHORT));
+                Toast myToast = (Toast.makeText(myContext.getApplicationContext(),
+                        myContext.getResources().getString(R.string.three_variants_tie), Toast.LENGTH_SHORT));
                 myToast.show();
                 myObjForSaveStatistics.saveTie(myActivity);
                 myHoldScreen(myInterfaceForLogic, iv1, iv2, iv3, iv4, iv5, iv6, iv7, iv8, iv9);
@@ -285,7 +293,8 @@ public class ThreeVariantsImpl implements ThreeVariants {
 
             //if(isSomebodyWin(myPositionsForPlayer2)==true){
             if(myInterfaceForLogic.isSomebodyWin(myPositionsForPlayer2)){
-                Toast myToast = (Toast.makeText(myContext.getApplicationContext(), "Выиграли нолики", Toast.LENGTH_SHORT));
+                Toast myToast = (Toast.makeText(myContext.getApplicationContext(),
+                        myContext.getResources().getString(R.string.three_variants_noughts_win), Toast.LENGTH_SHORT));
                 myToast.show();
                 myObjForSaveStatistics.saveWinForNoughts(myActivity);
                 myHoldScreen(myInterfaceForLogic, iv1, iv2, iv3, iv4, iv5, iv6, iv7, iv8, iv9);

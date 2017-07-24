@@ -11,4 +11,53 @@
     <string name="menu_item_color3">Зеленый</string>
     <string name="menu_item_reload">Перезагрузить</string>
     <string name="menu_item_stat_by_users">Статистика (По игрокам)</string>
+
+    <string name="custom_dialog_registration">Регистрация</string>
+    <string name="custom_dialog_hint">Введите имя игрока</string>
+
+    <string name="custom_dialog_pb_name">Подтвердить</string>
+    <string name="custom_dialog_pb_empty_name">Введите Ваше имя!</string>
+
+    <string name="custom_dialog_neutb_name">Продолжить предыдущую сессию</string>
+
+    <string name="custom_dialog_negb_name">Закрыть</string>
+    <string name="custom_dialog_negb_close">Вы вошли инкогнито! Статистика по игрокам отключена. Работает только общая статистика.</string>
+
+
+    <string name="dialog_stat_title">Статистика (Общая)</string>
+    <string name="dialog_stat_crosses_win">"Крестики выиграли: "</string>
+    <string name="dialog_stat_noughts_win">"Нолики выиграли: "</string>
+    <string name="dialog_stat_tie">"Ничья: "</string>
+
+    <string name="dialog_stat_pb_name">Ок</string>
+    <string name="dialog_stat_negb_name">Обнулить</string>
+
+
+    <string name="dialog_stat_byUser_title">Статистика (По игрокам)</string>
+
+    <string name="dialog_stat_byUser_pb_name">"Ок"</string>
+    <string name="dialog_stat_byUser_negb_name">"Удалить"</string>
+    <string name="dialog_stat_byUser_neutb_name">"Обнулить"</string>
+
+
+    <string name="realm_controller_existing_player">"Вы вошли как существующий игрок: "</string>
+    <string name="realm_controller_new_player">"Создан новый игрок: "</string>
+    <string name="realm_controller_empty_DB">База данных пуста! Создайте пользователя или просто закройте диалог.</string>
+    <string name="realm_controller_enterAs">"Вы вошли как: "</string>
+
+    <string name="realm_controller_player_win">"Игрок выиграл: "</string>
+    <string name="realm_controller_pc_win">"ПК выиграл: "</string>
+    <string name="realm_controller_tie">"Ничья: "</string>
+
+
+    <string name="three_variants_crosses_win">Крестики выиграли</string>
+    <string name="three_variants_noughts_win">Нолики выиграли</string>
+    <string name="three_variants_tie">Ничья</string>
+    <string name="three_variants_player_win">Выиграл игрок</string>
+    <string name="three_variants_pc_win">Выиграл ПК</string>
+
+
+    <string name="menu_toast_msg_reload">"Перезагрузите приложение!"</string>
+
+
 </resources>

@@ -48,10 +48,10 @@ public class CustomDialog extends AppCompatActivity {
         myEditTextUserName = (EditText) myView.findViewById(R.id.userInputDialog);
 
         myADB.setCancelable(false);
-        myADB.setPositiveButton("Подтвердить", (dialogBox, id) -> {
+        myADB.setPositiveButton(myContext.getResources().getString(R.string.custom_dialog_pb_name), (dialogBox, id) -> {
             myUserName = myEditTextUserName.getText().toString();
             if (myUserName.equals("")){
-                Toast myToast = (Toast.makeText(myContext.getApplicationContext(), "Введите Ваше имя!", Toast.LENGTH_SHORT));
+                Toast myToast = (Toast.makeText(myContext.getApplicationContext(), myContext.getResources().getString(R.string.custom_dialog_pb_empty_name), Toast.LENGTH_SHORT));
                 myToast.show();
                 //CustomDialog myObjForCustomDialog = new CustomDialog(this,this);
                 this.createCustomDialog();
@@ -69,7 +69,7 @@ public class CustomDialog extends AppCompatActivity {
 
 
         });
-        myADB.setNeutralButton("Продолжить предыдущую сессию",(dialogBox, id) -> {
+        myADB.setNeutralButton(myContext.getResources().getString(R.string.custom_dialog_neutb_name), (dialogBox, id) -> {
             if (!myObjForRealmControllerImpl.showLastCurrentUser(myContext)) {
                 this.createCustomDialog();
             }
@@ -77,8 +77,8 @@ public class CustomDialog extends AppCompatActivity {
         });
 
 
-        myADB.setNegativeButton("Закрыть",(dialogBox, id) -> {
-            Toast myToast = (Toast.makeText(myContext.getApplicationContext(), "Вы вошли инкогнито! Статистика по игрокам отключена. Работает только общая статистика.", Toast.LENGTH_LONG));
+        myADB.setNegativeButton(myContext.getResources().getString(R.string.custom_dialog_negb_name), (dialogBox, id) -> {
+            Toast myToast = (Toast.makeText(myContext.getApplicationContext(), myContext.getResources().getString(R.string.custom_dialog_negb_close), Toast.LENGTH_LONG));
             myToast.show();
             myObjForRealmControllerImpl.lastCurrentUserIsNotActive();
             dialogBox.cancel();

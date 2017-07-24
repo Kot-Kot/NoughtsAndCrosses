@@ -6,6 +6,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.kot.noughtsandcrosses.DB_SP.SaveGeneralStatisticsWithSPImpl;
+import com.example.kot.noughtsandcrosses.R;
 
 /**
  * Created by Kot Kot on 28.06.2017.
@@ -33,12 +34,12 @@ public class DialogStat extends AppCompatActivity {
         SaveGeneralStatisticsWithSPImpl myObjForSaveStatistics = new SaveGeneralStatisticsWithSPImpl(myContext, myActivity);
         myObjForSaveStatistics.loadStat();
 
-        String title = "Статистика (Общая)";
-        String message = "Крестики выиграли: "+ myObjForSaveStatistics.getWinsForCrosses()
-                +"\nНолики выиграли: " + myObjForSaveStatistics.getWinsForNoughts()
-                + "\nНичья: " + myObjForSaveStatistics.getTies();
-        String buttonStringPos = "Ок";
-        String buttonStringNeg = "Обнулить";
+        String title = myContext.getResources().getString(R.string.dialog_stat_title);
+        String message = myContext.getResources().getString(R.string.dialog_stat_crosses_win) + myObjForSaveStatistics.getWinsForCrosses()
+                + "\n" + myContext.getResources().getString(R.string.dialog_stat_noughts_win) + myObjForSaveStatistics.getWinsForNoughts()
+                + "\n" + myContext.getResources().getString(R.string.dialog_stat_tie) + myObjForSaveStatistics.getTies();
+        String buttonStringPos = myContext.getResources().getString(R.string.dialog_stat_pb_name);
+        String buttonStringNeg = myContext.getResources().getString(R.string.dialog_stat_negb_name);
 
         //AlertDialog.Builder myDialog = new AlertDialog.Builder(MainActivity.this);
         AlertDialog.Builder myDialog = new AlertDialog.Builder(myActivity);

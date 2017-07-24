@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">Noughts and Crosses</string>
+    <string name="rb1">PC vs PC</string>
+    <string name="rb2">Player vs PC</string>
+    <string name="rb3">Player vs Player</string>
+    <string name="btnClear">Clear screen</string>
+    <string name="menu_item_stat">Statistics (General)</string>
+    <string name="menu_item_skin">Skins</string>
+    <string name="menu_item_color1">Blue</string>
+    <string name="menu_item_color2">Violet</string>
+    <string name="menu_item_color3">Green</string>
+    <string name="menu_item_reload">Reload</string>
+    <string name="menu_item_stat_by_users">Statistics (By players)</string>
+
+    <string name="custom_dialog_registration">Registration</string>
+    <string name="custom_dialog_hint">Enter player\'s name</string>
+
+    <string name="custom_dialog_pb_name">Ok</string>
+    <string name="custom_dialog_pb_empty_name">Enter your name!</string>
+
+    <string name="custom_dialog_neutb_name">Continue previous session</string>
+
+    <string name="custom_dialog_negb_name">Close</string>
+    <string name="custom_dialog_negb_close">You entered incognito! Statistics by players are disabled. Only general statistics work.</string>
+
+
+    <string name="dialog_stat_title">Statistics (General)</string>
+    <string name="dialog_stat_crosses_win">"Crosses won: "</string>
+    <string name="dialog_stat_noughts_win">"Noughts won: "</string>
+    <string name="dialog_stat_tie">"Tie: "</string>
+
+    <string name="dialog_stat_pb_name">Ok</string>
+    <string name="dialog_stat_negb_name">Set counters to zero</string>
+
+
+    <string name="dialog_stat_byUser_title">Statistics (By players)</string>
+
+    <string name="dialog_stat_byUser_pb_name">"Ok"</string>
+    <string name="dialog_stat_byUser_negb_name">"Delete records"</string>
+    <string name="dialog_stat_byUser_neutb_name">"Set counters to zero"</string>
+
+
+    <string name="realm_controller_existing_player">"You are logged in as an existing player: "</string>
+    <string name="realm_controller_new_player">"Created new player: "</string>
+    <string name="realm_controller_empty_DB">The database is empty! Create a user or just close the dialog.</string>
+    <string name="realm_controller_enterAs">"You are logged in as: "</string>
+
+    <string name="realm_controller_player_win">"Player won: "</string>
+    <string name="realm_controller_pc_win">"PC won: "</string>
+    <string name="realm_controller_tie">"Tie: "</string>
+
+
+    <string name="three_variants_crosses_win">Crosses won</string>
+    <string name="three_variants_noughts_win">Noughts won</string>
+    <string name="three_variants_tie">Tie</string>
+    <string name="three_variants_player_win">Player won</string>
+    <string name="three_variants_pc_win">PC won</string>
+
+
+    <string name="menu_toast_msg_reload">"Reload app!"</string>
+</resources>

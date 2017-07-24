@@ -308,6 +308,8 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
+        String msgReload = this.getResources().getString(R.string.menu_toast_msg_reload);
+
         switch (item.getItemId()){
             case R.id.menu_reload:
                 Intent i = getBaseContext().getPackageManager()
@@ -331,20 +333,20 @@ public class MainActivity extends AppCompatActivity implements
                 item.setChecked(!item.isChecked());
                 //item.setEnabled(!item.isEnabled());
                 myObjForSaveStatistics.saveSkin(1);
-                Toast.makeText(this, "Перезагрузите приложение!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, msgReload, Toast.LENGTH_SHORT).show();
                 return true;
 
             case R.id.menu_skin2:
                 item.setChecked(!item.isChecked());
                 //item.setEnabled(!item.isEnabled());
                 myObjForSaveStatistics.saveSkin(2);
-                Toast.makeText(this, "Перезагрузите приложение!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, msgReload, Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.menu_skin3:
                 item.setChecked(!item.isChecked());
                 //item.setEnabled(!item.isEnabled());
                 myObjForSaveStatistics.saveSkin(3);
-                Toast.makeText(this, "Перезагрузите приложение!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, msgReload, Toast.LENGTH_SHORT).show();
                 return true;
 
             default:

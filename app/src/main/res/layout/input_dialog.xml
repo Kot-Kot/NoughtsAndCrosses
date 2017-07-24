@@ -11,13 +11,13 @@
         android:id="@+id/dialogTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Регистрация"
+        android:text="@string/custom_dialog_registration"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
         android:id="@+id/userInputDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Введите имя игрока"
+        android:hint="@string/custom_dialog_hint"
         android:inputType="text" />
 </LinearLayout>

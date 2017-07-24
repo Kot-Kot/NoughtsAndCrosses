@@ -33,7 +33,7 @@ public interface RealmConroller {
 
     public void currentUserTie();
 
-    public String showAllSortedByAlphabet();
+    public String showAllSortedByAlphabet(Context c);
 
     public void setAllToZeros();
 
