@@ -13,11 +13,14 @@ public interface SaveGeneralStatisticsWithSP {
     String NOUGHTS_WIN = "noughts_win";
     String TIE = "tie";
     String SKIN_CODE = "skin";
+    String LANGUAGE_CODE = "language";
 
     Integer getWinsForCrosses();
     Integer getWinsForNoughts();
     Integer getTies();
     Integer getSkin();
+
+    String getLanguage();
 
     void saveWinForCrosses(Activity a);
 
@@ -27,6 +30,10 @@ public interface SaveGeneralStatisticsWithSP {
 
     void saveSkin(Integer i);
     void loadSkin();
+
+    void saveLanguage(String lang);
+
+    void loadLanguage();
 
     void loadStat();
 

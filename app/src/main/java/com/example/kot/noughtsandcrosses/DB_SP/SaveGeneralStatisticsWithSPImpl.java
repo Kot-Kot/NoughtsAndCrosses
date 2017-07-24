@@ -19,6 +19,7 @@ public class SaveGeneralStatisticsWithSPImpl implements SaveGeneralStatisticsWit
     private Integer winsForNoughts;
     private Integer ties;
     private Integer skin;
+    private String language;
 
     @Override
     public Integer getWinsForCrosses() {
@@ -39,6 +40,12 @@ public class SaveGeneralStatisticsWithSPImpl implements SaveGeneralStatisticsWit
     public Integer getSkin() {
         return skin;
     }
+
+    public String getLanguage() {
+        return language;
+    }
+
+
 
     public SaveGeneralStatisticsWithSPImpl(Context c, Activity a) {
         myContext = c;
@@ -112,4 +119,22 @@ public class SaveGeneralStatisticsWithSPImpl implements SaveGeneralStatisticsWit
         mySharedPreferences = myContext.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
         skin = mySharedPreferences.getInt(SKIN_CODE, 1);
     }
+
+
+    @Override
+    public void saveLanguage(String lang) {
+        mySharedPreferences = myContext.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+        //skin = mySharedPreferences.getInt(SKIN_CODE, 0);
+        SharedPreferences.Editor myEditor = mySharedPreferences.edit();
+        myEditor.putString(LANGUAGE_CODE, lang);
+        myEditor.apply();
+    }
+
+    @Override
+    public void loadLanguage() {
+        mySharedPreferences = myContext.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+        language = mySharedPreferences.getString(LANGUAGE_CODE, "ru");
+    }
+
+
 }

@@ -4,6 +4,10 @@
     <string name="rb2">Player vs PC</string>
     <string name="rb3">Player vs Player</string>
     <string name="btnClear">Clear screen</string>
+    <string name="menu_item_locale">Language</string>
+    <string name="menu_item_eng">English</string>
+    <string name="menu_item_ru">Russian</string>
+
     <string name="menu_item_stat">Statistics (General)</string>
     <string name="menu_item_skin">Skins</string>
     <string name="menu_item_color1">Blue</string>
@@ -58,4 +62,5 @@
 
 
     <string name="menu_toast_msg_reload">"Reload app!"</string>
+
 </resources>

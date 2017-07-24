@@ -3,9 +3,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/menu_locale"
+        android:title="@string/menu_item_locale"
+        android:orderInCategory="1"
+        app:showAsAction="never"
+        android:enabled="true">
+
+        <menu>
+            <group android:checkableBehavior="single">
+
+                <item
+                    android:id="@+id/menu_lang_ru"
+                    android:title="@string/menu_item_ru"
+                    android:orderInCategory="1"
+                    app:showAsAction="never" />
+
+                <item
+                    android:id="@+id/menu_lang_eng"
+                    android:title="@string/menu_item_eng"
+                    android:orderInCategory="2"
+                    app:showAsAction="never" />
+
+
+            </group>
+        </menu>
+    </item>
+
+
+    <item
         android:id="@+id/menu_skin"
         android:title="@string/menu_item_skin"
-        android:orderInCategory="1"
+        android:orderInCategory="2"
         app:showAsAction="never"
         android:enabled="true"
         >
@@ -41,7 +69,7 @@
     <item
         android:id="@+id/menu_stat"
         android:title="@string/menu_item_stat"
-        android:orderInCategory="2"
+        android:orderInCategory="3"
         app:showAsAction="never"
         >
 
@@ -50,7 +78,7 @@
     <item
         android:id="@+id/menu_stat_by_users"
         android:title="@string/menu_item_stat_by_users"
-        android:orderInCategory="3"
+        android:orderInCategory="4"
         app:showAsAction="never"
         >
 
@@ -61,7 +89,7 @@
     <item
         android:id="@+id/menu_reload"
         android:title="@string/menu_item_reload"
-        android:orderInCategory="4"
+        android:orderInCategory="5"
         app:showAsAction="never"
         >
 

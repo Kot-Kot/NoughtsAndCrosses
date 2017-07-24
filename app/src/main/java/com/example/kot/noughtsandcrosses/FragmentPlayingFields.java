@@ -66,11 +66,11 @@ public class FragmentPlayingFields extends Fragment implements View.OnClickListe
     }
 
 
-     /*SaveGeneralStatisticsWithSP myObjForSaveStatistics = new SaveGeneralStatisticsWithSPImpl(getContext(),getActivity());
+     /*SaveGeneralStatisticsWithSP myObjForSaveGeneralStatistics = new SaveGeneralStatisticsWithSPImpl(getContext(),getActivity());
 
-        myObjForSaveStatistics.loadSkin();
+        myObjForSaveGeneralStatistics.loadSkin();
         Context contextThemeWrapper = new ContextThemeWrapper(getActivity(), R.style.AppTheme1);
-        switch (myObjForSaveStatistics.getSkin()){
+        switch (myObjForSaveGeneralStatistics.getSkin()){
             case 1:
                 contextThemeWrapper = new ContextThemeWrapper(getActivity(), R.style.AppTheme1);
                 break;

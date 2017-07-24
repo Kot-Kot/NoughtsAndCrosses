@@ -4,6 +4,9 @@
     <string name="rb2">Игрок vs ПК</string>
     <string name="rb3">Игрок vs Игрок</string>
     <string name="btnClear">Очистить экран</string>
+    <string name="menu_item_locale">Язык</string>
+    <string name="menu_item_eng">Английский</string>
+    <string name="menu_item_ru">Русский</string>
     <string name="menu_item_stat">Статистика (Общая)</string>
     <string name="menu_item_skin">Скины</string>
     <string name="menu_item_color1">Синий</string>

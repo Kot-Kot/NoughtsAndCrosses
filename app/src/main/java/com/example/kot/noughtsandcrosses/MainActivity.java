@@ -15,6 +15,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.example.kot.noughtsandcrosses.ChangeLocale.ChangeLocale;
 import com.example.kot.noughtsandcrosses.DB_SP.SaveGeneralStatisticsWithSPImpl;
 import com.example.kot.noughtsandcrosses.DB_SP.SaveGeneralStatisticsWithSP;
 import com.example.kot.noughtsandcrosses.Dialogs.CustomDialog;
@@ -53,14 +54,16 @@ public class MainActivity extends AppCompatActivity implements
     RadioButton myRB3;
 
 
-    SaveGeneralStatisticsWithSP myObjForSaveStatistics = new SaveGeneralStatisticsWithSPImpl(this, this);
+    SaveGeneralStatisticsWithSP myObjForSaveGeneralStatistics = new SaveGeneralStatisticsWithSPImpl(this, this);
 
     PCLogic myObjForLogic = new PCLogicImpl(this);
-    ThreeVariants myObjForDV = new ThreeVariantsImpl(this, this);
+    ThreeVariants myObjForThreeVariants = new ThreeVariantsImpl(this, this);
 
     Drawing myObjForNoughtPicture;
     Drawing myObjForCrossPicture;
     Drawing myObjForClearPicture;
+
+    ChangeLocale myObjForChangeLocale = new ChangeLocale();
 
     Bitmap myBitmapCross;
     Bitmap myBitmapNought;
@@ -86,9 +89,12 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        myObjForSaveGeneralStatistics.loadLanguage();
+        myObjForChangeLocale.setCurrentLanguage(myObjForSaveGeneralStatistics.getLanguage());
+        myObjForChangeLocale.updateLocale(this);
 
-        myObjForSaveStatistics.loadSkin();
-        switch (myObjForSaveStatistics.getSkin()){
+        myObjForSaveGeneralStatistics.loadSkin();
+        switch (myObjForSaveGeneralStatistics.getSkin()) {
             case 1:
                 myObjForNoughtPicture = new Skin1Impl(this);
                 myObjForCrossPicture = new Skin1Impl(this);
@@ -176,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements
         myClearScreen.setOnClickListener(v -> {
             //myClearScreen();
 
-            myObjForDV.myClearScreen(myObjForLogic, myBitmapForClean,
+            myObjForThreeVariants.myClearScreen(myObjForLogic, myBitmapForClean,
                     myIVTopLeft,myIVTopCenter,myIVTopRight,
                     myIVCenterLeft,myIVCenter,myIVCenterRight,
                     myIVBottomLeft,myIVBottomCenter,myIVBottomRight);
@@ -185,16 +191,16 @@ public class MainActivity extends AppCompatActivity implements
 
 
                 //while (myGameStage <= 9){
-                while (myObjForDV.getMyGameStage() <= 9){
-                    Log.d(LOG_TAG, "myPositionsForPlayer1 = " + Arrays.toString(myObjForDV.getMyPositionsForPlayer1()));
-                    Log.d(LOG_TAG, "myPositionsForPlayer2 = " + Arrays.toString(myObjForDV.getMyPositionsForPlayer2()));
+                while (myObjForThreeVariants.getMyGameStage() <= 9) {
+                    Log.d(LOG_TAG, "myPositionsForPlayer1 = " + Arrays.toString(myObjForThreeVariants.getMyPositionsForPlayer1()));
+                    Log.d(LOG_TAG, "myPositionsForPlayer2 = " + Arrays.toString(myObjForThreeVariants.getMyPositionsForPlayer2()));
                     //if (myGameStage%2 == 1){
-                    if (myObjForDV.getMyGameStage()%2 == 1){
-                        ImageView myIV = (ImageView) findViewById(myObjForLogic.myPCsClickedButton(myObjForDV.getMyPositionsForPlayer1(), myObjForDV.getMyPositionsForPlayer2()));
+                    if (myObjForThreeVariants.getMyGameStage() % 2 == 1) {
+                        ImageView myIV = (ImageView) findViewById(myObjForLogic.myPCsClickedButton(myObjForThreeVariants.getMyPositionsForPlayer1(), myObjForThreeVariants.getMyPositionsForPlayer2()));
 
                         myIV.performClick();
                     }else{
-                        ImageView myIV = (ImageView) findViewById(myObjForLogic.myPCsClickedButton(myObjForDV.getMyPositionsForPlayer2(), myObjForDV.getMyPositionsForPlayer1()));
+                        ImageView myIV = (ImageView) findViewById(myObjForLogic.myPCsClickedButton(myObjForThreeVariants.getMyPositionsForPlayer2(), myObjForThreeVariants.getMyPositionsForPlayer1()));
 
                         myIV.performClick();
                     }
@@ -220,7 +226,7 @@ public class MainActivity extends AppCompatActivity implements
 
         myRG.setOnCheckedChangeListener((group, checkedId) -> {
             //myClearScreen();
-            myObjForDV.myClearScreen(myObjForLogic, myBitmapForClean,
+            myObjForThreeVariants.myClearScreen(myObjForLogic, myBitmapForClean,
                     myIVTopLeft,myIVTopCenter,myIVTopRight,
                     myIVCenterLeft,myIVCenter,myIVCenterRight,
                     myIVBottomLeft,myIVBottomCenter,myIVBottomRight);
@@ -228,21 +234,21 @@ public class MainActivity extends AppCompatActivity implements
                 case R.id.rb1:
 
 
-                    while (myObjForDV.getMyGameStage() <= 9){
+                    while (myObjForThreeVariants.getMyGameStage() <= 9) {
 
-                        Log.d(LOG_TAG, "myPositionsForPlayer1 = " + Arrays.toString(myObjForDV.getMyPositionsForPlayer1()));
-                        Log.d(LOG_TAG, "myPositionsForPlayer2 = " + Arrays.toString(myObjForDV.getMyPositionsForPlayer2()));
+                        Log.d(LOG_TAG, "myPositionsForPlayer1 = " + Arrays.toString(myObjForThreeVariants.getMyPositionsForPlayer1()));
+                        Log.d(LOG_TAG, "myPositionsForPlayer2 = " + Arrays.toString(myObjForThreeVariants.getMyPositionsForPlayer2()));
 
 
-                        if (myObjForDV.getMyGameStage()%2 == 1){
+                        if (myObjForThreeVariants.getMyGameStage() % 2 == 1) {
 
-                            ImageView myIV = (ImageView) findViewById(myObjForLogic.myPCsClickedButton(myObjForDV.getMyPositionsForPlayer1(), myObjForDV.getMyPositionsForPlayer2()));
+                            ImageView myIV = (ImageView) findViewById(myObjForLogic.myPCsClickedButton(myObjForThreeVariants.getMyPositionsForPlayer1(), myObjForThreeVariants.getMyPositionsForPlayer2()));
 
                             myIV.performClick();
 
                         }else{
 
-                            ImageView myIV = (ImageView) findViewById(myObjForLogic.myPCsClickedButton(myObjForDV.getMyPositionsForPlayer2(), myObjForDV.getMyPositionsForPlayer1()));
+                            ImageView myIV = (ImageView) findViewById(myObjForLogic.myPCsClickedButton(myObjForThreeVariants.getMyPositionsForPlayer2(), myObjForThreeVariants.getMyPositionsForPlayer1()));
 
                             myIV.performClick();
 
@@ -277,8 +283,9 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        myObjForSaveStatistics.loadSkin();
-        switch (myObjForSaveStatistics.getSkin()){
+
+        myObjForSaveGeneralStatistics.loadSkin();
+        switch (myObjForSaveGeneralStatistics.getSkin()) {
             case 1:
                 menu.findItem(R.id.menu_skin1).setChecked(true);
                 //menu.getItem(R.id.menu_skin1).setChecked(true);
@@ -290,6 +297,19 @@ public class MainActivity extends AppCompatActivity implements
             case 3:
                 menu.findItem(R.id.menu_skin3).setChecked(true);
                 //menu.getItem(R.id.menu_skin3).setChecked(true);
+                break;
+        }
+
+        myObjForSaveGeneralStatistics.loadLanguage();
+        myObjForChangeLocale.setCurrentLanguage(myObjForSaveGeneralStatistics.getLanguage());
+        myObjForChangeLocale.updateLocale(this);
+
+        switch (myObjForChangeLocale.getCurrentLanguage()) {
+            case "ru":
+                menu.findItem(R.id.menu_lang_ru).setChecked(true);
+                break;
+            case "en":
+                menu.findItem(R.id.menu_lang_eng).setChecked(true);
                 break;
         }
 
@@ -332,20 +352,39 @@ public class MainActivity extends AppCompatActivity implements
             case R.id.menu_skin1:
                 item.setChecked(!item.isChecked());
                 //item.setEnabled(!item.isEnabled());
-                myObjForSaveStatistics.saveSkin(1);
+                myObjForSaveGeneralStatistics.saveSkin(1);
                 Toast.makeText(this, msgReload, Toast.LENGTH_SHORT).show();
                 return true;
 
             case R.id.menu_skin2:
                 item.setChecked(!item.isChecked());
                 //item.setEnabled(!item.isEnabled());
-                myObjForSaveStatistics.saveSkin(2);
+                myObjForSaveGeneralStatistics.saveSkin(2);
                 Toast.makeText(this, msgReload, Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.menu_skin3:
                 item.setChecked(!item.isChecked());
                 //item.setEnabled(!item.isEnabled());
-                myObjForSaveStatistics.saveSkin(3);
+                myObjForSaveGeneralStatistics.saveSkin(3);
+                Toast.makeText(this, msgReload, Toast.LENGTH_SHORT).show();
+                return true;
+
+            case R.id.menu_lang_ru:
+                item.setChecked(!item.isChecked());
+                //item.setEnabled(!item.isEnabled());
+
+                myObjForSaveGeneralStatistics.saveLanguage("ru");
+                myObjForChangeLocale.setCurrentLanguage("ru");
+                myObjForChangeLocale.updateLocale(this);
+                Toast.makeText(this, msgReload, Toast.LENGTH_SHORT).show();
+                return true;
+
+            case R.id.menu_lang_eng:
+                item.setChecked(!item.isChecked());
+                //item.setEnabled(!item.isEnabled());
+                myObjForSaveGeneralStatistics.saveLanguage("en");
+                myObjForChangeLocale.setCurrentLanguage("en");
+                myObjForChangeLocale.updateLocale(this);
                 Toast.makeText(this, msgReload, Toast.LENGTH_SHORT).show();
                 return true;
 
@@ -376,7 +415,7 @@ public class MainActivity extends AppCompatActivity implements
         String IdAsString = v.getResources().getResourceEntryName(v.getId());
         Log.d(LOG_TAG,"---                       ---");
         //Log.d(LOG_TAG,"myGameStage = " + myGameStage);
-        Log.d(LOG_TAG,"myGameStage = " + myObjForDV.getMyGameStage());
+        Log.d(LOG_TAG, "myGameStage = " + myObjForThreeVariants.getMyGameStage());
         Log.d(LOG_TAG,"IdAsString = " + IdAsString.substring(2));
         //if(myNowClickedButton == ""){
            // myNowClickedButton = IdAsString.substring(2);
@@ -390,7 +429,7 @@ public class MainActivity extends AppCompatActivity implements
             Log.d(LOG_TAG, "---myPlayerVsPlayer---");
             //myPlayerVsPlayer(myIV)
 
-            myObjForDV.myPlayerVsPlayer(myIV,
+            myObjForThreeVariants.myPlayerVsPlayer(myIV,
                     myObjForLogic, myBitmapCross, myBitmapNought,
                     myIVTopLeft,myIVTopCenter,myIVTopRight,
                     myIVCenterLeft,myIVCenter,myIVCenterRight,
@@ -401,7 +440,7 @@ public class MainActivity extends AppCompatActivity implements
         if(myRB2.isChecked()){
             Log.d(LOG_TAG, "---myPlayerVsPc---");
             //myPlayerVsPc(myIV);
-            myObjForDV.myPlayerVsPc(myIV,
+            myObjForThreeVariants.myPlayerVsPc(myIV,
                     myObjForLogic, myBitmapCross, myBitmapNought,
                     myIVTopLeft,myIVTopCenter,myIVTopRight,
                     myIVCenterLeft,myIVCenter,myIVCenterRight,
@@ -415,7 +454,7 @@ public class MainActivity extends AppCompatActivity implements
             Log.d(LOG_TAG, "---myPcVsPc---");
             //new Handler(Looper.getMainLooper()).postDelayed(() -> {myPcVsPc(myIV);}, 500);
             //myPcVsPc(myIV);
-            myObjForDV.myPcVsPc(myIV, myObjForLogic, myBitmapCross, myBitmapNought);
+            myObjForThreeVariants.myPcVsPc(myIV, myObjForLogic, myBitmapCross, myBitmapNought);
             return;
         }
     }
