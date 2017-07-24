@@ -3,8 +3,6 @@ package com.example.kot.noughtsandcrosses.Logic;
 import android.content.Context;
 import android.util.Log;
 
-import com.example.kot.noughtsandcrosses.Logic.Logic;
-
 import java.util.Arrays;
 
 
@@ -17,7 +15,7 @@ import java.util.Arrays;
  */
 
 //отвечает за логику хода ПК
-public class PCLogicImplLogic implements Logic {
+public class PCLogicImpl implements PCLogic {
     private String myNowClickedButton = "";
     private Context myContext;
 
@@ -29,7 +27,7 @@ public class PCLogicImplLogic implements Logic {
         this.myNowClickedButton = myNowClickedButton;
     }
 
-    public PCLogicImplLogic(Context c) {
+    public PCLogicImpl(Context c) {
         myContext = c;
     }
 

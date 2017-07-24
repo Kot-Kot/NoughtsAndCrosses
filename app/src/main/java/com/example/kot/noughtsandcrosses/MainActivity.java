@@ -15,19 +15,19 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.example.kot.noughtsandcrosses.DB_SP.SaveOverallStatisticsWithSP;
-import com.example.kot.noughtsandcrosses.DB_SP.SaveStatisticsWithSP;
+import com.example.kot.noughtsandcrosses.DB_SP.SaveGeneralStatisticsWithSPImpl;
+import com.example.kot.noughtsandcrosses.DB_SP.SaveGeneralStatisticsWithSP;
 import com.example.kot.noughtsandcrosses.Dialogs.CustomDialog;
 import com.example.kot.noughtsandcrosses.Dialogs.DialogStat;
 import com.example.kot.noughtsandcrosses.Dialogs.DialogStatByUser;
 import com.example.kot.noughtsandcrosses.Drawing.Drawing;
-import com.example.kot.noughtsandcrosses.Drawing.Skin1ImplDrawing;
-import com.example.kot.noughtsandcrosses.Drawing.Skin2ImplDrawing;
-import com.example.kot.noughtsandcrosses.Drawing.Skin3ImplDrawing;
-import com.example.kot.noughtsandcrosses.Logic.Logic;
-import com.example.kot.noughtsandcrosses.Logic.PCLogicImplLogic;
-import com.example.kot.noughtsandcrosses.ThreeVariants.DiffVariants;
-import com.example.kot.noughtsandcrosses.ThreeVariants.ThreeVariantsImplDiffVariants;
+import com.example.kot.noughtsandcrosses.Drawing.Skin1Impl;
+import com.example.kot.noughtsandcrosses.Drawing.Skin2Impl;
+import com.example.kot.noughtsandcrosses.Drawing.Skin3Impl;
+import com.example.kot.noughtsandcrosses.Logic.PCLogic;
+import com.example.kot.noughtsandcrosses.Logic.PCLogicImpl;
+import com.example.kot.noughtsandcrosses.ThreeVariants.ThreeVariants;
+import com.example.kot.noughtsandcrosses.ThreeVariants.ThreeVariantsImpl;
 
 import java.util.Arrays;
 
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements
         View.OnClickListener, RadioButton.OnCheckedChangeListener {
     static final String LOG_TAG = "MY_LOG";
 
-    //RealmController myObjForRealmController = new RealmController();
+    //RealmControllerImpl myObjForRealmController = new RealmControllerImpl();
 
 
     FragmentChooseMode myModeFragment;
@@ -53,10 +53,10 @@ public class MainActivity extends AppCompatActivity implements
     RadioButton myRB3;
 
 
-    SaveStatisticsWithSP myObjForSaveStatistics = new SaveOverallStatisticsWithSP(this, this);
+    SaveGeneralStatisticsWithSP myObjForSaveStatistics = new SaveGeneralStatisticsWithSPImpl(this, this);
 
-    Logic myObjForLogic = new PCLogicImplLogic(this);
-    DiffVariants myObjForDV = new ThreeVariantsImplDiffVariants(this, this);
+    PCLogic myObjForLogic = new PCLogicImpl(this);
+    ThreeVariants myObjForDV = new ThreeVariantsImpl(this, this);
 
     Drawing myObjForNoughtPicture;
     Drawing myObjForCrossPicture;
@@ -90,21 +90,21 @@ public class MainActivity extends AppCompatActivity implements
         myObjForSaveStatistics.loadSkin();
         switch (myObjForSaveStatistics.getSkin()){
             case 1:
-                myObjForNoughtPicture = new Skin1ImplDrawing(this);
-                myObjForCrossPicture = new Skin1ImplDrawing(this);
-                myObjForClearPicture = new Skin1ImplDrawing(this);
+                myObjForNoughtPicture = new Skin1Impl(this);
+                myObjForCrossPicture = new Skin1Impl(this);
+                myObjForClearPicture = new Skin1Impl(this);
                 MainActivity.this.setTheme(R.style.AppTheme1);
                 break;
             case 2:
-                myObjForNoughtPicture = new Skin2ImplDrawing(this);
-                myObjForCrossPicture = new Skin2ImplDrawing(this);
-                myObjForClearPicture = new Skin2ImplDrawing(this);
+                myObjForNoughtPicture = new Skin2Impl(this);
+                myObjForCrossPicture = new Skin2Impl(this);
+                myObjForClearPicture = new Skin2Impl(this);
                 MainActivity.this.setTheme(R.style.AppTheme2);
                 break;
             case 3:
-                myObjForNoughtPicture = new Skin3ImplDrawing(this);
-                myObjForCrossPicture = new Skin3ImplDrawing(this);
-                myObjForClearPicture = new Skin3ImplDrawing(this);
+                myObjForNoughtPicture = new Skin3Impl(this);
+                myObjForCrossPicture = new Skin3Impl(this);
+                myObjForClearPicture = new Skin3Impl(this);
                 MainActivity.this.setTheme(R.style.AppTheme3);
                 break;
             default:
@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements
         }
 
         setContentView(R.layout.activity_main);
-        //RealmController RC = new RealmController();
+        //RealmControllerImpl RC = new RealmControllerImpl();
         //RC.initializeRealm(this);
         //RC.clearAllUsers();
         //Log.d ("MYL", "RC.getAll() =" + RC.getAll());

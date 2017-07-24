@@ -8,7 +8,7 @@ import android.content.SharedPreferences;
  * Created by Kot Kot on 24.06.2017.
  */
 
-public class SaveOverallStatisticsWithSP implements SaveStatisticsWithSP {
+public class SaveGeneralStatisticsWithSPImpl implements SaveGeneralStatisticsWithSP {
 
     private Context myContext;
     private Activity myActivity;
@@ -40,7 +40,7 @@ public class SaveOverallStatisticsWithSP implements SaveStatisticsWithSP {
         return skin;
     }
 
-    public SaveOverallStatisticsWithSP(Context c, Activity a) {
+    public SaveGeneralStatisticsWithSPImpl(Context c, Activity a) {
         myContext = c;
         myActivity = a;
 

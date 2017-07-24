@@ -15,7 +15,7 @@ import com.example.kot.noughtsandcrosses.R;
  */
 
 //отвечает за прорисовку bitmap
-public class Skin1ImplDrawing implements Drawing {
+public class Skin1Impl implements Drawing {
 
     private Bitmap myBitmap = Bitmap.createBitmap(50,50, Bitmap.Config.ARGB_8888);
     private Canvas myCanvas = new Canvas(myBitmap);
@@ -34,7 +34,7 @@ public class Skin1ImplDrawing implements Drawing {
         return myContext;
     }
 
-    public Skin1ImplDrawing(Context c) {
+    public Skin1Impl(Context c) {
         myContext = c;
     }
 

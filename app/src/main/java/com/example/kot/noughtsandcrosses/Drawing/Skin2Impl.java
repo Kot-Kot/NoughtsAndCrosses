@@ -11,10 +11,10 @@ import com.example.kot.noughtsandcrosses.R;
  */
 
 //отвечает за прорисовку bitmap
-public class Skin2ImplDrawing extends Skin1ImplDrawing {
+public class Skin2Impl extends Skin1Impl {
 
 
-    public Skin2ImplDrawing(Context c) {
+    public Skin2Impl(Context c) {
         super(c);
     }
 

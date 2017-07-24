@@ -7,16 +7,16 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.kot.noughtsandcrosses.DB_Realm.RealmController;
-import com.example.kot.noughtsandcrosses.DB_SP.SaveOverallStatisticsWithSP;
-import com.example.kot.noughtsandcrosses.DB_SP.SaveStatisticsWithSP;
-import com.example.kot.noughtsandcrosses.Logic.Logic;
+import com.example.kot.noughtsandcrosses.DB_Realm.RealmControllerImpl;
+import com.example.kot.noughtsandcrosses.DB_SP.SaveGeneralStatisticsWithSP;
+import com.example.kot.noughtsandcrosses.DB_SP.SaveGeneralStatisticsWithSPImpl;
+import com.example.kot.noughtsandcrosses.Logic.PCLogic;
 
 /**
  * Created by Kot Kot on 14.06.2017.
  */
 //отвечает за разные варианты игры (PC vs PC, PC vs Player, Player vs Player)
-public class ThreeVariantsImplDiffVariants implements DiffVariants {
+public class ThreeVariantsImpl implements ThreeVariants {
 
 
 
@@ -26,8 +26,8 @@ public class ThreeVariantsImplDiffVariants implements DiffVariants {
     private String[] myPositionsForPlayer1 = {"","","","",""};
     private String[] myPositionsForPlayer2 = {"","","","",""};
 
-    //SaveOverallStatisticsWithSP myObjForSaveStatistics = new SaveOverallStatisticsWithSP(myContext, myActivity);
-    private SaveStatisticsWithSP myObjForSaveStatistics = new SaveOverallStatisticsWithSP(myContext, myActivity);
+    //SaveGeneralStatisticsWithSPImpl myObjForSaveStatistics = new SaveGeneralStatisticsWithSPImpl(myContext, myActivity);
+    private SaveGeneralStatisticsWithSP myObjForSaveStatistics = new SaveGeneralStatisticsWithSPImpl(myContext, myActivity);
 
     //String myNowClickedButton = "";
 
@@ -58,7 +58,7 @@ public class ThreeVariantsImplDiffVariants implements DiffVariants {
     }
 
 
-    public ThreeVariantsImplDiffVariants(Context c, Activity a) {
+    public ThreeVariantsImpl(Context c, Activity a) {
         //super(c);
         myContext = c;
         myActivity = a;
@@ -67,7 +67,7 @@ public class ThreeVariantsImplDiffVariants implements DiffVariants {
 
 
     public void myPcVsPc(ImageView iv,
-                         Logic myInterfaceForLogic,
+                         PCLogic myInterfaceForLogic,
                          Bitmap myBitmapCross, Bitmap myBitmapNought){
         // final ImageView fiv = iv;
         //final Bitmap fbc = myBitmapCross;
@@ -141,7 +141,7 @@ public class ThreeVariantsImplDiffVariants implements DiffVariants {
    //----------------------------------------------------------------------
 
     public void myPlayerVsPc(ImageView iv,
-                             Logic myInterfaceForLogic,
+                             PCLogic myInterfaceForLogic,
                              Bitmap myBitmapCross, Bitmap myBitmapNought,
                              ImageView iv1,
                              ImageView iv2,
@@ -153,8 +153,8 @@ public class ThreeVariantsImplDiffVariants implements DiffVariants {
                              ImageView iv8,
                              ImageView iv9){
 
-        RealmController myObjForRealmController = new RealmController();
-        myObjForRealmController.initializeRealm(myContext);
+        RealmControllerImpl myObjForRealmControllerImpl = new RealmControllerImpl();
+        myObjForRealmControllerImpl.initializeRealm(myContext);
 
         if (myGameStage%2 == 1) {
             //myPositionsForPlayer1[(myGameStage/2 + myGameStage%2)-1] = myNowClickedButton;
@@ -175,13 +175,13 @@ public class ThreeVariantsImplDiffVariants implements DiffVariants {
             if(myInterfaceForLogic.isSomebodyWin(myPositionsForPlayer1)){
                 Toast myToast = (Toast.makeText(myContext.getApplicationContext(), "Выиграл игрок", Toast.LENGTH_SHORT));
                 myToast.show();
-                myObjForRealmController.currentUserWin();
+                myObjForRealmControllerImpl.currentUserWin();
                 myObjForSaveStatistics.saveWinForCrosses(myActivity);
                 myHoldScreen(myInterfaceForLogic, iv1, iv2, iv3, iv4, iv5, iv6, iv7, iv8, iv9);
             }else if(myGameStage == 10){
                 Toast myToast = (Toast.makeText(myContext.getApplicationContext(), "Ничья", Toast.LENGTH_SHORT));
                 myToast.show();
-                myObjForRealmController.currentUserTie();
+                myObjForRealmControllerImpl.currentUserTie();
                 myObjForSaveStatistics.saveTie(myActivity);
                 myHoldScreen(myInterfaceForLogic, iv1, iv2, iv3, iv4, iv5, iv6, iv7, iv8, iv9);
             }else if (myGameStage < 9){
@@ -218,7 +218,7 @@ public class ThreeVariantsImplDiffVariants implements DiffVariants {
             if(myInterfaceForLogic.isSomebodyWin(myPositionsForPlayer2)) {
                 Toast myToast = (Toast.makeText(myContext.getApplicationContext(), "Выиграл ПК", Toast.LENGTH_SHORT));
                 myToast.show();
-                myObjForRealmController.currentUserLost();
+                myObjForRealmControllerImpl.currentUserLost();
                 myObjForSaveStatistics.saveWinForNoughts(myActivity);
                 myHoldScreen(myInterfaceForLogic, iv1, iv2, iv3, iv4, iv5, iv6, iv7, iv8, iv9);
 
@@ -230,7 +230,7 @@ public class ThreeVariantsImplDiffVariants implements DiffVariants {
 
 
     public void myPlayerVsPlayer(ImageView iv,
-                                 Logic myInterfaceForLogic,
+                                 PCLogic myInterfaceForLogic,
                                  Bitmap myBitmapCross, Bitmap myBitmapNought,
                                  ImageView iv1,
                                  ImageView iv2,
@@ -294,7 +294,7 @@ public class ThreeVariantsImplDiffVariants implements DiffVariants {
     }
 
 
-    public void myHoldScreen(Logic myInterfaceForLogic,
+    public void myHoldScreen(PCLogic myInterfaceForLogic,
                              ImageView iv1,
                              ImageView iv2,
                              ImageView iv3,
@@ -325,7 +325,7 @@ public class ThreeVariantsImplDiffVariants implements DiffVariants {
     }
 
 
-    public void myClearScreen(Logic myInterfaceForLogic,
+    public void myClearScreen(PCLogic myInterfaceForLogic,
                               Bitmap myBitmapForClean,
                               ImageView iv1,
                               ImageView iv2,

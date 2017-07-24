@@ -5,7 +5,7 @@ import android.content.Context;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.kot.noughtsandcrosses.DB_SP.SaveOverallStatisticsWithSP;
+import com.example.kot.noughtsandcrosses.DB_SP.SaveGeneralStatisticsWithSPImpl;
 
 /**
  * Created by Kot Kot on 28.06.2017.
@@ -30,7 +30,7 @@ public class DialogStat extends AppCompatActivity {
 
 
     public void openStatDialog() {
-        SaveOverallStatisticsWithSP myObjForSaveStatistics = new SaveOverallStatisticsWithSP(myContext, myActivity);
+        SaveGeneralStatisticsWithSPImpl myObjForSaveStatistics = new SaveGeneralStatisticsWithSPImpl(myContext, myActivity);
         myObjForSaveStatistics.loadStat();
 
         String title = "Статистика (Общая)";

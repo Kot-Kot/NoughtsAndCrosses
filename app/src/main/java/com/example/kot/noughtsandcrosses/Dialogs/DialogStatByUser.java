@@ -4,8 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.support.v7.app.AlertDialog;
 
-import com.example.kot.noughtsandcrosses.DB_Realm.RealmController;
-import com.example.kot.noughtsandcrosses.Dialogs.DialogStat;
+import com.example.kot.noughtsandcrosses.DB_Realm.RealmControllerImpl;
 
 /**
  * Created by Kot Kot on 28.06.2017.
@@ -17,11 +16,11 @@ public class DialogStatByUser extends DialogStat {
     }
 
     public void openStatDialog() {
-        RealmController myObjForRealmController = new RealmController();
-        myObjForRealmController.initializeRealm(super.getMyContext());
+        RealmControllerImpl myObjForRealmControllerImpl = new RealmControllerImpl();
+        myObjForRealmControllerImpl.initializeRealm(super.getMyContext());
 
         String title = "Статистика (По игрокам)";
-        String message = myObjForRealmController.showAllSortedByAlphabet();
+        String message = myObjForRealmControllerImpl.showAllSortedByAlphabet();
         String buttonStringPos = "Ок";
         String buttonStringNeg = "Удалить";
         String buttonStringNeut = "Обнулить";
@@ -37,12 +36,12 @@ public class DialogStatByUser extends DialogStat {
             //finish();
         });
         myDialog.setNeutralButton(buttonStringNeut, (dialog, which) -> {
-            myObjForRealmController.setAllToZeros();
+            myObjForRealmControllerImpl.setAllToZeros();
             openStatDialog();
         });
 
         myDialog.setNegativeButton(buttonStringNeg, (dialog, which) -> {
-            myObjForRealmController.clearAllUsers();
+            myObjForRealmControllerImpl.clearAllUsers();
             openStatDialog();
             //isQuitDialogOnTop = false;
             //finish();

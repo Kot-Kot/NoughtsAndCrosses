@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.kot.noughtsandcrosses.DB_Realm.RealmController;
+import com.example.kot.noughtsandcrosses.DB_Realm.RealmControllerImpl;
 import com.example.kot.noughtsandcrosses.R;
 
 /**
@@ -37,8 +37,8 @@ public class CustomDialog extends AppCompatActivity {
     }
 
     public void createCustomDialog() {
-        RealmController myObjForRealmController = new RealmController();
-        myObjForRealmController.initializeRealm(myContext);
+        RealmControllerImpl myObjForRealmControllerImpl = new RealmControllerImpl();
+        myObjForRealmControllerImpl.initializeRealm(myContext);
 
         LayoutInflater myLI = LayoutInflater.from(myContext);
         View myView = myLI.inflate(R.layout.input_dialog, null);
@@ -60,17 +60,17 @@ public class CustomDialog extends AppCompatActivity {
             }
 
             Log.d("MYL", "myUserName = " + myUserName);
-            Log.d ("MYL", "myObjForRealmController.getAll() = " + myObjForRealmController.getAll());
+            Log.d("MYL", "myObjForRealmControllerImpl.getAll() = " + myObjForRealmControllerImpl.getAll());
 
 
-            myObjForRealmController.setIsCurrentUserAsFalse();
-            myObjForRealmController.createNewUser(myUserName, myContext);
-            Log.d ("MYL", "myObjForRealmController.getAll() = " + myObjForRealmController.getAll());
+            myObjForRealmControllerImpl.setIsCurrentUserAsFalse();
+            myObjForRealmControllerImpl.createNewUser(myUserName, myContext);
+            Log.d("MYL", "myObjForRealmControllerImpl.getAll() = " + myObjForRealmControllerImpl.getAll());
 
 
         });
         myADB.setNeutralButton("Продолжить предыдущую сессию",(dialogBox, id) -> {
-            if (!myObjForRealmController.showLastCurrentUser(myContext)){
+            if (!myObjForRealmControllerImpl.showLastCurrentUser(myContext)) {
                 this.createCustomDialog();
             }
             //dialogBox.cancel();
@@ -80,7 +80,7 @@ public class CustomDialog extends AppCompatActivity {
         myADB.setNegativeButton("Закрыть",(dialogBox, id) -> {
             Toast myToast = (Toast.makeText(myContext.getApplicationContext(), "Вы вошли инкогнито! Статистика по игрокам отключена. Работает только общая статистика.", Toast.LENGTH_LONG));
             myToast.show();
-            myObjForRealmController.lastCurrentUserIsNotActive();
+            myObjForRealmControllerImpl.lastCurrentUserIsNotActive();
             dialogBox.cancel();
                 });
 

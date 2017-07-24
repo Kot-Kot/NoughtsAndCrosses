@@ -12,7 +12,7 @@ import io.realm.RealmResults;
  * Created by Kot Kot on 26.06.2017.
  */
 
-public class RealmController {
+public class RealmControllerImpl implements RealmConroller {
     private Realm myRealm;
 
 
@@ -205,7 +205,7 @@ public class RealmController {
         return myRealm.where(UsersRealm.class).findAll();
     }
 
-    void closeRealm() {
+    public void closeRealm() {
         myRealm.close();
     }
 

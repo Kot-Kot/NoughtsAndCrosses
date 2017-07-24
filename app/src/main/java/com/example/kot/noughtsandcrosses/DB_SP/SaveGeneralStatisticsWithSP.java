@@ -6,7 +6,7 @@ import android.app.Activity;
  * Created by Kot Kot on 24.06.2017.
  */
 
-public interface SaveStatisticsWithSP {
+public interface SaveGeneralStatisticsWithSP {
     String FILE_NAME = "my_stat";
 
     String CROSSES_WIN = "crosses_win";
