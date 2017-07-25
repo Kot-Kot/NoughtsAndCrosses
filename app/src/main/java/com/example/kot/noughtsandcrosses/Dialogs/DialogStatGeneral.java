@@ -12,7 +12,7 @@ import com.example.kot.noughtsandcrosses.R;
  * Created by Kot Kot on 28.06.2017.
  */
 
-public class DialogStat extends AppCompatActivity {
+public class DialogStatGeneral extends AppCompatActivity {
     private Context myContext;
     private Activity myActivity;
 
@@ -24,7 +24,7 @@ public class DialogStat extends AppCompatActivity {
         return myActivity;
     }
 
-    public DialogStat(Context c, Activity a) {
+    public DialogStatGeneral(Context c, Activity a) {
         myContext = c;
         myActivity = a;
     }

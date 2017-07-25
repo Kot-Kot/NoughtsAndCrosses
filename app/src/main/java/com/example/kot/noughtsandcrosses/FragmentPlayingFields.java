@@ -13,17 +13,6 @@ import android.view.ViewGroup;
 
 public class FragmentPlayingFields extends Fragment implements View.OnClickListener {
 
-    /*
-    private ImageView myIVTopLeft;
-    private ImageView myIVTopCenter;
-    private ImageView myIVTopRight;
-    private ImageView myIVCenterLeft;
-    private ImageView myIVCenter;
-    private ImageView myIVCenterRight;
-    private ImageView myIVBottomLeft;
-    private ImageView myIVBottomCenter;
-    private ImageView myIVBottomRight;
-*/
 
     private View myRootView;
     @Nullable
@@ -33,29 +22,7 @@ public class FragmentPlayingFields extends Fragment implements View.OnClickListe
 
 
         myRootView = inflater.inflate(R.layout.fields_fragment, container, false);
-/*
-        myIVTopLeft = (ImageView) myRootView.findViewById(R.id.ivTopLeft);
-        myIVTopCenter = (ImageView) myRootView.findViewById(R.id.ivTopCenter);
-        myIVTopRight = (ImageView) myRootView.findViewById(R.id.ivTopRight);
-        myIVCenterLeft = (ImageView) myRootView.findViewById(R.id.ivCenterLeft);
-        myIVCenter = (ImageView) myRootView.findViewById(R.id.ivCenter);
-        myIVCenterRight = (ImageView) myRootView.findViewById(R.id.ivCenterRight);
-        myIVBottomLeft = (ImageView) myRootView.findViewById(R.id.ivBottomLeft);
-        myIVBottomCenter = (ImageView) myRootView.findViewById(R.id.ivBottomCenter);
-        myIVBottomRight = (ImageView) myRootView.findViewById(R.id.ivBottomRight);
 
-
-        myIVTopLeft.setOnClickListener(this);
-        myIVTopCenter.setOnClickListener(this);
-        myIVTopRight.setOnClickListener(this);
-        myIVCenterLeft.setOnClickListener(this);
-        myIVCenter.setOnClickListener(this);
-        myIVCenterRight.setOnClickListener(this);
-        myIVBottomLeft.setOnClickListener(this);
-        myIVBottomCenter.setOnClickListener(this);
-        myIVBottomRight.setOnClickListener(this);
-*/
-        //return super.onCreateView(inflater, container, savedInstanceState);
         return myRootView;
     }
 

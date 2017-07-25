@@ -49,16 +49,7 @@ public class FragmentButtonClear extends Fragment implements View.OnClickListene
 
 
         myRootView = inflater.inflate(R.layout.button_fragment, container, false);
-        //myClearScreen = (Button) myRootView.findViewById(R.id.btnClear);
 
-        //myOnClickedClearButton =(OnClickedClearButton)getActivity();
-
-        //myClearScreen.setOnClickListener(v -> {
-            //onClickedClearButtonListener.clickedClearButton(true);
-
-        //});
-
-        //return super.onCreateView(inflater, container, savedInstanceState);
         return myRootView;
     }
 

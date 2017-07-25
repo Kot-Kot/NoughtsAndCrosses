@@ -22,14 +22,7 @@ import java.util.Arrays;
 public class FragmentChooseMode extends Fragment implements View.OnClickListener, RadioButton.OnCheckedChangeListener {
 
 
-   // interface OnCheckedRadioButtons {
-        //void isRadioButtonsChanged(Boolean flag);
-        //void whatRadioButtonsChanged(int flag);
 
-    //}
-
-
-    //OnCheckedRadioButtons onCheckedRadioButtonsListener;
 
     private View myRootView;
 
@@ -51,33 +44,7 @@ public class FragmentChooseMode extends Fragment implements View.OnClickListener
 
         myRootView = inflater.inflate(R.layout.mode_fragment, container, false);
 
-        //myRG = (RadioGroup) myRootView.findViewById(R.id.rg);
-        //myRB1 = (RadioButton) myRootView.findViewById(R.id.rb1);
-        //myRB2 = (RadioButton) myRootView.findViewById(R.id.rb2);
-        //myRB3 = (RadioButton) myRootView.findViewById(R.id.rb3);
-        //onCheckedRadioButtonsListener =(OnCheckedRadioButtons)getActivity();
-/*
-        myRG.setOnCheckedChangeListener((group, checkedId) -> {
-            //myClearScreen();
-            onCheckedRadioButtonsListener.isRadioButtonsChanged(true);
-            switch (checkedId){
-                case R.id.rb1:
-                    onCheckedRadioButtonsListener.whatRadioButtonsChanged(1);
-                    break;
-                case R.id.rb2:
-                    onCheckedRadioButtonsListener.whatRadioButtonsChanged(2);
-                    break;
-                case R.id.rb3:
-                    onCheckedRadioButtonsListener.whatRadioButtonsChanged(3);
-                    break;
-                default:
-                    break;
 
-            }
-        });
-*/
-
-        //return super.onCreateView(inflater, container, savedInstanceState);
         return myRootView;
     }
 

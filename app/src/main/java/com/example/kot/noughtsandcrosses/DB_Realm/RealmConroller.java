@@ -15,31 +15,31 @@ import io.realm.RealmResults;
 public interface RealmConroller {
 
 
-    public void initializeRealm(Context c);
+    void initializeRealm(Context c);
 
-    public void clearAllUsers();
+    void clearAllUsers();
 
-    public void createNewUser(String n, Context c);
+    void createNewUser(String n, Context c);
 
-    public void setIsCurrentUserAsFalse();
+    void setIsCurrentUserAsFalse();
 
-    public Boolean showLastCurrentUser(Context c);
+    Boolean showLastCurrentUser(Context c);
 
-    public void lastCurrentUserIsNotActive();
+    void lastCurrentUserIsNotActive();
 
-    public void currentUserWin();
+    void currentUserWin();
 
-    public void currentUserLost();
+    void currentUserLost();
 
-    public void currentUserTie();
+    void currentUserTie();
 
-    public String showAllSortedByAlphabet(Context c);
+    String showAllSortedByAlphabet(Context c);
 
-    public void setAllToZeros();
+    void setAllToZeros();
 
-    public RealmResults<UsersRealm> getAll();
+    RealmResults<UsersRealm> getAll();
 
-    public void closeRealm();
+    void closeRealm();
 
 
 }

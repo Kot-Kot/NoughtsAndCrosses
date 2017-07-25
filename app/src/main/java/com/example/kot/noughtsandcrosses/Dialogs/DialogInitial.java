@@ -17,7 +17,7 @@ import com.example.kot.noughtsandcrosses.R;
  * Created by Kot Kot on 26.06.2017.
  */
 
-public class CustomDialog extends AppCompatActivity {
+public class DialogInitial extends AppCompatActivity {
     private EditText myEditTextUserName;
     private String myUserName;
     private Context myContext;
@@ -31,7 +31,7 @@ public class CustomDialog extends AppCompatActivity {
         return myUserName;
     }
 
-    public CustomDialog(Context c, Activity a) {
+    public DialogInitial(Context c, Activity a) {
         myContext = c;
         myActivity = a;
     }
@@ -53,7 +53,7 @@ public class CustomDialog extends AppCompatActivity {
             if (myUserName.equals("")){
                 Toast myToast = (Toast.makeText(myContext.getApplicationContext(), myContext.getResources().getString(R.string.custom_dialog_pb_empty_name), Toast.LENGTH_SHORT));
                 myToast.show();
-                //CustomDialog myObjForCustomDialog = new CustomDialog(this,this);
+                //DialogInitial myObjForCustomDialog = new DialogInitial(this,this);
                 this.createCustomDialog();
 
                 return;

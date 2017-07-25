@@ -11,7 +11,7 @@ import com.example.kot.noughtsandcrosses.R;
  * Created by Kot Kot on 28.06.2017.
  */
 
-public class DialogStatByUser extends DialogStat {
+public class DialogStatByUser extends DialogStatGeneral {
     public DialogStatByUser(Context c, Activity a) {
         super(c, a);
     }

@@ -15,11 +15,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.example.kot.noughtsandcrosses.ChangeLocale.ChangeLocale;
+import com.example.kot.noughtsandcrosses.ChangeLocale.ChangeLocaleImpl;
 import com.example.kot.noughtsandcrosses.DB_SP.SaveGeneralStatisticsWithSPImpl;
 import com.example.kot.noughtsandcrosses.DB_SP.SaveGeneralStatisticsWithSP;
-import com.example.kot.noughtsandcrosses.Dialogs.CustomDialog;
-import com.example.kot.noughtsandcrosses.Dialogs.DialogStat;
+import com.example.kot.noughtsandcrosses.Dialogs.DialogInitial;
+import com.example.kot.noughtsandcrosses.Dialogs.DialogStatGeneral;
 import com.example.kot.noughtsandcrosses.Dialogs.DialogStatByUser;
 import com.example.kot.noughtsandcrosses.Drawing.Drawing;
 import com.example.kot.noughtsandcrosses.Drawing.Skin1Impl;
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements
     Drawing myObjForCrossPicture;
     Drawing myObjForClearPicture;
 
-    ChangeLocale myObjForChangeLocale = new ChangeLocale();
+    ChangeLocaleImpl myObjForChangeLocale = new ChangeLocaleImpl();
 
     Bitmap myBitmapCross;
     Bitmap myBitmapNought;
@@ -92,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements
         myObjForSaveGeneralStatistics.loadLanguage();
         myObjForChangeLocale.setCurrentLanguage(myObjForSaveGeneralStatistics.getLanguage());
         myObjForChangeLocale.updateLocale(this);
+        setTitle(R.string.app_name);
 
         myObjForSaveGeneralStatistics.loadSkin();
         switch (myObjForSaveGeneralStatistics.getSkin()) {
@@ -131,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements
         //Log.d ("MYL", "RC.getAll() =" + RC.getAll());
         //Log.d ("MYL", "RC.getItem(\"вася\") =" + RC.getItemByName("вася"));
 
-        CustomDialog myObjForCustomDialog = new CustomDialog(this, this);
+        DialogInitial myObjForCustomDialog = new DialogInitial(this, this);
 
         myObjForCustomDialog.createCustomDialog();
 
@@ -338,7 +339,7 @@ public class MainActivity extends AppCompatActivity implements
                 startActivity(i);
                 return true;
             case R.id.menu_stat:
-                DialogStat myObjForDialogStat = new DialogStat(this, this);
+                DialogStatGeneral myObjForDialogStat = new DialogStatGeneral(this, this);
                 myObjForDialogStat.openStatDialog();
 
                 //openStatDialog();
