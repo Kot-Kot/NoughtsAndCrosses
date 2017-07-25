@@ -14,7 +14,7 @@ import io.realm.RealmResults;
  * Created by Kot Kot on 26.06.2017.
  */
 
-public class RealmControllerImpl implements RealmConroller {
+public class RealmControllerImpl implements RealmController {
     private Realm myRealm;
 
 

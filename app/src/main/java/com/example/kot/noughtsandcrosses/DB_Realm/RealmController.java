@@ -12,7 +12,7 @@ import io.realm.RealmResults;
  * Created by Kot Kot on 24.07.2017.
  */
 
-public interface RealmConroller {
+public interface RealmController {
 
 
     void initializeRealm(Context c);
