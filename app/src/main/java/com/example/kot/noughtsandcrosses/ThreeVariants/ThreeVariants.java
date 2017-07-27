@@ -10,7 +10,7 @@ import com.example.kot.noughtsandcrosses.Logic.PCLogic;
  */
 
 public interface ThreeVariants {
-    String LOG_TAG = "MY_LOG";
+    //String LOG_TAG = "MY_LOG";
 
 
     String[] getMyPositionsForPlayer1();
@@ -19,7 +19,7 @@ public interface ThreeVariants {
     String[] getMyPositionsForPlayer2();
     void setMyPositionsForPlayer2(String[] myPositionsForPlayer2);
 
-    Integer getMyGameStage() ;
+    int getMyGameStage();
     void setMyGameStage(Integer myGameStage);
 
     void myPcVsPc(ImageView iv,

@@ -15,10 +15,13 @@ public interface SaveGeneralStatisticsWithSP {
     String SKIN_CODE = "skin";
     String LANGUAGE_CODE = "language";
 
-    Integer getWinsForCrosses();
-    Integer getWinsForNoughts();
-    Integer getTies();
-    Integer getSkin();
+    int getWinsForCrosses();
+
+    int getWinsForNoughts();
+
+    int getTies();
+
+    int getSkin();
 
     String getLanguage();
 

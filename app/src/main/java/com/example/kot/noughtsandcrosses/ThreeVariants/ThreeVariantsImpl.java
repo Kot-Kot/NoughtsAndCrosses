@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.kot.noughtsandcrosses.Constants.Constants;
 import com.example.kot.noughtsandcrosses.DB_Realm.RealmControllerImpl;
 import com.example.kot.noughtsandcrosses.DB_SP.SaveGeneralStatisticsWithSP;
 import com.example.kot.noughtsandcrosses.DB_SP.SaveGeneralStatisticsWithSPImpl;
@@ -23,7 +24,7 @@ public class ThreeVariantsImpl implements ThreeVariants {
 
     private Context myContext;
     private Activity myActivity;
-    //final String LOG_TAG = "MY_LOG";
+    //final String Constants.LOG_TAG = "MY_LOG";
     private String[] myPositionsForPlayer1 = {"","","","",""};
     private String[] myPositionsForPlayer2 = {"","","","",""};
 
@@ -32,7 +33,7 @@ public class ThreeVariantsImpl implements ThreeVariants {
 
     //String myNowClickedButton = "";
 
-    private Integer myGameStage = 1;
+    private int myGameStage = 1;
 
     public String[] getMyPositionsForPlayer1() {
         return myPositionsForPlayer1;
@@ -50,7 +51,7 @@ public class ThreeVariantsImpl implements ThreeVariants {
         this.myPositionsForPlayer2 = myPositionsForPlayer2;
     }
 
-    public Integer getMyGameStage() {
+    public int getMyGameStage() {
         return myGameStage;
     }
 
@@ -82,7 +83,7 @@ public class ThreeVariantsImpl implements ThreeVariants {
             //myNowClickedButton = "";
             myPositionsForPlayer1[(myGameStage/2 + myGameStage%2)-1] = myInterfaceForLogic.getMyNowClickedButton();
             myInterfaceForLogic.setMyNowClickedButton("");
-            Log.d(LOG_TAG,"----Cross---- ");
+            Log.d(Constants.LOG_TAG, "----Cross---- ");
             //myDelay(fiv,fbc);
             //new Thread(myThread).start();
             //iv.setTranslationY(-1000f);
@@ -95,14 +96,14 @@ public class ThreeVariantsImpl implements ThreeVariants {
 
             //if(isSomebodyWin(myPositionsForPlayer1)==true){
             if(myInterfaceForLogic.isSomebodyWin(myPositionsForPlayer1)){
-                Log.d(LOG_TAG, "Выиграли крестики");
+                Log.d(Constants.LOG_TAG, "Выиграли крестики");
                 Toast myToast = (Toast.makeText(myContext.getApplicationContext(),
                         myContext.getResources().getString(R.string.three_variants_crosses_win), Toast.LENGTH_SHORT));
                 myToast.show();
                 myObjForSaveStatistics.saveWinForCrosses(myActivity);
                 //myHoldScreen();
             }else if(myGameStage == 10) {
-                Log.d(LOG_TAG, "Ничья");
+                Log.d(Constants.LOG_TAG, "Ничья");
                 Toast myToast = (Toast.makeText(myContext.getApplicationContext(),
                         myContext.getResources().getString(R.string.three_variants_tie), Toast.LENGTH_SHORT));
                 myToast.show();
@@ -118,7 +119,7 @@ public class ThreeVariantsImpl implements ThreeVariants {
             //myNowClickedButton = "";
             myPositionsForPlayer2[(myGameStage/2 + myGameStage%2)-1] = myInterfaceForLogic.getMyNowClickedButton();
             myInterfaceForLogic.setMyNowClickedButton("");
-            Log.d(LOG_TAG,"----Naught---- ");
+            Log.d(Constants.LOG_TAG, "----Naught---- ");
             //myDelay(fiv,fbn);
             //iv.setTranslationY(-1000f);
             iv.setImageBitmap(myBitmapNought);
@@ -129,7 +130,7 @@ public class ThreeVariantsImpl implements ThreeVariants {
 
             //if(isSomebodyWin(myPositionsForPlayer2)==true){
             if(myInterfaceForLogic.isSomebodyWin(myPositionsForPlayer2)){
-                Log.d(LOG_TAG, "Выиграли нолики");
+                Log.d(Constants.LOG_TAG, "Выиграли нолики");
                 Toast myToast = (Toast.makeText(myContext.getApplicationContext(),
                         myContext.getResources().getString(R.string.three_variants_noughts_win), Toast.LENGTH_SHORT));
                 myToast.show();
@@ -139,7 +140,7 @@ public class ThreeVariantsImpl implements ThreeVariants {
 
         }
 
-        Log.d(LOG_TAG, "myGameStage++ myPcVsPc = " + myGameStage);
+        Log.d(Constants.LOG_TAG, "myGameStage++ myPcVsPc = " + myGameStage);
     }
 
    //----------------------------------------------------------------------
@@ -165,7 +166,7 @@ public class ThreeVariantsImpl implements ThreeVariants {
             //myNowClickedButton = "";
             myPositionsForPlayer1[(myGameStage/2 + myGameStage%2)-1] = myInterfaceForLogic.getMyNowClickedButton();
             myInterfaceForLogic.setMyNowClickedButton("");
-            Log.d(LOG_TAG,"----Cross---- ");
+            Log.d(Constants.LOG_TAG, "----Cross---- ");
 
             //iv.setTranslationY(-1000f);
             iv.setImageBitmap(myBitmapCross);
@@ -211,7 +212,7 @@ public class ThreeVariantsImpl implements ThreeVariants {
             //myNowClickedButton = "";
             myPositionsForPlayer2[(myGameStage/2 + myGameStage%2)-1] = myInterfaceForLogic.getMyNowClickedButton();
             myInterfaceForLogic.setMyNowClickedButton("");
-            Log.d(LOG_TAG,"----Naught---- ");
+            Log.d(Constants.LOG_TAG, "----Naught---- ");
             //iv.setTranslationY(-1000f);
             iv.setImageBitmap(myBitmapNought);
             //iv.animate().translationYBy(1000f).setDuration(500);
@@ -252,7 +253,7 @@ public class ThreeVariantsImpl implements ThreeVariants {
             //myNowClickedButton = "";
             myPositionsForPlayer1[(myGameStage/2 + myGameStage%2)-1] = myInterfaceForLogic.getMyNowClickedButton();
             myInterfaceForLogic.setMyNowClickedButton("");
-            Log.d(LOG_TAG,"----Cross---- ");
+            Log.d(Constants.LOG_TAG, "----Cross---- ");
             iv.setTranslationY(-1000f);
             iv.setImageBitmap(myBitmapCross);
             iv.animate().translationYBy(1000f).setDuration(500);
@@ -281,7 +282,7 @@ public class ThreeVariantsImpl implements ThreeVariants {
             //myNowClickedButton = "";
             myPositionsForPlayer2[(myGameStage/2 + myGameStage%2)-1] = myInterfaceForLogic.getMyNowClickedButton();
             myInterfaceForLogic.setMyNowClickedButton("");
-            Log.d(LOG_TAG,"----Naught---- ");
+            Log.d(Constants.LOG_TAG, "----Naught---- ");
             iv.setTranslationY(-1000f);
             iv.setImageBitmap(myBitmapNought);
 

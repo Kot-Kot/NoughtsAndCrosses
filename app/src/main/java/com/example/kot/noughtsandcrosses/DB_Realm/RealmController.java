@@ -23,7 +23,7 @@ public interface RealmController {
 
     void setIsCurrentUserAsFalse();
 
-    Boolean showLastCurrentUser(Context c);
+    boolean showLastCurrentUser(Context c);
 
     void lastCurrentUserIsNotActive();
 

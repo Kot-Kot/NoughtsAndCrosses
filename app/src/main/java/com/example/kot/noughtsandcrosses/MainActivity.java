@@ -16,6 +16,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.kot.noughtsandcrosses.ChangeLocale.ChangeLocaleImpl;
+import com.example.kot.noughtsandcrosses.Constants.Constants;
 import com.example.kot.noughtsandcrosses.DB_SP.SaveGeneralStatisticsWithSPImpl;
 import com.example.kot.noughtsandcrosses.DB_SP.SaveGeneralStatisticsWithSP;
 import com.example.kot.noughtsandcrosses.Dialogs.DialogInitial;
@@ -35,7 +36,7 @@ import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity implements
         View.OnClickListener, RadioButton.OnCheckedChangeListener {
-    static final String LOG_TAG = "MY_LOG";
+    //public static final String LOG_TAG = "MY_LOG";
 
     //RealmControllerImpl myObjForRealmController = new RealmControllerImpl();
 
@@ -193,8 +194,8 @@ public class MainActivity extends AppCompatActivity implements
 
                 //while (myGameStage <= 9){
                 while (myObjForThreeVariants.getMyGameStage() <= 9) {
-                    Log.d(LOG_TAG, "myPositionsForPlayer1 = " + Arrays.toString(myObjForThreeVariants.getMyPositionsForPlayer1()));
-                    Log.d(LOG_TAG, "myPositionsForPlayer2 = " + Arrays.toString(myObjForThreeVariants.getMyPositionsForPlayer2()));
+                    Log.d(Constants.LOG_TAG, "myPositionsForPlayer1 = " + Arrays.toString(myObjForThreeVariants.getMyPositionsForPlayer1()));
+                    Log.d(Constants.LOG_TAG, "myPositionsForPlayer2 = " + Arrays.toString(myObjForThreeVariants.getMyPositionsForPlayer2()));
                     //if (myGameStage%2 == 1){
                     if (myObjForThreeVariants.getMyGameStage() % 2 == 1) {
                         ImageView myIV = (ImageView) findViewById(myObjForLogic.myPCsClickedButton(myObjForThreeVariants.getMyPositionsForPlayer1(), myObjForThreeVariants.getMyPositionsForPlayer2()));
@@ -237,8 +238,8 @@ public class MainActivity extends AppCompatActivity implements
 
                     while (myObjForThreeVariants.getMyGameStage() <= 9) {
 
-                        Log.d(LOG_TAG, "myPositionsForPlayer1 = " + Arrays.toString(myObjForThreeVariants.getMyPositionsForPlayer1()));
-                        Log.d(LOG_TAG, "myPositionsForPlayer2 = " + Arrays.toString(myObjForThreeVariants.getMyPositionsForPlayer2()));
+                        Log.d(Constants.LOG_TAG, "myPositionsForPlayer1 = " + Arrays.toString(myObjForThreeVariants.getMyPositionsForPlayer1()));
+                        Log.d(Constants.LOG_TAG, "myPositionsForPlayer2 = " + Arrays.toString(myObjForThreeVariants.getMyPositionsForPlayer2()));
 
 
                         if (myObjForThreeVariants.getMyGameStage() % 2 == 1) {
@@ -414,10 +415,10 @@ public class MainActivity extends AppCompatActivity implements
 
         //String IdAsString = v.getResources().getResourceName(v.getId());
         String IdAsString = v.getResources().getResourceEntryName(v.getId());
-        Log.d(LOG_TAG,"---                       ---");
-        //Log.d(LOG_TAG,"myGameStage = " + myGameStage);
-        Log.d(LOG_TAG, "myGameStage = " + myObjForThreeVariants.getMyGameStage());
-        Log.d(LOG_TAG,"IdAsString = " + IdAsString.substring(2));
+        Log.d(Constants.LOG_TAG, "---                       ---");
+        //Log.d(Constants.LOG_TAG,"myGameStage = " + myGameStage);
+        Log.d(Constants.LOG_TAG, "myGameStage = " + myObjForThreeVariants.getMyGameStage());
+        Log.d(Constants.LOG_TAG, "IdAsString = " + IdAsString.substring(2));
         //if(myNowClickedButton == ""){
            // myNowClickedButton = IdAsString.substring(2);
        // }
@@ -427,7 +428,7 @@ public class MainActivity extends AppCompatActivity implements
         }
 
         if(myRB3.isChecked()){
-            Log.d(LOG_TAG, "---myPlayerVsPlayer---");
+            Log.d(Constants.LOG_TAG, "---myPlayerVsPlayer---");
             //myPlayerVsPlayer(myIV)
 
             myObjForThreeVariants.myPlayerVsPlayer(myIV,
@@ -439,7 +440,7 @@ public class MainActivity extends AppCompatActivity implements
         }
 
         if(myRB2.isChecked()){
-            Log.d(LOG_TAG, "---myPlayerVsPc---");
+            Log.d(Constants.LOG_TAG, "---myPlayerVsPc---");
             //myPlayerVsPc(myIV);
             myObjForThreeVariants.myPlayerVsPc(myIV,
                     myObjForLogic, myBitmapCross, myBitmapNought,
@@ -452,7 +453,7 @@ public class MainActivity extends AppCompatActivity implements
 
 
         if(myRB1.isChecked()){
-            Log.d(LOG_TAG, "---myPcVsPc---");
+            Log.d(Constants.LOG_TAG, "---myPcVsPc---");
             //new Handler(Looper.getMainLooper()).postDelayed(() -> {myPcVsPc(myIV);}, 500);
             //myPcVsPc(myIV);
             myObjForThreeVariants.myPcVsPc(myIV, myObjForLogic, myBitmapCross, myBitmapNought);

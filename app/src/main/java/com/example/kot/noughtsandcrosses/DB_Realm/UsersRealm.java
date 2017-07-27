@@ -18,12 +18,12 @@ public class UsersRealm extends RealmObject {
 
     @PrimaryKey
     private String myName;
-    private Boolean isCurrentUser;
-    private Boolean isActive;
+    private boolean isCurrentUser;
+    private boolean isActive;
 
-    private Integer myPcWins;
-    private Integer myPlayerWins;
-    private Integer myTie;
+    private int myPcWins;
+    private int myPlayerWins;
+    private int myTie;
 
 
 
@@ -36,7 +36,7 @@ public class UsersRealm extends RealmObject {
         myName = n;
     }
 
-    public Boolean getIsCurrentUser(){
+    public boolean getIsCurrentUser() {
         return isCurrentUser;
     }
 
@@ -44,7 +44,7 @@ public class UsersRealm extends RealmObject {
         isCurrentUser = b;
     }
 
-    public Boolean getIsActive() {
+    public boolean getIsActive() {
         return isActive;
     }
 
@@ -52,7 +52,7 @@ public class UsersRealm extends RealmObject {
         isActive = b;
     }
 
-    public Integer getMyPcWins() {
+    public int getMyPcWins() {
         return myPcWins;
     }
 
@@ -60,7 +60,7 @@ public class UsersRealm extends RealmObject {
         myPcWins = i;
     }
 
-    public Integer getMyPlayerWins() {
+    public int getMyPlayerWins() {
         return myPlayerWins;
     }
 
@@ -68,7 +68,7 @@ public class UsersRealm extends RealmObject {
         myPlayerWins = i;
     }
 
-    public Integer getMyTie() {
+    public int getMyTie() {
         return myTie;
     }
 

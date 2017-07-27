@@ -15,29 +15,29 @@ public class SaveGeneralStatisticsWithSPImpl implements SaveGeneralStatisticsWit
     private SharedPreferences mySharedPreferences;
 
 
-    private Integer winsForCrosses;
-    private Integer winsForNoughts;
-    private Integer ties;
-    private Integer skin;
+    private int winsForCrosses;
+    private int winsForNoughts;
+    private int ties;
+    private int skin;
     private String language;
 
     @Override
-    public Integer getWinsForCrosses() {
+    public int getWinsForCrosses() {
         return winsForCrosses;
     }
 
     @Override
-    public Integer getWinsForNoughts() {
+    public int getWinsForNoughts() {
         return winsForNoughts;
     }
 
     @Override
-    public Integer getTies() {
+    public int getTies() {
         return ties;
     }
 
     @Override
-    public Integer getSkin() {
+    public int getSkin() {
         return skin;
     }
 

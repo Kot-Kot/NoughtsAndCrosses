@@ -5,7 +5,7 @@ package com.example.kot.noughtsandcrosses.Logic;
  */
 
 public interface PCLogic {
-    String LOG_TAG = "MY_LOG";
+    //String LOG_TAG = "MY_LOG";
 
     String FirstPos = "Center";
     String[] SecondPos = {"TopLeft","TopRight","BottomLeft","BottomRight"};
@@ -32,7 +32,9 @@ public interface PCLogic {
 
     void setMyNowClickedButton(String myNowClickedButton);
 
-    Integer myPCsClickedButton(String[] strPos, String[] strPosRival);
-    Boolean isPosInArray(String pos, String[] posArray);
-    Boolean isSomebodyWin(String[] strPos);
+    int myPCsClickedButton(String[] strPos, String[] strPosRival);
+
+    boolean isPosInArray(String pos, String[] posArray);
+
+    boolean isSomebodyWin(String[] strPos);
 }

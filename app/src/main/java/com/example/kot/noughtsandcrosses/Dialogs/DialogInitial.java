@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.kot.noughtsandcrosses.Constants.Constants;
 import com.example.kot.noughtsandcrosses.DB_Realm.RealmControllerImpl;
 import com.example.kot.noughtsandcrosses.R;
 
@@ -59,13 +60,13 @@ public class DialogInitial extends AppCompatActivity {
                 return;
             }
 
-            Log.d("MYL", "myUserName = " + myUserName);
-            Log.d("MYL", "myObjForRealmControllerImpl.getAll() = " + myObjForRealmControllerImpl.getAll());
+            Log.d(Constants.LOG_TAG, "myUserName = " + myUserName);
+            Log.d(Constants.LOG_TAG, "myObjForRealmControllerImpl.getAll() = " + myObjForRealmControllerImpl.getAll());
 
 
             myObjForRealmControllerImpl.setIsCurrentUserAsFalse();
             myObjForRealmControllerImpl.createNewUser(myUserName, myContext);
-            Log.d("MYL", "myObjForRealmControllerImpl.getAll() = " + myObjForRealmControllerImpl.getAll());
+            Log.d(Constants.LOG_TAG, "myObjForRealmControllerImpl.getAll() = " + myObjForRealmControllerImpl.getAll());
 
 
         });

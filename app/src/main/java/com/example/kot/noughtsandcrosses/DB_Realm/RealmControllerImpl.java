@@ -4,6 +4,8 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.kot.noughtsandcrosses.Constants.Constants;
+import com.example.kot.noughtsandcrosses.MainActivity;
 import com.example.kot.noughtsandcrosses.R;
 
 import io.realm.Realm;
@@ -78,7 +80,7 @@ public class RealmControllerImpl implements RealmController {
     public void setIsCurrentUserAsFalse() {
 
         UsersRealm myObjForLastCurrentUser = myRealm.where(UsersRealm.class).equalTo("isCurrentUser", true).findFirst();
-        Log.d ("MYL", "myObjForLastCurrentUser = " + myObjForLastCurrentUser);
+        Log.d(Constants.LOG_TAG, "myObjForLastCurrentUser = " + myObjForLastCurrentUser);
         if (myObjForLastCurrentUser != null) {
             myRealm.executeTransaction(realm -> {
                 //myObjForLastCurrentUser.setMyName(myObjForLastCurrentUser.getMyName());
@@ -90,10 +92,10 @@ public class RealmControllerImpl implements RealmController {
         }
     }
 
-    public Boolean showLastCurrentUser(Context c) {
+    public boolean showLastCurrentUser(Context c) {
 
         UsersRealm myObjForLastCurrentUser = myRealm.where(UsersRealm.class).equalTo("isCurrentUser", true).findFirst();
-        Log.d ("MYL", "myObjForLastCurrentUser = " + myObjForLastCurrentUser);
+        Log.d(Constants.LOG_TAG, "myObjForLastCurrentUser = " + myObjForLastCurrentUser);
         if (myObjForLastCurrentUser == null){
             Toast myToast = (Toast.makeText(c.getApplicationContext(), c.getResources().getString(R.string.realm_controller_empty_DB), Toast.LENGTH_LONG));
             myToast.show();
@@ -113,7 +115,7 @@ public class RealmControllerImpl implements RealmController {
     public void lastCurrentUserIsNotActive() {
 
         UsersRealm myObjForLastCurrentUser = myRealm.where(UsersRealm.class).equalTo("isCurrentUser", true).findFirst();
-        Log.d("MYL", "myObjForLastCurrentUser = " + myObjForLastCurrentUser);
+        Log.d(Constants.LOG_TAG, "myObjForLastCurrentUser = " + myObjForLastCurrentUser);
         if (myObjForLastCurrentUser != null) {
             myRealm.executeTransaction(realm -> {
                 //myObjForLastCurrentUser.setMyName(myObjForLastCurrentUser.getMyName());
@@ -129,7 +131,7 @@ public class RealmControllerImpl implements RealmController {
     public void currentUserWin() {
 
         UsersRealm myObjForLastCurrentUser = myRealm.where(UsersRealm.class).equalTo("isCurrentUser", true).equalTo("isActive", true).findFirst();
-        Log.d ("MYL", "myObjForLastCurrentUser = " + myObjForLastCurrentUser);
+        Log.d(Constants.LOG_TAG, "myObjForLastCurrentUser = " + myObjForLastCurrentUser);
         if (myObjForLastCurrentUser != null) {
             myRealm.executeTransaction(realm -> {
                 Integer i;
@@ -143,7 +145,7 @@ public class RealmControllerImpl implements RealmController {
     public void currentUserLost() {
 
         UsersRealm myObjForLastCurrentUser = myRealm.where(UsersRealm.class).equalTo("isCurrentUser", true).equalTo("isActive", true).findFirst();
-        Log.d ("MYL", "myObjForLastCurrentUser = " + myObjForLastCurrentUser);
+        Log.d(Constants.LOG_TAG, "myObjForLastCurrentUser = " + myObjForLastCurrentUser);
         if (myObjForLastCurrentUser != null) {
             myRealm.executeTransaction(realm -> {
                 Integer i;
@@ -157,7 +159,7 @@ public class RealmControllerImpl implements RealmController {
     public void currentUserTie() {
 
         UsersRealm myObjForLastCurrentUser = myRealm.where(UsersRealm.class).equalTo("isCurrentUser", true).equalTo("isActive", true).findFirst();
-        Log.d ("MYL", "myObjForLastCurrentUser = " + myObjForLastCurrentUser);
+        Log.d(Constants.LOG_TAG, "myObjForLastCurrentUser = " + myObjForLastCurrentUser);
         if (myObjForLastCurrentUser != null) {
             myRealm.executeTransaction(realm -> {
                 Integer i;
@@ -188,7 +190,7 @@ public class RealmControllerImpl implements RealmController {
             myBuilder.append(temp);
         }
         String completedString = myBuilder.toString();
-        Log.d("MYL", completedString);
+        Log.d(Constants.LOG_TAG, completedString);
         return completedString;
     }
 
