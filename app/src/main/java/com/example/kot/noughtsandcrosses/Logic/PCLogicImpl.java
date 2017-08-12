@@ -1,7 +1,9 @@
-package com.example.kot.noughtsandcrosses;
+package com.example.kot.noughtsandcrosses.Logic;
 
 import android.content.Context;
 import android.util.Log;
+
+import com.example.kot.noughtsandcrosses.Constants.Constants;
 
 import java.util.Arrays;
 
@@ -15,9 +17,9 @@ import java.util.Arrays;
  */
 
 //отвечает за логику хода ПК
-public class ClassForLogic implements InterfaceForLogic {
+public class PCLogicImpl implements PCLogic {
     private String myNowClickedButton = "";
-    Context myContext;
+    private Context myContext;
 
     public String getMyNowClickedButton() {
         return myNowClickedButton;
@@ -27,13 +29,13 @@ public class ClassForLogic implements InterfaceForLogic {
         this.myNowClickedButton = myNowClickedButton;
     }
 
-    ClassForLogic(Context c){
+    public PCLogicImpl(Context c) {
         myContext = c;
     }
 
 
     @Override
-    public Integer myPCsClickedButton(String[] strPos, String[] strPosRival) {
+    public int myPCsClickedButton(String[] strPos, String[] strPosRival) {
         Integer btnId = 0;
         String tempStr = FirstPos;
 
@@ -50,7 +52,7 @@ public class ClassForLogic implements InterfaceForLogic {
                         pos[j] = 1;
                         if (number == 2){
                             for(int p = 0; p < pos.length; p++){
-                                if (pos[p]==0 & isPosInArray(myWinningCombinations[i][p],strPosRival) == false){
+                                if (pos[p]==0 & !isPosInArray(myWinningCombinations[i][p], strPosRival)){
                                     tempStr = myWinningCombinations[i][p];
                                     myNowClickedButton = tempStr;
                                     btnId = myContext.getResources().getIdentifier("iv"+tempStr,"id", myContext.getPackageName());
@@ -78,16 +80,16 @@ public class ClassForLogic implements InterfaceForLogic {
             for(int j = 0; j < 3; j++){
                 for (int k = 0; k < 5; k++){
                     if(myWinningCombinations[i][j].equalsIgnoreCase(strPosRival[k])){
-                        //Log.d(LOG_TAG, "myWinningCombinations[i][j] =" + myWinningCombinations[i][j]);
-                        //Log.d(LOG_TAG, "rivalPositions[k] =" + rivalPositions[k]);
-                        //Log.d(LOG_TAG, "---                   ---");
+                        //Log.d(Constants.LOG_TAG, "myWinningCombinations[i][j] =" + myWinningCombinations[i][j]);
+                        //Log.d(Constants.LOG_TAG, "rivalPositions[k] =" + rivalPositions[k]);
+                        //Log.d(Constants.LOG_TAG, "---                   ---");
                         number++;
                         pos[j] = 1;
                         if (number == 2){
-                            //Log.d(LOG_TAG, "i = " + i);
-                            //Log.d(LOG_TAG, "pos[] = " + Arrays.toString(pos));
+                            //Log.d(Constants.LOG_TAG, "i = " + i);
+                            //Log.d(Constants.LOG_TAG, "pos[] = " + Arrays.toString(pos));
                             for(int p = 0; p < pos.length; p++){
-                                if (pos[p]==0 & isPosInArray(myWinningCombinations[i][p],strPos) == false){
+                                if (pos[p]==0 & !isPosInArray(myWinningCombinations[i][p], strPos)){
                                     tempStr = myWinningCombinations[i][p];
                                     myNowClickedButton = tempStr;
                                     btnId = myContext.getResources().getIdentifier("iv"+tempStr,"id", myContext.getPackageName());
@@ -114,7 +116,7 @@ public class ClassForLogic implements InterfaceForLogic {
 
         for (int i = 0; i < strPos.length; i++){
             if (tempStr.equalsIgnoreCase(strPos[i]) || tempStr.equalsIgnoreCase(strPosRival[i])){
-                //Log.d(LOG_TAG, "tempStr.equalsIgnoreCase(strPos[i]) || tempStr.equalsIgnoreCase(strPosRival[i]) , i = " +i);
+                //Log.d(Constants.LOG_TAG, "tempStr.equalsIgnoreCase(strPos[i]) || tempStr.equalsIgnoreCase(strPosRival[i]) , i = " +i);
                 break;
             }else if(i==4){
                 myNowClickedButton = tempStr;
@@ -134,10 +136,10 @@ public class ClassForLogic implements InterfaceForLogic {
                 }
             }
         }
-        Log.d(LOG_TAG, " tempSecondPos[] = " + Arrays.toString(tempSecondPos));
+        Log.d(Constants.LOG_TAG, " tempSecondPos[] = " + Arrays.toString(tempSecondPos));
         for (String s : tempSecondPos){
             if(s != null){
-                Log.d(LOG_TAG, " tempSecondPos[] = " + Arrays.toString(tempSecondPos));
+                Log.d(Constants.LOG_TAG, " tempSecondPos[] = " + Arrays.toString(tempSecondPos));
                 do{
                     tempStr = tempSecondPos[(int)(Math.random()*tempSecondPos.length)];
                 }while (tempStr == null);
@@ -159,10 +161,10 @@ public class ClassForLogic implements InterfaceForLogic {
                 }
             }
         }
-        Log.d(LOG_TAG, " tempThirdPos[] = " + Arrays.toString(tempThirdPos));
+        Log.d(Constants.LOG_TAG, " tempThirdPos[] = " + Arrays.toString(tempThirdPos));
         for (String s : tempThirdPos){
             if(s != null){
-                Log.d(LOG_TAG, " tempThirdPos[] = " + Arrays.toString(tempThirdPos));
+                Log.d(Constants.LOG_TAG, " tempThirdPos[] = " + Arrays.toString(tempThirdPos));
                 do{
                     tempStr = tempThirdPos[(int)(Math.random()*tempThirdPos.length)];
                 }while (tempStr == null);
@@ -175,7 +177,7 @@ public class ClassForLogic implements InterfaceForLogic {
         }
 
         myNowClickedButton = tempStr;
-        Log.d(LOG_TAG, " btnId = " + btnId);
+        Log.d(Constants.LOG_TAG, " btnId = " + btnId);
         return btnId;
         //return tempStr;
 
@@ -183,7 +185,7 @@ public class ClassForLogic implements InterfaceForLogic {
     }
 
     @Override
-    public Boolean isPosInArray(String pos, String[] posArray) {
+    public boolean isPosInArray(String pos, String[] posArray) {
 
         for (int i=0; i<posArray.length;i++){
             if (posArray[i].equalsIgnoreCase(pos)){
@@ -196,7 +198,7 @@ public class ClassForLogic implements InterfaceForLogic {
 
 
     @Override
-    public Boolean isSomebodyWin(String[] strPos) {
+    public boolean isSomebodyWin(String[] strPos) {
 
         int number;
 

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_locale"
+        android:title="@string/menu_item_locale"
+        android:orderInCategory="1"
+        app:showAsAction="never"
+        android:enabled="true">
+
+        <menu>
+            <group android:checkableBehavior="single">
+
+                <item
+                    android:id="@+id/menu_lang_ru"
+                    android:title="@string/menu_item_ru"
+                    android:orderInCategory="1"
+                    app:showAsAction="never" />
+
+                <item
+                    android:id="@+id/menu_lang_eng"
+                    android:title="@string/menu_item_eng"
+                    android:orderInCategory="2"
+                    app:showAsAction="never" />
+
+
+            </group>
+        </menu>
+    </item>
+
+
+    <item
+        android:id="@+id/menu_skin"
+        android:title="@string/menu_item_skin"
+        android:orderInCategory="2"
+        app:showAsAction="never"
+        android:enabled="true"
+        >
+
+        <menu>
+            <group
+                android:checkableBehavior="single"
+                >
+            <item
+                android:id="@+id/menu_skin1"
+                android:title="@string/menu_item_color1"
+                android:orderInCategory="1"
+                app:showAsAction="never"
+                />
+
+            <item
+                android:id="@+id/menu_skin2"
+                android:title="@string/menu_item_color2"
+                android:orderInCategory="2"
+                app:showAsAction="never"
+                />
+
+            <item
+                android:id="@+id/menu_skin3"
+                android:title="@string/menu_item_color3"
+                android:orderInCategory="3"
+                app:showAsAction="never"
+                />
+            </group>
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/menu_stat"
+        android:title="@string/menu_item_stat"
+        android:orderInCategory="3"
+        app:showAsAction="never"
+        >
+
+    </item>
+
+    <item
+        android:id="@+id/menu_stat_by_users"
+        android:title="@string/menu_item_stat_by_users"
+        android:orderInCategory="4"
+        app:showAsAction="never"
+        >
+
+    </item>
+
+
+
+    <item
+        android:id="@+id/menu_reload"
+        android:title="@string/menu_item_reload"
+        android:orderInCategory="5"
+        app:showAsAction="never"
+        >
+
+    </item>
+
+
+</menu>

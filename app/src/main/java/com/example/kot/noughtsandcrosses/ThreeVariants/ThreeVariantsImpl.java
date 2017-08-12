@@ -1,4 +1,4 @@
-package com.example.kot.noughtsandcrosses;
+package com.example.kot.noughtsandcrosses.ThreeVariants;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,21 +7,33 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.kot.noughtsandcrosses.Constants.Constants;
+import com.example.kot.noughtsandcrosses.DB_Realm.RealmControllerImpl;
+import com.example.kot.noughtsandcrosses.DB_SP.SaveGeneralStatisticsWithSP;
+import com.example.kot.noughtsandcrosses.DB_SP.SaveGeneralStatisticsWithSPImpl;
+import com.example.kot.noughtsandcrosses.Logic.PCLogic;
+import com.example.kot.noughtsandcrosses.R;
+
 /**
  * Created by Kot Kot on 14.06.2017.
  */
 //отвечает за разные варианты игры (PC vs PC, PC vs Player, Player vs Player)
-public class ClassForDiffVariants implements InterfaceForDiffVariants {
+public class ThreeVariantsImpl implements ThreeVariants {
+
+
 
     private Context myContext;
     private Activity myActivity;
-    //final String LOG_TAG = "MY_LOG";
+    //final String Constants.LOG_TAG = "MY_LOG";
     private String[] myPositionsForPlayer1 = {"","","","",""};
     private String[] myPositionsForPlayer2 = {"","","","",""};
 
+    //SaveGeneralStatisticsWithSPImpl myObjForSaveStatistics = new SaveGeneralStatisticsWithSPImpl(myContext, myActivity);
+    private SaveGeneralStatisticsWithSP myObjForSaveStatistics = new SaveGeneralStatisticsWithSPImpl(myContext, myActivity);
+
     //String myNowClickedButton = "";
 
-    Integer myGameStage = 1;
+    private int myGameStage = 1;
 
     public String[] getMyPositionsForPlayer1() {
         return myPositionsForPlayer1;
@@ -39,7 +51,7 @@ public class ClassForDiffVariants implements InterfaceForDiffVariants {
         this.myPositionsForPlayer2 = myPositionsForPlayer2;
     }
 
-    public Integer getMyGameStage() {
+    public int getMyGameStage() {
         return myGameStage;
     }
 
@@ -47,16 +59,18 @@ public class ClassForDiffVariants implements InterfaceForDiffVariants {
         this.myGameStage = myGameStage;
     }
 
-    ClassForDiffVariants(Context c, Activity a) {
+
+    public ThreeVariantsImpl(Context c, Activity a) {
         //super(c);
         myContext = c;
         myActivity = a;
     }
 
 
+
     public void myPcVsPc(ImageView iv,
-                         InterfaceForLogic myInterfaceForLogic,
-                  Bitmap myBitmapCross, Bitmap myBitmapNought){
+                         PCLogic myInterfaceForLogic,
+                         Bitmap myBitmapCross, Bitmap myBitmapNought){
         // final ImageView fiv = iv;
         //final Bitmap fbc = myBitmapCross;
         // final Bitmap fbn = myBitmapNought;
@@ -69,10 +83,12 @@ public class ClassForDiffVariants implements InterfaceForDiffVariants {
             //myNowClickedButton = "";
             myPositionsForPlayer1[(myGameStage/2 + myGameStage%2)-1] = myInterfaceForLogic.getMyNowClickedButton();
             myInterfaceForLogic.setMyNowClickedButton("");
-            Log.d(LOG_TAG,"----Cross---- ");
+            Log.d(Constants.LOG_TAG, "----Cross---- ");
             //myDelay(fiv,fbc);
             //new Thread(myThread).start();
+            //iv.setTranslationY(-1000f);
             iv.setImageBitmap(myBitmapCross);
+            //iv.animate().translationYBy(1000f).setDuration(500);
             //iv.setImageBitmap(myObjForCrossPicture.myDrawCross());
 
             iv.setClickable(false);
@@ -80,14 +96,18 @@ public class ClassForDiffVariants implements InterfaceForDiffVariants {
 
             //if(isSomebodyWin(myPositionsForPlayer1)==true){
             if(myInterfaceForLogic.isSomebodyWin(myPositionsForPlayer1)){
-                Log.d(LOG_TAG, "Выиграли крестики");
-                Toast myToast = (Toast.makeText(myContext.getApplicationContext(), "Выиграли крестики", Toast.LENGTH_SHORT));
+                Log.d(Constants.LOG_TAG, "Выиграли крестики");
+                Toast myToast = (Toast.makeText(myContext.getApplicationContext(),
+                        myContext.getResources().getString(R.string.three_variants_crosses_win), Toast.LENGTH_SHORT));
                 myToast.show();
+                myObjForSaveStatistics.saveWinForCrosses(myActivity);
                 //myHoldScreen();
             }else if(myGameStage == 10) {
-                Log.d(LOG_TAG, "Ничья");
-                Toast myToast = (Toast.makeText(myContext.getApplicationContext(), "Ничья", Toast.LENGTH_SHORT));
+                Log.d(Constants.LOG_TAG, "Ничья");
+                Toast myToast = (Toast.makeText(myContext.getApplicationContext(),
+                        myContext.getResources().getString(R.string.three_variants_tie), Toast.LENGTH_SHORT));
                 myToast.show();
+                myObjForSaveStatistics.saveTie(myActivity);
                 // myHoldScreen();
             }
 
@@ -99,47 +119,58 @@ public class ClassForDiffVariants implements InterfaceForDiffVariants {
             //myNowClickedButton = "";
             myPositionsForPlayer2[(myGameStage/2 + myGameStage%2)-1] = myInterfaceForLogic.getMyNowClickedButton();
             myInterfaceForLogic.setMyNowClickedButton("");
-            Log.d(LOG_TAG,"----Naught---- ");
+            Log.d(Constants.LOG_TAG, "----Naught---- ");
             //myDelay(fiv,fbn);
+            //iv.setTranslationY(-1000f);
             iv.setImageBitmap(myBitmapNought);
+            //iv.animate().translationYBy(1000f).setDuration(500);
             //iv.setImageBitmap(myObjForNoughtPicture.myDrawNought());
             iv.setClickable(false);
             myGameStage++;
 
             //if(isSomebodyWin(myPositionsForPlayer2)==true){
             if(myInterfaceForLogic.isSomebodyWin(myPositionsForPlayer2)){
-                Log.d(LOG_TAG, "Выиграли нолики");
-                Toast myToast = (Toast.makeText(myContext.getApplicationContext(), "Выиграли нолики", Toast.LENGTH_SHORT));
+                Log.d(Constants.LOG_TAG, "Выиграли нолики");
+                Toast myToast = (Toast.makeText(myContext.getApplicationContext(),
+                        myContext.getResources().getString(R.string.three_variants_noughts_win), Toast.LENGTH_SHORT));
                 myToast.show();
+                myObjForSaveStatistics.saveWinForNoughts(myActivity);
                 //myHoldScreen();
             }
 
         }
 
-        Log.d(LOG_TAG, "myGameStage++ myPcVsPc = " + myGameStage);
+        Log.d(Constants.LOG_TAG, "myGameStage++ myPcVsPc = " + myGameStage);
     }
 
    //----------------------------------------------------------------------
 
     public void myPlayerVsPc(ImageView iv,
-                             InterfaceForLogic myInterfaceForLogic,
+                             PCLogic myInterfaceForLogic,
                              Bitmap myBitmapCross, Bitmap myBitmapNought,
-                      ImageView iv1,
-                      ImageView iv2,
-                      ImageView iv3,
-                      ImageView iv4,
-                      ImageView iv5,
-                      ImageView iv6,
-                      ImageView iv7,
-                      ImageView iv8,
-                      ImageView iv9){
+                             ImageView iv1,
+                             ImageView iv2,
+                             ImageView iv3,
+                             ImageView iv4,
+                             ImageView iv5,
+                             ImageView iv6,
+                             ImageView iv7,
+                             ImageView iv8,
+                             ImageView iv9){
+
+        RealmControllerImpl myObjForRealmControllerImpl = new RealmControllerImpl();
+        myObjForRealmControllerImpl.initializeRealm(myContext);
+
         if (myGameStage%2 == 1) {
             //myPositionsForPlayer1[(myGameStage/2 + myGameStage%2)-1] = myNowClickedButton;
             //myNowClickedButton = "";
             myPositionsForPlayer1[(myGameStage/2 + myGameStage%2)-1] = myInterfaceForLogic.getMyNowClickedButton();
             myInterfaceForLogic.setMyNowClickedButton("");
-            Log.d(LOG_TAG,"----Cross---- ");
+            Log.d(Constants.LOG_TAG, "----Cross---- ");
+
+            //iv.setTranslationY(-1000f);
             iv.setImageBitmap(myBitmapCross);
+            //iv.animate().translationYBy(1000f).setDuration(500);
             //iv.setImageBitmap(myObjForCrossPicture.myDrawCross());
 
             iv.setClickable(false);
@@ -147,12 +178,18 @@ public class ClassForDiffVariants implements InterfaceForDiffVariants {
 
             //if(isSomebodyWin(myPositionsForPlayer1)==true){
             if(myInterfaceForLogic.isSomebodyWin(myPositionsForPlayer1)){
-                Toast myToast = (Toast.makeText(myContext.getApplicationContext(), "Выиграл игрок", Toast.LENGTH_SHORT));
+                Toast myToast = (Toast.makeText(myContext.getApplicationContext(),
+                        myContext.getResources().getString(R.string.three_variants_player_win), Toast.LENGTH_SHORT));
                 myToast.show();
+                myObjForRealmControllerImpl.currentUserWin();
+                myObjForSaveStatistics.saveWinForCrosses(myActivity);
                 myHoldScreen(myInterfaceForLogic, iv1, iv2, iv3, iv4, iv5, iv6, iv7, iv8, iv9);
             }else if(myGameStage == 10){
-                Toast myToast = (Toast.makeText(myContext.getApplicationContext(), "Ничья", Toast.LENGTH_SHORT));
+                Toast myToast = (Toast.makeText(myContext.getApplicationContext(),
+                        myContext.getResources().getString(R.string.three_variants_tie), Toast.LENGTH_SHORT));
                 myToast.show();
+                myObjForRealmControllerImpl.currentUserTie();
+                myObjForSaveStatistics.saveTie(myActivity);
                 myHoldScreen(myInterfaceForLogic, iv1, iv2, iv3, iv4, iv5, iv6, iv7, iv8, iv9);
             }else if (myGameStage < 9){
                 //TextView myTV = (TextView) findViewById(myPCsClickedButton0(myPositionsForPlayer2,myPositionsForPlayer1));
@@ -161,7 +198,10 @@ public class ClassForDiffVariants implements InterfaceForDiffVariants {
                 //Integer btnId = myContext.getResources().getIdentifier("iv"+myObjForLogic.myPCsClickedButton(myPositionsForPlayer2,myPositionsForPlayer1),"id",myContext.getPackageName());
                 //ImageView myIV = (ImageView) findViewById(btnId);
                 ImageView myIV = (ImageView) myActivity.findViewById(myInterfaceForLogic.myPCsClickedButton(myPositionsForPlayer2,myPositionsForPlayer1));
+
                 myIV.performClick();
+
+
             }
 
 
@@ -172,16 +212,21 @@ public class ClassForDiffVariants implements InterfaceForDiffVariants {
             //myNowClickedButton = "";
             myPositionsForPlayer2[(myGameStage/2 + myGameStage%2)-1] = myInterfaceForLogic.getMyNowClickedButton();
             myInterfaceForLogic.setMyNowClickedButton("");
-            Log.d(LOG_TAG,"----Naught---- ");
+            Log.d(Constants.LOG_TAG, "----Naught---- ");
+            //iv.setTranslationY(-1000f);
             iv.setImageBitmap(myBitmapNought);
+            //iv.animate().translationYBy(1000f).setDuration(500);
             //iv.setImageBitmap(myObjForNoughtPicture.myDrawNought());
             iv.setClickable(false);
             myGameStage++;
 
             //if(isSomebodyWin(myPositionsForPlayer2)==true) {
             if(myInterfaceForLogic.isSomebodyWin(myPositionsForPlayer2)) {
-                Toast myToast = (Toast.makeText(myContext.getApplicationContext(), "Выиграл ПК", Toast.LENGTH_SHORT));
+                Toast myToast = (Toast.makeText(myContext.getApplicationContext(),
+                        myContext.getResources().getString(R.string.three_variants_pc_win), Toast.LENGTH_SHORT));
                 myToast.show();
+                myObjForRealmControllerImpl.currentUserLost();
+                myObjForSaveStatistics.saveWinForNoughts(myActivity);
                 myHoldScreen(myInterfaceForLogic, iv1, iv2, iv3, iv4, iv5, iv6, iv7, iv8, iv9);
 
             }
@@ -192,36 +237,42 @@ public class ClassForDiffVariants implements InterfaceForDiffVariants {
 
 
     public void myPlayerVsPlayer(ImageView iv,
-                                 InterfaceForLogic myInterfaceForLogic,
-                          Bitmap myBitmapCross, Bitmap myBitmapNought,
-                          ImageView iv1,
-                          ImageView iv2,
-                          ImageView iv3,
-                          ImageView iv4,
-                          ImageView iv5,
-                          ImageView iv6,
-                          ImageView iv7,
-                          ImageView iv8,
-                          ImageView iv9){
+                                 PCLogic myInterfaceForLogic,
+                                 Bitmap myBitmapCross, Bitmap myBitmapNought,
+                                 ImageView iv1,
+                                 ImageView iv2,
+                                 ImageView iv3,
+                                 ImageView iv4,
+                                 ImageView iv5,
+                                 ImageView iv6,
+                                 ImageView iv7,
+                                 ImageView iv8,
+                                 ImageView iv9){
         if (myGameStage%2 == 1) {
             //myPositionsForPlayer1[(myGameStage/2 + myGameStage%2)-1] = myNowClickedButton;
             //myNowClickedButton = "";
             myPositionsForPlayer1[(myGameStage/2 + myGameStage%2)-1] = myInterfaceForLogic.getMyNowClickedButton();
             myInterfaceForLogic.setMyNowClickedButton("");
-            Log.d(LOG_TAG,"----Cross---- ");
+            Log.d(Constants.LOG_TAG, "----Cross---- ");
+            iv.setTranslationY(-1000f);
             iv.setImageBitmap(myBitmapCross);
+            iv.animate().translationYBy(1000f).setDuration(500);
             //iv.setImageBitmap(myObjForCrossPicture.myDrawCross());
             iv.setClickable(false);
             myGameStage++;
 
             //if(isSomebodyWin(myPositionsForPlayer1)==true){
             if(myInterfaceForLogic.isSomebodyWin(myPositionsForPlayer1)){
-                Toast myToast = (Toast.makeText(myContext.getApplicationContext(), "Выиграли крестики", Toast.LENGTH_SHORT));
+                Toast myToast = (Toast.makeText(myContext.getApplicationContext(),
+                        myContext.getResources().getString(R.string.three_variants_crosses_win), Toast.LENGTH_SHORT));
                 myToast.show();
+                myObjForSaveStatistics.saveWinForCrosses(myActivity);
                 myHoldScreen(myInterfaceForLogic, iv1, iv2, iv3, iv4, iv5, iv6, iv7, iv8, iv9);
             }else if(myGameStage == 10) {
-                Toast myToast = (Toast.makeText(myContext.getApplicationContext(), "Ничья", Toast.LENGTH_SHORT));
+                Toast myToast = (Toast.makeText(myContext.getApplicationContext(),
+                        myContext.getResources().getString(R.string.three_variants_tie), Toast.LENGTH_SHORT));
                 myToast.show();
+                myObjForSaveStatistics.saveTie(myActivity);
                 myHoldScreen(myInterfaceForLogic, iv1, iv2, iv3, iv4, iv5, iv6, iv7, iv8, iv9);
             }
 
@@ -231,8 +282,11 @@ public class ClassForDiffVariants implements InterfaceForDiffVariants {
             //myNowClickedButton = "";
             myPositionsForPlayer2[(myGameStage/2 + myGameStage%2)-1] = myInterfaceForLogic.getMyNowClickedButton();
             myInterfaceForLogic.setMyNowClickedButton("");
-            Log.d(LOG_TAG,"----Naught---- ");
+            Log.d(Constants.LOG_TAG, "----Naught---- ");
+            iv.setTranslationY(-1000f);
             iv.setImageBitmap(myBitmapNought);
+
+            iv.animate().translationYBy(1000f).setDuration(500);
             //iv.setImageBitmap(myObjForNoughtPicture.myDrawNought());
 
             iv.setClickable(false);
@@ -240,25 +294,26 @@ public class ClassForDiffVariants implements InterfaceForDiffVariants {
 
             //if(isSomebodyWin(myPositionsForPlayer2)==true){
             if(myInterfaceForLogic.isSomebodyWin(myPositionsForPlayer2)){
-                Toast myToast = (Toast.makeText(myContext.getApplicationContext(), "Выиграли нолики", Toast.LENGTH_SHORT));
+                Toast myToast = (Toast.makeText(myContext.getApplicationContext(),
+                        myContext.getResources().getString(R.string.three_variants_noughts_win), Toast.LENGTH_SHORT));
                 myToast.show();
+                myObjForSaveStatistics.saveWinForNoughts(myActivity);
                 myHoldScreen(myInterfaceForLogic, iv1, iv2, iv3, iv4, iv5, iv6, iv7, iv8, iv9);
             }
         }
     }
 
 
-
-    public void myHoldScreen(InterfaceForLogic myInterfaceForLogic,
-                      ImageView iv1,
-                      ImageView iv2,
-                      ImageView iv3,
-                      ImageView iv4,
-                      ImageView iv5,
-                      ImageView iv6,
-                      ImageView iv7,
-                      ImageView iv8,
-                      ImageView iv9){
+    public void myHoldScreen(PCLogic myInterfaceForLogic,
+                             ImageView iv1,
+                             ImageView iv2,
+                             ImageView iv3,
+                             ImageView iv4,
+                             ImageView iv5,
+                             ImageView iv6,
+                             ImageView iv7,
+                             ImageView iv8,
+                             ImageView iv9){
         //myNowClickedButton = "";
         myInterfaceForLogic.setMyNowClickedButton("");
         myGameStage = 1;
@@ -280,17 +335,17 @@ public class ClassForDiffVariants implements InterfaceForDiffVariants {
     }
 
 
-    public void myClearScreen(InterfaceForLogic myInterfaceForLogic,
-                       Bitmap myBitmapForClean,
-                       ImageView iv1,
-                       ImageView iv2,
-                       ImageView iv3,
-                       ImageView iv4,
-                       ImageView iv5,
-                       ImageView iv6,
-                       ImageView iv7,
-                       ImageView iv8,
-                       ImageView iv9){
+    public void myClearScreen(PCLogic myInterfaceForLogic,
+                              Bitmap myBitmapForClean,
+                              ImageView iv1,
+                              ImageView iv2,
+                              ImageView iv3,
+                              ImageView iv4,
+                              ImageView iv5,
+                              ImageView iv6,
+                              ImageView iv7,
+                              ImageView iv8,
+                              ImageView iv9){
 
         //myNowClickedButton = "";
         myInterfaceForLogic.setMyNowClickedButton("");
